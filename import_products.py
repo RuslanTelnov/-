@@ -6,11 +6,24 @@ import requests
 import pandas as pd
 from dotenv import load_dotenv
 
+from supabase import create_client, Client
+
 # Загрузка настроек
 load_dotenv()
 LOGIN = os.getenv("MOYSKLAD_LOGIN")
 PASSWORD = os.getenv("MOYSKLAD_PASSWORD")
 BASE_URL = "https://api.moysklad.ru/api/remap/1.2"
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+# Инициализация Supabase
+supabase: Client = None
+if SUPABASE_URL and SUPABASE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        print("✅ Supabase клиент инициализирован")
+    except Exception as e:
+        print(f"❌ Ошибка инициализации Supabase: {e}")
 
 # ID Доп. полей (найдены через check_metadata.py)
 ATTR_PREORDER_ID = "677beb5d-7769-11f0-0a80-00cb000c69da" # Тип: long (Целое число)
@@ -22,6 +35,28 @@ HEADERS = {
     "Authorization": f"Basic {auth_b64}",
     "Content-Type": "application/json"
 }
+
+def save_to_supabase(product_data, moysklad_id):
+    """Сохранение товара в Supabase"""
+    if not supabase:
+        return
+
+    try:
+        data = {
+            "moysklad_id": moysklad_id,
+            "name": product_data["name"],
+            "article": product_data["article"],
+            "price": product_data["salePrices"][0]["value"] / 100, # Переводим обратно в рубли
+            "country": product_data.get("country", {}).get("meta", {}).get("href", "").split("/")[-1] # ID страны или пустая строка
+        }
+        
+        # Если есть мета страны, попробуем получить имя (но у нас тут только мета)
+        # Для простоты сохраняем пока так, или можно расширить логику
+        
+        supabase.table("products").insert(data).execute()
+        print(f"   💾 Сохранено в Supabase")
+    except Exception as e:
+        print(f"   ⚠️  Ошибка сохранения в Supabase: {e}")
 
 def get_all_countries():
     """Загрузка всех стран для маппинга"""
@@ -112,8 +147,11 @@ def create_product(row, countries_map, currency_meta, price_type_meta):
         return False
 
     # 1. Проверка дубликата
-    if find_product_by_article(article):
+    existing_product = find_product_by_article(article)
+    if existing_product:
         print(f"⏭️  Товар существует: {article}")
+        # Можно обновить в Supabase, если нужно
+        # save_to_supabase(existing_product, existing_product['id'])
         return False
 
     # 2. Поиск связей
@@ -165,7 +203,12 @@ def create_product(row, countries_map, currency_meta, price_type_meta):
     try:
         resp = requests.post(f"{BASE_URL}/entity/product", json=product_data, headers=HEADERS)
         resp.raise_for_status()
+        new_product = resp.json()
         print(f"✅ Создан товар: {name} ({article})")
+        
+        # 7. Сохранение в Supabase
+        save_to_supabase(product_data, new_product['id'])
+        
         return True
     except Exception as e:
         print(f"❌ Ошибка создания товара {article}: {e}")
