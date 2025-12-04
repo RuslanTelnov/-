@@ -223,6 +223,7 @@ def create_product(row, countries_map, currency_meta, price_type_meta):
         resp.raise_for_status()
         new_product = resp.json()
         print(f"✅ Создан товар: {name} ({article})")
+        print(f"   💰 Цены: Розничная={sale_price/100:.2f}, Мин={min_price/100:.2f}")
         
         # 7. Сохранение в Supabase
         save_to_supabase(product_data, new_product['id'])
