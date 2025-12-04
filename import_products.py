@@ -70,7 +70,39 @@ def find_product_by_article(article):
         print(f"⚠️  Ошибка проверки товара '{article}': {e}")
     return None
 
-def create_product(row, countries_map):
+def get_default_currency():
+    """Получение валюты по умолчанию (обычно рубли)"""
+    url = f"{BASE_URL}/entity/currency"
+    try:
+        resp = requests.get(url, headers=HEADERS)
+        resp.raise_for_status()
+        data = resp.json()
+        # Берем первую попавшуюся или ищем рубли
+        if data.get('rows'):
+            return data['rows'][0]['meta']
+    except Exception as e:
+        print(f"❌ Ошибка загрузки валюты: {e}")
+    return None
+
+def get_price_type(name="Цена продажи"):
+    """Получение типа цены по имени"""
+    url = f"{BASE_URL}/context/companysettings/pricetype"
+    try:
+        resp = requests.get(url, headers=HEADERS)
+        resp.raise_for_status()
+        data = resp.json()
+        for row in data:
+            if row['name'] == name:
+                return row['meta']
+        # Если не нашли по имени, вернем первый попавшийся
+        if data:
+            print(f"⚠️  Тип цены '{name}' не найден, используем '{data[0]['name']}'")
+            return data[0]['meta']
+    except Exception as e:
+        print(f"❌ Ошибка загрузки типов цен: {e}")
+    return None
+
+def create_product(row, countries_map, currency_meta, price_type_meta):
     """Создание товара из строки Excel"""
     name = row.get('Название')
     article = str(row.get('Артикул', '')).strip()
@@ -92,9 +124,7 @@ def create_product(row, countries_map):
     elif country_name:
         print(f"⚠️  Страна не найдена: {row.get('Страна')}")
 
-    supplier_meta = find_counterparty(row.get('Поставщик'))
-    if row.get('Поставщик') and not supplier_meta:
-        print(f"⚠️  Поставщик не найден: {row.get('Поставщик')}")
+    # Поставщик убран по требованию
 
     # 3. Цены
     min_price = float(row.get('Минимальная цена', 0)) * 100 # Копейки
@@ -102,31 +132,25 @@ def create_product(row, countries_map):
 
     # 4. Атрибуты (Предзаказ)
     attributes = []
-    preorder_val = row.get('Строка предзаказ')
-    if pd.notna(preorder_val):
-        try:
-            # API требует long, пробуем преобразовать
-            val_long = int(float(preorder_val))
-            attributes.append({
-                "meta": {
-                    "href": f"{BASE_URL}/entity/product/metadata/attributes/{ATTR_PREORDER_ID}",
-                    "type": "attributemetadata",
-                    "mediaType": "application/json"
-                },
-                "value": val_long
-            })
-        except ValueError:
-            print(f"⚠️  Ошибка поля 'Предзаказ': значение '{preorder_val}' не является числом (требуется целое число)")
+    # Хардкод значения 30 по требованию
+    attributes.append({
+        "meta": {
+            "href": f"{BASE_URL}/entity/product/metadata/attributes/{ATTR_PREORDER_ID}",
+            "type": "attributemetadata",
+            "mediaType": "application/json"
+        },
+        "value": 30
+    })
 
     # 5. Сборка JSON
     product_data = {
         "name": name,
         "article": article,
-        "minPrice": {"value": min_price, "currency": {"meta": {"href": f"{BASE_URL}/entity/currency/rub", "type": "currency", "mediaType": "application/json"}}}, # Валюта по умолчанию рубли, нужно проверять
+        "minPrice": {"value": min_price, "currency": {"meta": currency_meta}}, 
         "salePrices": [
             {
                 "value": sale_price,
-                "priceType": {"name": "Цена продажи"} # Обычно это дефолтный тип
+                "priceType": {"meta": price_type_meta}
             }
         ]
     }
@@ -134,9 +158,6 @@ def create_product(row, countries_map):
     if country_meta:
         product_data["country"] = {"meta": country_meta}
     
-    if supplier_meta:
-        product_data["supplier"] = {"meta": supplier_meta}
-        
     if attributes:
         product_data["attributes"] = attributes
 
@@ -157,6 +178,16 @@ def main():
     
     # 1. Загрузка справочников
     countries_map = get_all_countries()
+    currency_meta = get_default_currency()
+    price_type_meta = get_price_type()
+    
+    if not currency_meta:
+        print("❌ Не удалось получить валюту!")
+        return
+        
+    if not price_type_meta:
+        print("❌ Не удалось получить тип цены!")
+        return
     
     # 2. Чтение файла
     input_dir = "input"
@@ -182,7 +213,7 @@ def main():
     
     success_count = 0
     for index, row in df.iterrows():
-        if create_product(row, countries_map):
+        if create_product(row, countries_map, currency_meta, price_type_meta):
             success_count += 1
         # Пауза чтобы не спамить API (лимиты)
         time.sleep(0.3)
