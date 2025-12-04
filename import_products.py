@@ -165,8 +165,26 @@ def create_product(row, countries_map, currency_meta, price_type_meta):
     # Поставщик убран по требованию
 
     # 3. Цены
-    min_price = float(row.get('Минимальная цена', 0)) * 100 # Копейки
-    sale_price = float(row.get('Розничная цена', 0)) * 100 # Копейки
+    cost_price = float(row.get('Себестоимость', 0))
+    
+    # Формулы:
+    # Минимальная цена : (себестоимоть*100)/70
+    # Розничная цена : (себестоимость*100)/40
+    
+    if cost_price > 0:
+        min_price_rub = (cost_price * 100) / 70
+        sale_price_rub = (cost_price * 100) / 40
+    else:
+        min_price_rub = 0
+        sale_price_rub = 0
+        print(f"⚠️  Себестоимость равна 0 для товара {article}")
+
+    min_price = min_price_rub * 100 # Копейки
+    sale_price = sale_price_rub * 100 # Копейки
+    
+    # Округляем до копеек (целое число)
+    min_price = int(round(min_price))
+    sale_price = int(round(sale_price))
 
     # 4. Атрибуты (Предзаказ)
     attributes = []
