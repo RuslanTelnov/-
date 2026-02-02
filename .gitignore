@@ -1,5 +1,8 @@
 .env
 .venv/
+node_modules/
+venv/
+*.log
 __pycache__/
 input/
 *.xlsx
