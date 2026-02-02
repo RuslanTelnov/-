@@ -1,0 +1,103 @@
+_format_version: "2.1"
+_transform: true
+
+consumers:
+  - username: anon
+    keyauth_credentials:
+      - key: eyJ0eXAiOiAiSldUIiwgImFsZyI6ICJIUzI1NiJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3NjY1NzQ5NjAsICJleHAiOiAyMDgxOTM0OTYwfQ.phtKpTn6CxKM83LDFpcYHhqtaFOTFurxKrlmK_RDBRM
+    acls:
+      - group: anon
+
+  - username: service_role
+    keyauth_credentials:
+      - key: eyJ0eXAiOiAiSldUIiwgImFsZyI6ICJIUzI1NiJ9.eyJyb2xlIjogInNlcnZpY2Vfcm9sZSIsICJpc3MiOiAic3VwYWJhc2UiLCAiaWF0IjogMTc2NjU3NDk2MCwgImV4cCI6IDIwODE5MzQ5NjB9.2aNfOnHjm-YYvuq10YoRItfXFWw4V6tJ6Ch3Vy_Rkes
+    acls:
+      - group: service_role
+
+services:
+  - name: auth-v1
+    url: http://supabase-auth:9999/
+    routes:
+      - name: auth-v1
+        strip_path: true
+        paths:
+          - /auth/v1
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: false
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - anon
+            - service_role
+
+  - name: rest-v1
+    url: http://supabase-rest:3000/
+    routes:
+      - name: rest-v1
+        strip_path: true
+        paths:
+          - /rest/v1
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: true
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - anon
+            - service_role
+
+  - name: realtime-v1
+    url: http://supabase-realtime:4000/socket
+    routes:
+      - name: realtime-v1
+        strip_path: true
+        paths:
+          - /realtime/v1
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: true
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - anon
+            - service_role
+
+  - name: storage-v1
+    url: http://supabase-storage:5000/
+    routes:
+      - name: storage-v1
+        strip_path: true
+        paths:
+          - /storage/v1
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: true
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - anon
+            - service_role
+
+  - name: meta
+    url: http://supabase-studio:3000/api/
+    routes:
+      - name: meta
+        strip_path: true
+        paths:
+          - /api
+    plugins:
+      - name: cors
+

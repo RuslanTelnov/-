@@ -1,0 +1,1486 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        1264
+      ],
+      "id": "0317835c-bd59-498c-954b-20aab6e81bbe",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/product",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        48
+      ],
+      "id": "4a47a818-10cd-4200-bda6-7534975e1b1a",
+      "name": "Товар"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  // Извлекаем кастомные атрибуты из r.attributes[]\n  const attrs = r.attributes || [];\n\n  const disableKaspi = attrs.find(a => a.name === 'Не выгружать на Каспи')?.value ?? false;\n  const disableDumping = attrs.find(a => a.name === 'Отключить демпинг')?.value ?? false;\n  const preorderDays = attrs.find(a => a.name === 'Предзаказ')?.value ?? null;\n\n  // 🧩 Гарантируем уникальный article — обязательное поле для upsert\n  const article = r.article || r.code || ('TEMP_' + r.id.slice(0, 8));\n\n  return {\n    json: {\n      id: r.id,\n      article,                                // ← теперь ключевое поле\n      name: r.name,\n      code: r.code || null,\n      external_code: r.externalCode || null,\n      description: r.description || null,\n      category: r.pathName || null,\n      category_id: r.productFolder?.id || null,\n      sale_price: (r.salePrices?.[0]?.value || 0) / 100,\n      buy_price: (r.buyPrice?.value || 0) / 100,\n      weight: r.weight || null,\n      volume: r.volume || null,\n      image_url: r.images?.[0]?.meta?.href || null,\n      quantity_reserve: r.quantityReserve || 0,\n      updated_at: r.updated || new Date().toISOString(),\n      archived: r.archived || false,\n      modifications_count: r.modificationsCount || 0,\n      owner: r.owner?.name || null,\n\n      // 🔥 Новые поля из attributes:\n      disable_kaspi: disableKaspi,          // Не выгружать на Kaspi\n      disable_dumping: disableDumping,      // Отключить демпинг\n      preorder_days: preorderDays           // Кол-во дней предзаказа\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        48
+      ],
+      "id": "3b689fc7-6467-4bf7-a93d-bdef541649f0",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/products",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"article\": {{ $json.article ? JSON.stringify($json.article) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"code\": {{ $json.code ? JSON.stringify($json.code) : \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description.slice(0, 2000)) : \"null\" }},\n    \"category\": {{ $json.category ? JSON.stringify($json.category) : \"null\" }},\n    \"category_id\": {{ $json.category_id ? JSON.stringify($json.category_id) : \"null\" }},\n    \"sale_price\": {{ $json.sale_price ?? \"null\" }},\n    \"buy_price\": {{ $json.buy_price ?? \"null\" }},\n    \"weight\": {{ $json.weight ?? \"null\" }},\n    \"volume\": {{ $json.volume ?? \"null\" }},\n    \"image_url\": {{ $json.image_url ? JSON.stringify($json.image_url) : \"null\" }},\n    \"updated_at\": {{ $json.updated_at ? JSON.stringify($json.updated_at) : \"null\" }},\n    \"archived\": {{ $json.archived ?? \"false\" }},\n    \"modifications_count\": {{ $json.modifications_count ?? \"0\" }},\n    \"owner\": {{ $json.owner ? JSON.stringify($json.owner) : \"null\" }},\n    \"disable_kaspi\": {{ $json.disable_kaspi ?? \"false\" }},\n    \"disable_dumping\": {{ $json.disable_dumping ?? \"false\" }},\n    \"preorder_days\": {{ $json.preorder_days === undefined || $json.preorder_days === null ? \"null\" : $json.preorder_days }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        48
+      ],
+      "id": "90b65480-8682-40f7-a92a-0acad01e8d42",
+      "name": "Supabase Upsert Products.",
+      "alwaysOutputData": true,
+      "notesInFlow": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "D1OtSbvrhxMnLrDi",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/report/stock/all",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        272
+      ],
+      "id": "00af0bbf-8b99-411a-94d1-5ea392e3280f",
+      "name": "Товар1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      article: r.article || r.code || null,  // Связь с таблицей product\n      stock: r.stock ?? 0,\n      in_transit: r.inTransit ?? 0,\n      reserve: r.reserve ?? 0,\n      quantity: r.quantity ?? 0,\n      stock_days: r.stockDays ?? null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        272
+      ],
+      "id": "1cf3438c-4676-49ba-9893-743356832028",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/stock",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"article\": {{ $json.article ? JSON.stringify($json.article) : \"null\" }},\n    \"stock\": {{ $json.stock ?? \"null\" }},\n    \"in_transit\": {{ $json.in_transit ?? \"null\" }},\n    \"reserve\": {{ $json.reserve ?? \"null\" }},\n    \"quantity\": {{ $json.quantity ?? \"null\" }},\n    \"stock_days\": {{ $json.stock_days === undefined || $json.stock_days === null ? \"null\" : $json.stock_days }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        272
+      ],
+      "id": "3cf7266a-bdd6-4a52-8346-d7cffdfb3eae",
+      "name": "Supabase Upsert Products.1",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/store",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        496
+      ],
+      "id": "b623f034-adfd-41a1-8415-07ef18f275bc",
+      "name": "Товар2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(row => {\n  return {\n    json: {\n      id: row.id,\n      account_id: row.accountId || null,\n      shared: row.shared || false,\n      updated: row.updated || null,\n      name: row.name || null,\n      description: row.description || null,\n      code: row.code || null,\n      external_code: row.externalCode || null,\n      archived: row.archived || false,\n      address: row.address || null,\n      address_addinfo: row.addressFull?.addInfo || null,\n      path_name: row.pathName || null,\n      group_id: row.group?.meta?.href?.split('/').pop() || null,\n      owner_id: row.owner?.meta?.href?.split('/').pop() || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        496
+      ],
+      "id": "ebb35260-59e5-46a2-8c10-b2fb49b32a8e",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/warehouses",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"account_id\": {{ $json.account_id ? JSON.stringify($json.account_id) : \"null\" }},\n    \"shared\": {{ $json.shared ?? \"false\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"code\": {{ $json.code ? JSON.stringify($json.code) : \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"archived\": {{ $json.archived ?? \"false\" }},\n    \"address\": {{ $json.address ? JSON.stringify($json.address) : \"null\" }},\n    \"address_addinfo\": {{ $json.address_addinfo ? JSON.stringify($json.address_addinfo) : \"null\" }},\n    \"path_name\": {{ $json.path_name ? JSON.stringify($json.path_name) : \"null\" }},\n    \"group_id\": {{ $json.group_id ? JSON.stringify($json.group_id) : \"null\" }},\n    \"owner_id\": {{ $json.owner_id ? JSON.stringify($json.owner_id) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        496
+      ],
+      "id": "1f96d3cc-f19e-4565-b023-97b280ec05eb",
+      "name": "Supabase Upsert Products.2",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/customerorder",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        720
+      ],
+      "id": "41a2b547-2646-4217-a528-4e0cd0820d6b",
+      "name": "Товар3"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      id: r.id,\n      name: r.name || null,\n      created: r.created || null,\n      updated: r.updated || null,\n      moment: r.moment || null,\n      description: r.description || null,\n      external_code: r.externalCode || null,\n      sum: r.sum ?? null,\n      vat_sum: r.vatSum ?? null,\n      state_name: r.state?.name || null,\n      state_id: r.state?.meta?.href?.split('/').pop() || null,\n      agent_id: r.agent?.meta?.href?.split('/').pop() || null,\n      organization_id: r.organization?.meta?.href?.split('/').pop() || null,\n      store_id: r.store?.meta?.href?.split('/').pop() || null,\n      owner_id: r.owner?.meta?.href?.split('/').pop() || null,\n      group_id: r.group?.meta?.href?.split('/').pop() || null,\n      rate_currency: r.rate?.currency?.meta?.href?.split('/').pop() || null,\n      rate_value: r.rate?.value ?? null,\n      rate_multiplier: r.rate?.multiplier ?? null,\n      printed: r.printed ?? false,\n      published: r.published ?? false,\n      deleted: r.deleted || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        720
+      ],
+      "id": "e1fe0db3-ed18-4bb7-8c1b-592d01f5fc4d",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/customerorders",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"created\": {{ $json.created ? JSON.stringify($json.created) : \"null\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"moment\": {{ $json.moment ? JSON.stringify($json.moment) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"sum\": {{ $json.sum ?? \"null\" }},\n    \"vat_sum\": {{ $json.vat_sum ?? \"null\" }},\n    \"state_name\": {{ $json.state_name ? JSON.stringify($json.state_name) : \"null\" }},\n    \"state_id\": {{ $json.state_id ? JSON.stringify($json.state_id) : \"null\" }},\n    \"agent_id\": {{ $json.agent_id ? JSON.stringify($json.agent_id) : \"null\" }},\n    \"organization_id\": {{ $json.organization_id ? JSON.stringify($json.organization_id) : \"null\" }},\n    \"store_id\": {{ $json.store_id ? JSON.stringify($json.store_id) : \"null\" }},\n    \"owner_id\": {{ $json.owner_id ? JSON.stringify($json.owner_id) : \"null\" }},\n    \"group_id\": {{ $json.group_id ? JSON.stringify($json.group_id) : \"null\" }},\n    \"rate_currency\": {{ $json.rate_currency ? JSON.stringify($json.rate_currency) : \"null\" }},\n    \"rate_value\": {{ $json.rate_value ?? \"null\" }},\n    \"rate_multiplier\": {{ $json.rate_multiplier ?? \"null\" }},\n    \"printed\": {{ $json.printed ?? \"false\" }},\n    \"published\": {{ $json.published ?? \"false\" }},\n    \"deleted\": {{ $json.deleted ? JSON.stringify($json.deleted) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        720
+      ],
+      "id": "b0cee62d-c701-4c93-a048-26cd3d12c90f",
+      "name": "Supabase Upsert Products.3",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/paymentin",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        944
+      ],
+      "id": "d5b50dd2-05d4-4884-8705-50167cddc98c",
+      "name": "Товар4"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      id: r.id,\n      name: r.name || null,\n      created: r.created || null,\n      updated: r.updated || null,\n      moment: r.moment || null,\n      sum: r.sum ?? null,\n      external_code: r.externalCode || null,\n      description: r.description || null,\n      incoming_number: r.incomingNumber || null,\n      incoming_date: r.incomingDate || null,\n      vat_sum: r.vatSum ?? null,\n      rate_currency: r.rate?.currency?.meta?.href?.split('/').pop() || null,\n      rate_value: r.rate?.value ?? null,\n      rate_multiplier: r.rate?.multiplier ?? null,\n      agent_id: r.agent?.meta?.href?.split('/').pop() || null,\n      organization_id: r.organization?.meta?.href?.split('/').pop() || null,\n      group_id: r.group?.meta?.href?.split('/').pop() || null,\n      owner_id: r.owner?.meta?.href?.split('/').pop() || null,\n      state_name: r.state?.name || null,\n      state_id: r.state?.meta?.href?.split('/').pop() || null,\n      operations: r.operations?.map(op => op.meta?.href?.split('/').pop()).join(',') || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        944
+      ],
+      "id": "177d70ee-9110-4709-bf33-a927ad2e5705",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/paymentin",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"created\": {{ $json.created ? JSON.stringify($json.created) : \"null\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"moment\": {{ $json.moment ? JSON.stringify($json.moment) : \"null\" }},\n    \"sum\": {{ $json.sum ?? \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"incoming_number\": {{ $json.incoming_number ? JSON.stringify($json.incoming_number) : \"null\" }},\n    \"incoming_date\": {{ $json.incoming_date ? JSON.stringify($json.incoming_date) : \"null\" }},\n    \"vat_sum\": {{ $json.vat_sum ?? \"null\" }},\n    \"rate_currency\": {{ $json.rate_currency ? JSON.stringify($json.rate_currency) : \"null\" }},\n    \"rate_value\": {{ $json.rate_value ?? \"null\" }},\n    \"rate_multiplier\": {{ $json.rate_multiplier ?? \"null\" }},\n    \"agent_id\": {{ $json.agent_id ? JSON.stringify($json.agent_id) : \"null\" }},\n    \"organization_id\": {{ $json.organization_id ? JSON.stringify($json.organization_id) : \"null\" }},\n    \"group_id\": {{ $json.group_id ? JSON.stringify($json.group_id) : \"null\" }},\n    \"owner_id\": {{ $json.owner_id ? JSON.stringify($json.owner_id) : \"null\" }},\n    \"state_name\": {{ $json.state_name ? JSON.stringify($json.state_name) : \"null\" }},\n    \"state_id\": {{ $json.state_id ? JSON.stringify($json.state_id) : \"null\" }},\n    \"operations\": {{ $json.operations ? JSON.stringify($json.operations) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        944
+      ],
+      "id": "b141989d-13fe-4f87-88f3-c28f770e2409",
+      "name": "Supabase Upsert Products.4",
+      "alwaysOutputData": true,
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "Product",
+        "height": 192,
+        "width": 592
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "833ee285-6801-4929-a97d-9a862b7c4004",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Stock",
+        "height": 192,
+        "width": 592,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        224
+      ],
+      "typeVersion": 1,
+      "id": "a7d97618-a8f4-4165-b670-82f9f56669f4",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Werehouses (Склад)",
+        "height": 192,
+        "width": 592,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "f0479c85-6c1a-4b8b-848f-2e37aa71fa94",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Customerorder\n",
+        "height": 192,
+        "width": 592,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        672
+      ],
+      "typeVersion": 1,
+      "id": "5bbba1fe-e3e5-455f-b034-3fc9b18ba664",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "Paymentin",
+        "height": 192,
+        "width": 592,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        896
+      ],
+      "typeVersion": 1,
+      "id": "2c408dfd-7cd1-4cff-a878-cde6c5f2062b",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/paymentout",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        1168
+      ],
+      "id": "135e7f51-fe2e-45be-9020-0f968b2dffb8",
+      "name": "Товар5"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      id: r.id,\n      name: r.name || null,\n      created: r.created || null,\n      updated: r.updated || null,\n      moment: r.moment || null,\n      sum: r.sum ?? null,\n      external_code: r.externalCode || null,\n      description: r.description || null,\n      incoming_number: r.incomingNumber || null,\n      incoming_date: r.incomingDate || null,\n      vat_sum: r.vatSum ?? null,\n      rate_currency: r.rate?.currency?.meta?.href?.split('/').pop() || null,\n      rate_value: r.rate?.value ?? null,\n      rate_multiplier: r.rate?.multiplier ?? null,\n      agent_id: r.agent?.meta?.href?.split('/').pop() || null,\n      organization_id: r.organization?.meta?.href?.split('/').pop() || null,\n      group_id: r.group?.meta?.href?.split('/').pop() || null,\n      owner_id: r.owner?.meta?.href?.split('/').pop() || null,\n      state_name: r.state?.name || null,\n      state_id: r.state?.meta?.href?.split('/').pop() || null,\n      operations: r.operations?.map(op => op.meta?.href?.split('/').pop()).join(',') || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        1168
+      ],
+      "id": "7d32ab63-eec0-4415-a93b-8f8a814b1d91",
+      "name": "Code in JavaScript5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/paymentout",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"created\": {{ $json.created ? JSON.stringify($json.created) : \"null\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"moment\": {{ $json.moment ? JSON.stringify($json.moment) : \"null\" }},\n    \"sum\": {{ $json.sum ?? \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"incoming_number\": {{ $json.incoming_number ? JSON.stringify($json.incoming_number) : \"null\" }},\n    \"incoming_date\": {{ $json.incoming_date ? JSON.stringify($json.incoming_date) : \"null\" }},\n    \"vat_sum\": {{ $json.vat_sum ?? \"null\" }},\n    \"rate_currency\": {{ $json.rate_currency ? JSON.stringify($json.rate_currency) : \"null\" }},\n    \"rate_value\": {{ $json.rate_value ?? \"null\" }},\n    \"rate_multiplier\": {{ $json.rate_multiplier ?? \"null\" }},\n    \"agent_id\": {{ $json.agent_id ? JSON.stringify($json.agent_id) : \"null\" }},\n    \"organization_id\": {{ $json.organization_id ? JSON.stringify($json.organization_id) : \"null\" }},\n    \"group_id\": {{ $json.group_id ? JSON.stringify($json.group_id) : \"null\" }},\n    \"owner_id\": {{ $json.owner_id ? JSON.stringify($json.owner_id) : \"null\" }},\n    \"state_name\": {{ $json.state_name ? JSON.stringify($json.state_name) : \"null\" }},\n    \"state_id\": {{ $json.state_id ? JSON.stringify($json.state_id) : \"null\" }},\n    \"operations\": {{ $json.operations ? JSON.stringify($json.operations) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        1168
+      ],
+      "id": "26abff34-2626-4847-97bd-f66651ed6f07",
+      "name": "Supabase Upsert Products.5",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "Paymentout",
+        "height": 192,
+        "width": 592,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        1120
+      ],
+      "typeVersion": 1,
+      "id": "fd3e9fc2-7935-440d-aedf-27f16054c95e",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/cashin",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        1392
+      ],
+      "id": "77aaf0c8-768e-4fc2-8a4c-66fa4e8e5aa8",
+      "name": "Товар6"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      id: r.id,\n      name: r.name || null,\n      created: r.created || null,\n      updated: r.updated || null,\n      moment: r.moment || null,\n      sum: r.sum ?? null,\n      external_code: r.externalCode || null,\n      description: r.description || null,\n      incoming_number: r.incomingNumber || null,\n      incoming_date: r.incomingDate || null,\n      organization_id: r.organization?.meta?.href?.split('/').pop() || null,\n      agent_id: r.agent?.meta?.href?.split('/').pop() || null,\n      state_name: r.state?.name || null,\n      state_id: r.state?.meta?.href?.split('/').pop() || null,\n      rate_currency: r.rate?.currency?.meta?.href?.split('/').pop() || null,\n      rate_value: r.rate?.value ?? null,\n      rate_multiplier: r.rate?.multiplier ?? null,\n      group_id: r.group?.meta?.href?.split('/').pop() || null,\n      owner_id: r.owner?.meta?.href?.split('/').pop() || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        1392
+      ],
+      "id": "6a1b4833-6210-41ac-a152-29b3f6d18a14",
+      "name": "Code in JavaScript6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/cashin",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"created\": {{ $json.created ? JSON.stringify($json.created) : \"null\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"moment\": {{ $json.moment ? JSON.stringify($json.moment) : \"null\" }},\n    \"sum\": {{ $json.sum ?? \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"incoming_number\": {{ $json.incoming_number ? JSON.stringify($json.incoming_number) : \"null\" }},\n    \"incoming_date\": {{ $json.incoming_date ? JSON.stringify($json.incoming_date) : \"null\" }},\n    \"organization_id\": {{ $json.organization_id ? JSON.stringify($json.organization_id) : \"null\" }},\n    \"agent_id\": {{ $json.agent_id ? JSON.stringify($json.agent_id) : \"null\" }},\n    \"state_name\": {{ $json.state_name ? JSON.stringify($json.state_name) : \"null\" }},\n    \"state_id\": {{ $json.state_id ? JSON.stringify($json.state_id) : \"null\" }},\n    \"rate_currency\": {{ $json.rate_currency ? JSON.stringify($json.rate_currency) : \"null\" }},\n    \"rate_value\": {{ $json.rate_value ?? \"null\" }},\n    \"rate_multiplier\": {{ $json.rate_multiplier ?? \"null\" }},\n    \"group_id\": {{ $json.group_id ? JSON.stringify($json.group_id) : \"null\" }},\n    \"owner_id\": {{ $json.owner_id ? JSON.stringify($json.owner_id) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        1392
+      ],
+      "id": "1287b9ab-abd7-4bc9-8162-315c29d39a85",
+      "name": "Supabase Upsert Products.6",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "cashin",
+        "height": 192,
+        "width": 592,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        1344
+      ],
+      "typeVersion": 1,
+      "id": "8841d6e3-e69b-4eb5-9842-60b20ea50de0",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/cashout",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        1616
+      ],
+      "id": "90a4c0e5-9b7f-490c-ab7f-f0b9cb2427ab",
+      "name": "Товар7"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      id: r.id,\n      name: r.name || null,\n      created: r.created || null,\n      updated: r.updated || null,\n      moment: r.moment || null,\n      sum: r.sum ?? null,\n      external_code: r.externalCode || null,\n      description: r.description || null,\n      incoming_number: r.incomingNumber || null,\n      incoming_date: r.incomingDate || null,\n      organization_id: r.organization?.meta?.href?.split('/').pop() || null,\n      agent_id: r.agent?.meta?.href?.split('/').pop() || null,\n      state_name: r.state?.name || null,\n      state_id: r.state?.meta?.href?.split('/').pop() || null,\n      rate_currency: r.rate?.currency?.meta?.href?.split('/').pop() || null,\n      rate_value: r.rate?.value ?? null,\n      rate_multiplier: r.rate?.multiplier ?? null,\n      group_id: r.group?.meta?.href?.split('/').pop() || null,\n      owner_id: r.owner?.meta?.href?.split('/').pop() || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        1616
+      ],
+      "id": "6074ca87-6b4b-4346-8f63-75dbe0907e99",
+      "name": "Code in JavaScript7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/cashout",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"created\": {{ $json.created ? JSON.stringify($json.created) : \"null\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"moment\": {{ $json.moment ? JSON.stringify($json.moment) : \"null\" }},\n    \"sum\": {{ $json.sum ?? \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"incoming_number\": {{ $json.incoming_number ? JSON.stringify($json.incoming_number) : \"null\" }},\n    \"incoming_date\": {{ $json.incoming_date ? JSON.stringify($json.incoming_date) : \"null\" }},\n    \"organization_id\": {{ $json.organization_id ? JSON.stringify($json.organization_id) : \"null\" }},\n    \"agent_id\": {{ $json.agent_id ? JSON.stringify($json.agent_id) : \"null\" }},\n    \"state_name\": {{ $json.state_name ? JSON.stringify($json.state_name) : \"null\" }},\n    \"state_id\": {{ $json.state_id ? JSON.stringify($json.state_id) : \"null\" }},\n    \"rate_currency\": {{ $json.rate_currency ? JSON.stringify($json.rate_currency) : \"null\" }},\n    \"rate_value\": {{ $json.rate_value ?? \"null\" }},\n    \"rate_multiplier\": {{ $json.rate_multiplier ?? \"null\" }},\n    \"group_id\": {{ $json.group_id ? JSON.stringify($json.group_id) : \"null\" }},\n    \"owner_id\": {{ $json.owner_id ? JSON.stringify($json.owner_id) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        1616
+      ],
+      "id": "0c608fb9-f31f-4d61-8d39-180c00946e26",
+      "name": "Supabase Upsert Products.7",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "cashout",
+        "height": 192,
+        "width": 592
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        1568
+      ],
+      "typeVersion": 1,
+      "id": "19ea66fd-ed16-4576-b79e-f46482cb2f97",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/entity/loss",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        1840
+      ],
+      "id": "e557a6c1-2fd0-45f0-b765-529e41622663",
+      "name": "Товар8"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  return {\n    json: {\n      id: r.id,\n      account_id: r.accountId || null,\n      owner: r.owner?.meta?.href || null,\n      shared: r.shared ?? false,\n      group: r.group?.meta?.href || null,\n      updated: r.updated || null,\n      name: r.name || null,\n      description: r.description || null,\n      external_code: r.externalCode || null,\n      moment: r.moment || null,\n      applicable: r.applicable ?? false,\n      sum: r.sum ?? null,\n      store: r.store?.meta?.href || null,\n      organization: r.organization?.meta?.href || null,\n      created: r.created || null,\n      printed: r.printed ?? false,\n      published: r.published ?? false,\n      inventory: r.inventory?.meta?.href || null,\n      project: r.project?.meta?.href || null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        1840
+      ],
+      "id": "7ad57650-74bf-423b-9f73-8ee691142e8e",
+      "name": "Code in JavaScript8"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/loss",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"id\": {{ $json.id ? JSON.stringify($json.id) : \"null\" }},\n    \"account_id\": {{ $json.account_id ? JSON.stringify($json.account_id) : \"null\" }},\n    \"owner\": {{ $json.owner ? JSON.stringify($json.owner) : \"null\" }},\n    \"shared\": {{ $json.shared ?? \"false\" }},\n    \"group\": {{ $json.group ? JSON.stringify($json.group) : \"null\" }},\n    \"updated\": {{ $json.updated ? JSON.stringify($json.updated) : \"null\" }},\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"description\": {{ $json.description ? JSON.stringify($json.description) : \"null\" }},\n    \"external_code\": {{ $json.external_code ? JSON.stringify($json.external_code) : \"null\" }},\n    \"moment\": {{ $json.moment ? JSON.stringify($json.moment) : \"null\" }},\n    \"applicable\": {{ $json.applicable ?? \"false\" }},\n    \"sum\": {{ $json.sum ?? \"null\" }},\n    \"store\": {{ $json.store ? JSON.stringify($json.store) : \"null\" }},\n    \"organization\": {{ $json.organization ? JSON.stringify($json.organization) : \"null\" }},\n    \"created\": {{ $json.created ? JSON.stringify($json.created) : \"null\" }},\n    \"printed\": {{ $json.printed ?? \"false\" }},\n    \"published\": {{ $json.published ?? \"false\" }},\n    \"inventory\": {{ $json.inventory ? JSON.stringify($json.inventory) : \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        1840
+      ],
+      "id": "2e06e09a-5764-435b-aa17-efd0506d9f29",
+      "name": "Supabase Upsert Products.8",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "loss",
+        "height": 192,
+        "width": 592,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        1792
+      ],
+      "typeVersion": 1,
+      "id": "c3290635-b4ab-4148-b036-1daa45d229bd",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/report/turnover/all",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        2064
+      ],
+      "id": "bd5aac4a-47b7-4905-8dda-5f59c3d09756",
+      "name": "Товар9"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/turnover",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"article\": {{$json.article ? JSON.stringify($json.article) : \"null\"}},\n    \"name\": {{$json.name ? JSON.stringify($json.name) : \"null\"}},\n    \"code\": {{$json.code ? JSON.stringify($json.code) : \"null\"}},\n    \n    \"uom_name\": {{$json.uom_name ? JSON.stringify($json.uom_name) : \"null\"}},\n    \"uom_href\": {{$json.uom_href ? JSON.stringify($json.uom_href) : \"null\"}},\n\n    \"image_href\": {{$json.image_href ? JSON.stringify($json.image_href) : \"null\"}},\n    \"image_title\": {{$json.image_title ? JSON.stringify($json.image_title) : \"null\"}},\n    \"image_filename\": {{$json.image_filename ? JSON.stringify($json.image_filename) : \"null\"}},\n    \"image_updated\": {{$json.image_updated ? JSON.stringify($json.image_updated) : \"null\"}},\n    \"image_tiny_href\": {{$json.image_tiny_href ? JSON.stringify($json.image_tiny_href) : \"null\"}},\n    \"image_miniature_href\": {{$json.image_miniature_href ? JSON.stringify($json.image_miniature_href) : \"null\"}},\n\n    \"assortment_href\": {{$json.assortment_href ? JSON.stringify($json.assortment_href) : \"null\"}},\n    \"assortment_type\": {{$json.assortment_type ? JSON.stringify($json.assortment_type) : \"null\"}},\n\n    \"on_period_start_quantity\": {{$json.on_period_start_quantity ?? \"null\"}},\n    \"on_period_start_sum\": {{$json.on_period_start_sum ?? \"null\"}},\n\n    \"income_quantity\": {{$json.income_quantity ?? \"null\"}},\n    \"income_sum\": {{$json.income_sum ?? \"null\"}},\n\n    \"outcome_quantity\": {{$json.outcome_quantity ?? \"null\"}},\n    \"outcome_sum\": {{$json.outcome_sum ?? \"null\"}},\n\n    \"on_period_end_quantity\": {{$json.on_period_end_quantity ?? \"null\"}},\n    \"on_period_end_sum\": {{$json.on_period_end_sum ?? \"null\"}}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        2064
+      ],
+      "id": "e4819b44-9257-4881-88ee-c3f5335a5379",
+      "name": "Supabase Upsert Products.9",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "Turnover report",
+        "height": 192,
+        "width": 592,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        2016
+      ],
+      "typeVersion": 1,
+      "id": "21611b5c-2258-4848-8508-90f9d299401e",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  const assortment = r.assortment || {};\n  const meta = assortment.meta || {};\n  const uomMeta = assortment.uom?.meta || {};\n  const imageMeta = assortment.image?.meta || {};\n\n  return {\n    json: {\n      article: assortment.article || null,\n      name: assortment.name || null,\n      code: assortment.code || null,\n      \n      // Единица измерения\n      uom_name: assortment.uom?.name || null,\n      uom_href: uomMeta.href || null,\n\n      // Изображение\n      image_href: imageMeta.href || null,\n      image_title: assortment.image?.title || null,\n      image_filename: assortment.image?.filename || null,\n      image_updated: assortment.image?.updated || null,\n      image_tiny_href: assortment.image?.tiny?.href || null,\n      image_miniature_href: assortment.image?.miniature?.href || null,\n\n      // Метаданные\n      assortment_href: meta.href || null,\n      assortment_type: meta.type || null,\n\n      // Остатки и движения\n      on_period_start_quantity: r.onPeriodStart?.quantity ?? null,\n      on_period_start_sum: r.onPeriodStart?.sum ?? null,\n\n      income_quantity: r.income?.quantity ?? null,\n      income_sum: r.income?.sum ?? null,\n\n      outcome_quantity: r.outcome?.quantity ?? null,\n      outcome_sum: r.outcome?.sum ?? null,\n\n      on_period_end_quantity: r.onPeriodEnd?.quantity ?? null,\n      on_period_end_sum: r.onPeriodEnd?.sum ?? null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        2064
+      ],
+      "id": "f28b0aa6-64a7-447a-aa17-0bfd830d1213",
+      "name": "Code in JavaScript9"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/report/profit/byproduct",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        2288
+      ],
+      "id": "15ad5461-547d-47bd-bf2b-3fd774d1b6ba",
+      "name": "Товар10"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/profitability_report",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"name\": {{ $json.name ? JSON.stringify($json.name) : \"null\" }},\n    \"code\": {{ $json.code ? JSON.stringify($json.code) : \"null\" }},\n    \"article\": {{ $json.article ? JSON.stringify($json.article) : \"null\" }},\n    \"image_url\": {{ $json.image_url ? JSON.stringify($json.image_url) : \"null\" }},\n    \"uom_name\": {{ $json.uom_name ? JSON.stringify($json.uom_name) : \"null\" }},\n    \"sell_quantity\": {{ $json.sell_quantity ?? \"null\" }},\n    \"sell_price\": {{ $json.sell_price ?? \"null\" }},\n    \"sell_cost\": {{ $json.sell_cost ?? \"null\" }},\n    \"sell_sum\": {{ $json.sell_sum ?? \"null\" }},\n    \"sell_cost_sum\": {{ $json.sell_cost_sum ?? \"null\" }},\n    \"return_quantity\": {{ $json.return_quantity ?? \"null\" }},\n    \"return_price\": {{ $json.return_price ?? \"null\" }},\n    \"return_cost\": {{ $json.return_cost ?? \"null\" }},\n    \"return_sum\": {{ $json.return_sum ?? \"null\" }},\n    \"return_cost_sum\": {{ $json.return_cost_sum ?? \"null\" }},\n    \"profit\": {{ $json.profit ?? \"null\" }},\n    \"margin\": {{ $json.margin ?? \"null\" }},\n    \"sales_margin\": {{ $json.sales_margin ?? \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        2288
+      ],
+      "id": "a16d4752-5edb-4b05-9c0e-e48adcf4d81c",
+      "name": "Supabase Upsert Products.10",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "Profitability report",
+        "height": 192,
+        "width": 592,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        2240
+      ],
+      "typeVersion": 1,
+      "id": "abe45f8d-2b85-4353-a48d-8dcdb575da4e",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(r => {\n  const assortment = r.assortment || {};\n  const image = assortment.image || {};\n  const uom = assortment.uom || {};\n\n  return {\n    json: {\n      name: assortment.name || null,\n      code: assortment.code || null,\n      article: assortment.article || null,\n      image_url: image.meta?.href || null,\n      uom_name: uom.name || null,\n      sell_quantity: r.sellQuantity ?? null,\n      sell_price: r.sellPrice ?? null,\n      sell_cost: r.sellCost ?? null,\n      sell_sum: r.sellSum ?? null,\n      sell_cost_sum: r.sellCostSum ?? null,\n      return_quantity: r.returnQuantity ?? null,\n      return_price: r.returnPrice ?? null,\n      return_cost: r.returnCost ?? null,\n      return_sum: r.returnSum ?? null,\n      return_cost_sum: r.returnCostSum ?? null,\n      profit: r.profit ?? null,\n      margin: r.margin ?? null,\n      sales_margin: r.salesMargin ?? null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        2288
+      ],
+      "id": "331907f0-fac9-4c54-9d6e-750e20aae8a2",
+      "name": "Code in JavaScript10"
+    },
+    {
+      "parameters": {
+        "url": "https://api.moysklad.ru/api/remap/1.2/report/money/byaccount",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ca2356f59ed3f58668abff4a2db106be74462343"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        2512
+      ],
+      "id": "b3a66f3e-4f23-4061-8c11-c1bb2b882709",
+      "name": "Товар11"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nvwccrudnmsshkqpvvqu.supabase.co/rest/v1/cash_balance",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52d2NjcnVkbm1zc2hrcXB2dnF1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTQyODI1MCwiZXhwIjoyMDc1MDA0MjUwfQ.8GvB82MZy0xJ5ZA279FEdrlWEXc5-wZK7UGEjRJTx9A"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates, return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "=[\n  {\n    \"organization_name\": {{ $json.organization_name ? JSON.stringify($json.organization_name) : \"null\" }},\n    \"organization_href\": {{ $json.organization_href ? JSON.stringify($json.organization_href) : \"null\" }},\n    \"account_name\": {{ $json.account_name ? JSON.stringify($json.account_name) : \"null\" }},\n    \"account_href\": {{ $json.account_href ? JSON.stringify($json.account_href) : \"null\" }},\n    \"balance\": {{ $json.balance ?? \"null\" }}\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        2512
+      ],
+      "id": "e6ab4505-bee2-4be3-8f67-306b16cb03cc",
+      "name": "Supabase Upsert Products.11",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "content": "Cash Balance report",
+        "height": 192,
+        "width": 592,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        2464
+      ],
+      "typeVersion": 1,
+      "id": "d1596739-f562-409e-bbbc-b8ccccc67379",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items[0].json.rows.map(row => {\n  return {\n    json: {\n      organization_name: row.organization?.name || null,\n      organization_href: row.organization?.meta?.href || null,\n      account_name: row.account?.name || null,\n      account_href: row.account?.meta?.href || null,\n      balance: row.balance ?? null\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        2512
+      ],
+      "id": "93c37a2c-7405-4ab6-b7b8-1529be5ebe22",
+      "name": "Code in JavaScript11"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Товар11",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар10",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар9",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар8",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар7",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар6",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Товар",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар4": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар5": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар6": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript6": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар7": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript7": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар8": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript8": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар9": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript9": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар10": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript10": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Товар11": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript11": {
+      "main": [
+        [
+          {
+            "node": "Supabase Upsert Products.11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "fe1656cd6336b4718f4619772076f852f6838b036caf2d9b3e8d3f48689e0a85"
+  }
+}
