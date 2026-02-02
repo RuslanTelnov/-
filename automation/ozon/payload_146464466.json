@@ -1,0 +1,17 @@
+[
+  {
+    "id": 384,
+    "moysklad_id": "afb42994-769c-11f0-0a80-0db7002d6ad6",
+    "name": "\u0420\u044e\u043a\u0437\u0430\u043a Vel \u043d\u0435\u0439\u043b\u043e\u043d \u0447\u0435\u0440\u043d\u044b\u0439",
+    "article": "146464466",
+    "price": 300000.0,
+    "country": null,
+    "image_url": null,
+    "created_at": "2025-12-07T13:38:32.517819+00:00",
+    "supplier": null,
+    "cost_price": 0.0,
+    "description": null,
+    "min_price": 135964.0,
+    "stock": 5
+  }
+]

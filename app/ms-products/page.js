@@ -1,0 +1,634 @@
+'use client'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabase'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
+
+export default function MsProducts() {
+    const router = useRouter()
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [selectedImage, setSelectedImage] = useState(null)
+    const [searchQuery, setSearchQuery] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [exportingId, setExportingId] = useState(null)
+    const [successIds, setSuccessIds] = useState(new Set())
+    const [error, setError] = useState(null)
+    const itemsPerPage = 25
+
+    const [warehouses, setWarehouses] = useState([])
+    const [selectedWarehouse, setSelectedWarehouse] = useState('all')
+    const [warehouseStocks, setWarehouseStocks] = useState({}) // product_id -> stock
+
+    useEffect(() => {
+        fetchProducts()
+        fetchWarehouses()
+
+        const channel = supabase
+            .channel('products_changes')
+            .on(
+                'postgres_changes',
+                {
+                    event: '*',
+                    schema: 'Parser',
+                    table: 'products'
+                },
+                (payload) => {
+                    console.log('Change received!', payload)
+                    fetchProducts()
+                }
+            )
+            .subscribe()
+
+        return () => {
+            supabase.removeChannel(channel)
+        }
+    }, [])
+
+    // Reset to first page when search query changes
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [searchQuery])
+
+    async function fetchProducts() {
+        try {
+            const { data, error } = await supabase
+                .from('products')
+                .select('*')
+                .order('name', { ascending: true })
+
+            if (error) throw error
+
+            console.log('Fetched products:', data.length)
+            const target = data.find(p => String(p.article) === '123873313')
+            if (target) {
+                console.log('✅ Found target product:', target)
+            } else {
+                console.log('❌ Target product 123873313 NOT found in fetched data')
+            }
+
+            setProducts(data || [])
+            setError(null)
+        } catch (error) {
+            console.error('Error fetching products:', error.message)
+            setError('Ошибка загрузки товаров: ' + error.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const handleExportToOzon = async (e, product) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        if (exportingId) return // Prevent multiple clicks
+        if (successIds.has(product.id)) return
+
+        // if (!confirm(`Выгрузить "${product.name}" на Ozon?`)) return
+
+        setExportingId(product.id)
+
+        try {
+            const response = await fetch('/api/ozon/create-card', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ product }),
+            })
+
+            const data = await response.json()
+
+            if (data.success) {
+                setSuccessIds(prev => new Set(prev).add(product.id))
+                // alert(`✅ Успешно! Задача на создание создана.\n\n${data.message}`) // Removed alert for smoother UX
+            } else {
+                alert(`❌ Ошибка: ${data.error || 'Неизвестная ошибка'}\n\nOutput: ${data.output}`)
+            }
+        } catch (error) {
+            console.error('Export error:', error)
+            alert(`❌ Ошибка сети: ${error.message}`)
+        } finally {
+            setExportingId(null)
+        }
+    }
+
+    const filteredProducts = products.filter(product => {
+        const query = searchQuery.toLowerCase().trim()
+        return (
+            (product.name && product.name.toLowerCase().includes(query)) ||
+            (product.article && String(product.article).toLowerCase().includes(query))
+        )
+    })
+
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+    const indexOfLastItem = currentPage * itemsPerPage
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage
+    const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem)
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
+    async function fetchWarehouses() {
+        try {
+            const { data, error } = await supabase
+                .from('warehouses')
+                .select('*')
+                .order('name')
+
+            if (error) {
+                // Ignore error if table doesn't exist yet (graceful degrade)
+                console.warn('Could not fetch warehouses (table might be missing)')
+                return
+            }
+            setWarehouses(data || [])
+        } catch (e) {
+            console.error('Error loading warehouses:', e)
+        }
+    }
+
+    async function fetchWarehouseStocks(warehouseId) {
+        if (warehouseId === 'all') {
+            setWarehouseStocks({})
+            return
+        }
+
+        try {
+            const { data, error } = await supabase
+                .from('product_stocks')
+                .select('product_id, stock')
+                .eq('warehouse_id', warehouseId)
+
+            if (error) throw error
+
+            const stockMap = {}
+            data.forEach(item => {
+                stockMap[item.product_id] = item.stock
+            })
+            setWarehouseStocks(stockMap)
+        } catch (e) {
+            console.error('Error fetching warehouse stocks:', e)
+        }
+    }
+
+    useEffect(() => {
+        if (selectedWarehouse !== 'all') {
+            fetchWarehouseStocks(selectedWarehouse)
+        } else {
+            setWarehouseStocks({})
+        }
+    }, [selectedWarehouse])
+
+    const getDisplayStock = (product) => {
+        if (selectedWarehouse === 'all') {
+            return product.stock || 0
+        }
+        // Return specific warehouse stock, or 0 if not found
+        return warehouseStocks[product.id] || 0
+    }
+
+    if (loading) return <div className="container"><h1 className="title-gradient">Загрузка...</h1></div>
+
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    }
+
+    const item = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0 }
+    }
+
+    const handleImageClick = (e, imageUrl) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setSelectedImage(imageUrl)
+    }
+
+    const placeholders = [
+        'https://images.unsplash.com/photo-1557683316-973673baf926?w=400&q=80', // Gradient 1
+        'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=400&q=80', // Gradient 2
+        'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=400&q=80', // Gradient 3
+        'https://images.unsplash.com/photo-1557682260-96773eb01377?w=400&q=80', // Gradient 4
+        'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80'  // Abstract
+    ]
+
+    return (
+        <div style={{ minHeight: '100vh', background: 'var(--velveto-bg-primary)' }}>
+            {/* Image Modal */}
+            {selectedImage && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'rgba(5, 8, 20, 0.95)',
+                        backdropFilter: 'blur(10px)',
+                        zIndex: 1000,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <motion.div
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        style={{
+                            background: 'var(--velveto-bg-secondary)',
+                            padding: '1rem',
+                            borderRadius: '16px',
+                            maxWidth: '600px',
+                            maxHeight: '80vh',
+                            width: '90%',
+                            position: 'relative',
+                            cursor: 'default',
+                            border: '1px solid var(--velveto-accent-primary)',
+                            boxShadow: '0 0 50px rgba(0,0,0,0.5)'
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setSelectedImage(null)}
+                            style={{
+                                position: 'absolute',
+                                top: '-20px',
+                                right: '-20px',
+                                background: 'var(--velveto-status-error)',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: '40px',
+                                height: '40px',
+                                cursor: 'pointer',
+                                fontWeight: 'bold',
+                                fontSize: '1.2rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+                            }}
+                        >
+                            ✕
+                        </button>
+                        <img
+                            src={selectedImage}
+                            alt="Preview"
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                                borderRadius: '8px',
+                                objectFit: 'contain',
+                                maxHeight: '70vh'
+                            }}
+                        />
+                    </motion.div>
+                </div>
+            )}
+
+            {/* Header */}
+            <header style={{
+                padding: '1rem 5%',
+                position: 'sticky',
+                top: 0,
+                zIndex: 100,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                backdropFilter: 'blur(20px)',
+                background: 'rgba(5, 8, 20, 0.8)',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                        <Link href="/">
+                            <h1 style={{
+                                fontSize: '1.4rem',
+                                fontWeight: '300',
+                                letterSpacing: '0.18em',
+                                color: 'var(--velveto-text-primary)',
+                                cursor: 'pointer',
+                                textTransform: 'uppercase'
+                            }}>
+                                VELVETO
+                            </h1>
+                        </Link>
+                        <span style={{
+                            color: 'var(--velveto-accent-primary)',
+                            fontSize: '0.6rem',
+                            letterSpacing: '0.2em',
+                            textTransform: 'uppercase',
+                            border: '1px solid var(--velveto-accent-primary)',
+                            padding: '2px 6px',
+                            borderRadius: '4px'
+                        }}>
+                            TECH
+                        </span>
+                    </div>
+
+                    {/* Navigation Tabs */}
+                    <nav style={{ display: 'flex', gap: '1.5rem' }}>
+                        <Link href="/" style={{
+                            color: 'var(--velveto-text-muted)',
+                            fontSize: '0.8rem',
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
+                        }}>
+                            Главная
+                        </Link>
+                        <Link href="/ms-products" style={{
+                            color: 'var(--velveto-accent-primary)',
+                            fontSize: '0.8rem',
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
+                            fontWeight: '600',
+                        }}>
+                            МойСклад
+                        </Link>
+                    </nav>
+                </div>
+            </header>
+
+            <main className="container" style={{ padding: '2rem 1rem', maxWidth: '1400px', margin: '0 auto' }}>
+                <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
+                    <h2 style={{
+                        fontSize: 'clamp(1.8rem, 6vw, 3.5rem)',
+                        marginBottom: '1rem',
+                        color: 'var(--velveto-text-primary)',
+                        fontWeight: '200',
+                        letterSpacing: '0.05em',
+                        textTransform: 'uppercase'
+                    }}>
+                        Номенклатуры <span style={{ color: 'var(--velveto-accent-primary)' }}>МойСклад</span>
+                    </h2>
+                    <p style={{ color: 'var(--velveto-text-muted)', fontSize: '1rem' }}>
+                        Полный список товаров и остатков из системы МойСклад
+                    </p>
+                </div>
+
+                {/* Controls Container */}
+                <div style={{
+                    marginBottom: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    width: '100%',
+                    maxWidth: '900px',
+                    margin: '0 auto 2rem'
+                }}>
+                    <div style={{ display: 'flex', gap: '1rem', width: '100%', flexWrap: 'wrap' }}>
+                        {/* Search Bar */}
+                        <div style={{ position: 'relative', flex: '2', minWidth: '280px' }}>
+                            <input
+                                type="text"
+                                placeholder="..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    padding: '0.8rem 1.25rem',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    background: 'rgba(255, 255, 255, 0.03)',
+                                    color: 'var(--velveto-text-primary)',
+                                    fontSize: '1rem',
+                                    outline: 'none',
+                                    height: '48px',
+                                    transition: 'all 0.3s',
+                                    fontFamily: 'var(--velveto-font-ui)'
+                                }}
+                            />
+                        </div>
+
+                        {/* Warehouse Selector */}
+                        <div style={{ flex: '1', minWidth: '200px' }}>
+                            <select
+                                value={selectedWarehouse}
+                                onChange={(e) => setSelectedWarehouse(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    padding: '0 1.25rem',
+                                    borderRadius: '12px',
+                                    border: '1px solid var(--velveto-accent-primary)',
+                                    background: 'rgba(0, 0, 0, 0.3)',
+                                    color: 'var(--velveto-text-primary)',
+                                    fontSize: '0.9rem',
+                                    cursor: 'pointer',
+                                    outline: 'none',
+                                    height: '48px',
+                                    appearance: 'none',
+                                    backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffb35a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'right 1rem center',
+                                    backgroundSize: '1em'
+                                }}
+                            >
+                                <option value="all" style={{ background: '#1a1a1a' }}>📦 Все склады</option>
+                                {warehouses.map(w => (
+                                    <option key={w.id} value={w.moysklad_id} style={{ background: '#1a1a1a' }}>
+                                        {w.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                {error && (
+                    <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--velveto-status-error)', fontSize: '1.2rem' }}>
+                        {error}
+                        <button onClick={fetchProducts} style={{ marginLeft: '1rem', padding: '0.5rem 1rem', cursor: 'pointer' }}>Повторить</button>
+                    </div>
+                )}
+
+                {!loading && !error && filteredProducts.length === 0 && (
+                    <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--velveto-text-muted)' }}>
+                        <h3>Ничего не найдено</h3>
+                        <p>Попробуйте изменить поисковый запрос</p>
+                        {products.length === 0 && <p>Список товаров пуст (возможно, ошибка загрузки)</p>}
+                    </div>
+                )}
+
+                <motion.div
+                    className="ms-table-container"
+                    variants={container}
+                    initial="hidden"
+                    animate="show"
+                    key={currentPage}
+                >
+                    <table className="ms-table">
+                        <thead>
+                            <tr>
+                                <th style={{ width: '80px' }}>Фото</th>
+                                <th>Наименование</th>
+                                <th>Артикул</th>
+                                <th>Мин. цена</th>
+                                <th>Розничная</th>
+                                <th>Себестоимость</th>
+                                <th>Остаток</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {currentItems.map((product, index) => (
+                                <tr
+                                    key={product.id}
+                                    onClick={() => router.push(`/product/${product.id}`)}
+                                    style={{ cursor: 'pointer', transition: 'background 0.2s' }}
+                                    className="hover:bg-white/5"
+                                >
+                                    <td data-label="Фото">
+                                        <img
+                                            src={product.image_url || placeholders[product.id % placeholders.length]}
+                                            alt={product.name}
+                                            className="ms-thumb"
+                                            style={{ cursor: 'zoom-in', border: '1px solid rgba(255,255,255,0.1)' }}
+                                            onClick={(e) => handleImageClick(e, product.image_url || placeholders[product.id % placeholders.length])}
+                                        />
+                                    </td>
+                                    <td data-label="Наименование" className="ms-cell-name" style={{ color: 'var(--velveto-text-primary)' }}>{product.name}</td>
+                                    <td data-label="Артикул" className="ms-cell-article" style={{ color: 'var(--velveto-text-muted)' }}>{product.article}</td>
+                                    <td data-label="Мин. цена" style={{ fontWeight: '600', color: 'var(--velveto-status-warning)' }}>
+                                        {product.min_price ? (product.min_price / 100).toLocaleString('ru-RU') : 0} ₸
+                                    </td>
+                                    <td data-label="Розничная" className="ms-cell-price" style={{ color: 'var(--velveto-accent-primary)' }}>
+                                        {product.price ? (product.price / 100).toLocaleString('ru-RU') : 0} ₸
+                                    </td>
+                                    <td data-label="Себестоимость">
+                                        {product.cost_price && (
+                                            <span className="cost-price" style={{ color: 'var(--velveto-text-secondary)' }}>
+                                                {(Number(product.cost_price)).toLocaleString('ru-RU')} ₸
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td data-label="Остаток">
+                                        <span style={{
+                                            fontWeight: 'bold',
+                                            color: getDisplayStock(product) > 0 ? 'var(--velveto-status-success)' : 'var(--velveto-status-error)',
+                                            transition: 'color 0.3s'
+                                        }}>
+                                            {getDisplayStock(product)}
+                                            {selectedWarehouse !== 'all' && (
+                                                <span style={{ fontSize: '0.7em', paddingLeft: '4px', opacity: 0.7 }}>
+                                                    (на складе)
+                                                </span>
+                                            )}
+                                        </span>
+                                    </td>
+                                    <td data-label="Действия">
+                                        <button
+                                            onClick={(e) => handleExportToOzon(e, product)}
+                                            disabled={exportingId === product.id || successIds.has(product.id)}
+                                            style={{
+                                                padding: '6px 12px',
+                                                borderRadius: '6px',
+                                                background: successIds.has(product.id)
+                                                    ? 'var(--velveto-status-success)'
+                                                    : (exportingId === product.id ? 'var(--velveto-text-muted)' : 'var(--velveto-accent-primary)'),
+                                                color: 'var(--velveto-bg-primary)',
+                                                border: 'none',
+                                                cursor: (exportingId === product.id || successIds.has(product.id)) ? 'default' : 'pointer',
+                                                fontWeight: '600',
+                                                fontSize: '0.75rem',
+                                                transition: 'all 0.2s',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '6px',
+                                                minWidth: '120px',
+                                                justifyContent: 'center'
+                                            }}
+                                        >
+                                            {successIds.has(product.id) ? '✓ OK' : (exportingId === product.id ? '...' : 'Export')}
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </motion.div>
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '1.5rem',
+                        marginTop: '3rem',
+                        paddingBottom: '2rem'
+                    }}>
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            style={{
+                                padding: '0.75rem 1.5rem',
+                                borderRadius: '12px',
+                                background: currentPage === 1 ? 'rgba(255,255,255,0.02)' : 'rgba(255, 255, 255, 0.05)',
+                                color: currentPage === 1 ? 'var(--velveto-text-muted)' : 'var(--velveto-text-primary)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                                transition: 'all 0.3s',
+                                fontFamily: 'var(--velveto-font-ui)'
+                            }}
+                        >
+                            ← Назад
+                        </button>
+
+                        <span style={{ color: 'var(--velveto-text-secondary)', fontSize: '1rem', letterSpacing: '0.05em' }}>
+                            Страница <span style={{ color: 'var(--velveto-accent-primary)', fontWeight: 'bold' }}>{currentPage}</span> из {totalPages}
+                        </span>
+
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            style={{
+                                padding: '0.75rem 1.5rem',
+                                borderRadius: '12px',
+                                background: currentPage === totalPages ? 'rgba(255,255,255,0.02)' : 'rgba(255, 255, 255, 0.05)',
+                                color: currentPage === totalPages ? 'var(--velveto-text-muted)' : 'var(--velveto-text-primary)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+                                transition: 'all 0.3s',
+                                fontFamily: 'var(--velveto-font-ui)'
+                            }}
+                        >
+                            Вперед →
+                        </button>
+                    </div>
+                )}
+            </main>
+
+            {/* Debug Footer */}
+            <div style={{
+                position: 'fixed',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                background: 'rgba(0,0,0,0.8)',
+                color: '#0f0',
+                padding: '0.5rem',
+                fontSize: '0.8rem',
+                fontFamily: 'monospace',
+                zIndex: 9999,
+                pointerEvents: 'none'
+            }}>
+                Debug: Products={products.length} | Filtered={filteredProducts.length} | Page={currentPage}/{totalPages} | Search="{searchQuery}" | Loading={String(loading)} | Error={String(error)}
+            </div>
+        </div >
+    )
+}

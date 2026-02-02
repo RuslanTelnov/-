@@ -1,0 +1,23 @@
+{
+  "meta" : {
+    "href" : "https://api.moysklad.ru/api/remap/1.2/entity/product/35063c51-5be8-11ef-0a80-059000183ac7/images/7d3531bc-6c3a-4cb8-b8ec-96d0af40e44d",
+    "type" : "image",
+    "mediaType" : "application/json",
+    "downloadHref" : "https://api.moysklad.ru/api/remap/1.2/download/7d3531bc-6c3a-4cb8-b8ec-96d0af40e44d"
+  },
+  "title" : "Снимок экрана 2024-08-16 в 20.56.59",
+  "filename" : "Снимок экрана 2024-08-16 в 20.56.59.png",
+  "size" : 2104732,
+  "updated" : "2024-08-16 18:57:16.344",
+  "miniature" : {
+    "href" : "https://api.moysklad.ru/api/remap/1.2/download/7d3531bc-6c3a-4cb8-b8ec-96d0af40e44d?miniature=true",
+    "type" : "image",
+    "mediaType" : "image/png",
+    "downloadHref" : "https://miniature-prod.moysklad.ru/miniature/de566b7d-23f4-11ef-0a80-0b44000068f1/documentminiature/04d53493-10f3-41c7-81b3-79f1079ab663"
+  },
+  "tiny" : {
+    "href" : "https://tinyimage-prod.moysklad.ru/static/tinyimage/de566b7d-23f4-11ef-0a80-0b44000068f1/tinyimage/302a32e8-4fcf-48a3-9879-18b776835874/t.png",
+    "type" : "image",
+    "mediaType" : "image/png"
+  }
+}

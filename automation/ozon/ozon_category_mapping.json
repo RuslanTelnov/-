@@ -1,0 +1,40 @@
+{
+    "рюкзак": {
+        "category_id": 17027904,
+        "type_id": 115945533,
+        "description_category_id": 17027904,
+        "type_name": "Рюкзак",
+        "attributes": {
+            "85": 5061932,
+            "9163": 22883
+        }
+    },
+    "сумка": {
+        "category_id": 17027904,
+        "type_id": 93500,
+        "description_category_id": 17027904,
+        "type_name": "Сумка",
+        "attributes": {
+            "85": 5061932,
+            "9163": 22880
+        }
+    },
+    "игрушка": {
+        "category_id": 17036082,
+        "type_id": 91307,
+        "description_category_id": 17036082,
+        "type_name": "Мягкая игрушка",
+        "attributes": {
+            "85": 5061932
+        }
+    },
+    "ролик": {
+        "category_id": 17028706,
+        "type_id": 971083333,
+        "description_category_id": 17028706,
+        "type_name": "Ролик для пресса",
+        "attributes": {
+            "85": 5061932
+        }
+    }
+}

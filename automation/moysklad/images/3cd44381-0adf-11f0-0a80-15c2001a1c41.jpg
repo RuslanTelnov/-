@@ -1,0 +1,23 @@
+{
+  "meta" : {
+    "href" : "https://api.moysklad.ru/api/remap/1.2/entity/product/3cd44381-0adf-11f0-0a80-15c2001a1c41/images/2a2c8d4e-49c8-44dd-86b2-0e9f3102fc04",
+    "type" : "image",
+    "mediaType" : "application/json",
+    "downloadHref" : "https://api.moysklad.ru/api/remap/1.2/download/2a2c8d4e-49c8-44dd-86b2-0e9f3102fc04"
+  },
+  "title" : "84340390002718",
+  "filename" : "84340390002718.jpg",
+  "size" : 178049,
+  "updated" : "2025-03-27 10:43:23.786",
+  "miniature" : {
+    "href" : "https://api.moysklad.ru/api/remap/1.2/download/2a2c8d4e-49c8-44dd-86b2-0e9f3102fc04?miniature=true",
+    "type" : "image",
+    "mediaType" : "image/png",
+    "downloadHref" : "https://miniature-prod.moysklad.ru/miniature/de566b7d-23f4-11ef-0a80-0b44000068f1/documentminiature/dc00fb55-4833-4203-b5c9-ae95d295b10c"
+  },
+  "tiny" : {
+    "href" : "https://tinyimage-prod.moysklad.ru/static/tinyimage/de566b7d-23f4-11ef-0a80-0b44000068f1/tinyimage/cde2e783-ed44-4188-9dd1-a2cd2092a6f7/t.png",
+    "type" : "image",
+    "mediaType" : "image/png"
+  }
+}

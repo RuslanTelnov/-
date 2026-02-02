@@ -1,0 +1,54 @@
+{
+    "brand": {
+        "name": "Velveto Tech",
+        "tone": "Future-oriented, cinematic, strict, intelligent, minimal"
+    },
+    "colors": {
+        "background": {
+            "primary": "#050814",
+            "secondary": "#070b1c",
+            "surface": "#101528"
+        },
+        "accent": {
+            "primary": "#ffb35a",
+            "soft": "#ffcf85",
+            "secondary": "#f4e9db"
+        },
+        "text": {
+            "primary": "#f5f5f5",
+            "secondary": "#c3c9d9",
+            "muted": "#8a90a4"
+        },
+        "status": {
+            "success": "#10b981",
+            "warning": "#f59e0b",
+            "error": "#ef4444"
+        }
+    },
+    "typography": {
+        "fontFamily": {
+            "display": "'Manrope', sans-serif",
+            "ui": "'Inter', sans-serif"
+        },
+        "weights": {
+            "light": 200,
+            "regular": 400,
+            "medium": 500,
+            "semibold": 600
+        },
+        "tracking": {
+            "display": "0.18em",
+            "nav": "0.16em"
+        }
+    },
+    "layout": {
+        "maxWidth": "1320px",
+        "radius": {
+            "card": "24px",
+            "button": "18px"
+        },
+        "shadows": {
+            "deep": "0 18px 60px rgba(0,0,0,0.45)"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "ms_id": "006e6337-3d3f-11f0-0a80-1129000afbb8",
+    "name": "Мягкая игрушка 1231 Соник жёлтый , высота 30 см, мультиколор",
+    "stock": 8.0,
+    "price": 4500.0,
+    "image_path": "/home/wik/.gemini/antigravity/scratch/wb-dashboard-project/ozon-automation/images/006e6337-3d3f-11f0-0a80-1129000afbb8.jpg",
+    "image_filename": "006e6337-3d3f-11f0-0a80-1129000afbb8.jpg",
+    "ozon_link": "https://www.ozon.ru/product/super-sonik-plyushevye-kukly-kukla-ezhik-1768167495/?utm_medium=organic&utm_source=yandexsmartcamera",
+    "scraped_title": "Доступ ограничен",
+    "scraped_description": "",
+    "scraped_images": [],
+    "category_path": [],
+    "scraped_attributes": {}
+  },
+  {
+    "ms_id": "030665d6-773e-11f0-0a80-076a00033b66",
+    "name": "Рюкзак Капибара 3456 искусственный мех коричневый",
+    "stock": 1.0,
+    "price": 4752.29,
+    "image_path": "/home/wik/.gemini/antigravity/scratch/wb-dashboard-project/ozon-automation/images/030665d6-773e-11f0-0a80-076a00033b66.jpg",
+    "image_filename": "030665d6-773e-11f0-0a80-076a00033b66.jpg",
+    "ozon_link": "https://www.ozon.ru/product/ryukzak-kapibara-igrushka-myagkaya-30sm-2138320565/?utm_medium=organic&utm_source=yandexsmartcamera",
+    "scraped_title": "Доступ ограничен",
+    "scraped_description": "",
+    "scraped_images": [],
+    "category_path": [],
+    "scraped_attributes": {}
+  }
+]

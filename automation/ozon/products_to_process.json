@@ -1,0 +1,43 @@
+[
+  {
+    "ms_id": "91a97eb0-3d42-11f0-0a80-06f8000bc6bd",
+    "name": "Мягкая игрушка морковь Успокаивающая для сна, высота 15 см, оранжевый",
+    "article": "130789380",
+    "stock": 15.0,
+    "price": 0.0,
+    "description": "",
+    "image_url": null,
+    "local_image_path": null,
+    "attributes": {}
+  },
+  {
+    "ms_id": "9b0385b1-773c-11f0-0a80-0cd6000394ae",
+    "name": "Мягкая игрушка Тум тум саур Тралалеро Тралала, 24 см",
+    "article": "140142807",
+    "stock": 6.0,
+    "price": 3345.46,
+    "description": "",
+    "image_url": null,
+    "local_image_path": null,
+    "attributes": {
+      "Не выгружать на Каспи": false,
+      "Отключить демпинг": false,
+      "Предзаказ": 30
+    }
+  },
+  {
+    "ms_id": "fe6a6929-7290-11f0-0a80-00b70004c7e5",
+    "name": "Мягкая игрушка Sprunki Raddy, высота 20 см, красный",
+    "article": "134427247",
+    "stock": 2.0,
+    "price": 3547.43,
+    "description": "",
+    "image_url": null,
+    "local_image_path": null,
+    "attributes": {
+      "Не выгружать на Каспи": false,
+      "Отключить демпинг": false,
+      "Предзаказ": 30
+    }
+  }
+]

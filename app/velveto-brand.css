@@ -1,0 +1,88 @@
+:root {
+  /* Colors - Backgrounds */
+  --velveto-bg-primary: #050814;
+  --velveto-bg-secondary: #070b1c;
+  --velveto-bg-surface: #101528;
+
+  /* Colors - Accents */
+  --velveto-accent-primary: #ffb35a;
+  --velveto-accent-soft: #ffcf85;
+  --velveto-accent-secondary: #f4e9db;
+
+  /* Colors - Text */
+  --velveto-text-primary: #f5f5f5;
+  --velveto-text-secondary: #c3c9d9;
+  --velveto-text-muted: #8a90a4;
+
+  /* Colors - Status */
+  --velveto-status-success: #10b981;
+  --velveto-status-warning: #f59e0b;
+  --velveto-status-error: #ef4444;
+
+  /* Typography */
+  --velveto-font-display: 'Manrope', sans-serif;
+  --velveto-font-ui: 'Inter', sans-serif;
+  
+  --velveto-tracking-display: 0.18em;
+  --velveto-tracking-nav: 0.16em;
+
+  /* Layout */
+  --velveto-radius-card: 24px;
+  --velveto-radius-button: 18px;
+  --velveto-shadow-deep: 0 18px 60px rgba(0,0,0,0.45);
+  
+  /* Gradients */
+  --velveto-gradient-glow: radial-gradient(circle at center, rgba(255, 179, 90, 0.15) 0%, rgba(5, 8, 20, 0) 70%);
+}
+
+body {
+  background-color: var(--velveto-bg-primary);
+  color: var(--velveto-text-primary);
+  font-family: var(--velveto-font-ui);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--velveto-font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--velveto-tracking-display);
+  font-weight: 300;
+}
+
+/* Utility Classes */
+.velveto-card {
+  background-color: var(--velveto-bg-surface);
+  border-radius: var(--velveto-radius-card);
+  box-shadow: var(--velveto-shadow-deep);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.velveto-button {
+  background-color: var(--velveto-accent-primary);
+  color: var(--velveto-bg-primary);
+  border-radius: var(--velveto-radius-button);
+  font-family: var(--velveto-font-ui);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.velveto-button:hover {
+  background-color: var(--velveto-accent-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 179, 90, 0.3);
+}
+
+.velveto-button-outline {
+  background: transparent;
+  border: 1px solid rgba(245, 245, 245, 0.2);
+  color: var(--velveto-text-primary);
+  border-radius: var(--velveto-radius-button);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.velveto-button-outline:hover {
+  border-color: var(--velveto-accent-primary);
+  color: var(--velveto-accent-primary);
+}
