@@ -1,0 +1,2327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kaspi_catalog xmlns="kaspiShopping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" date="11.02.2026 19:07" xsi:schemaLocation="http://kaspi.kz/kaspishopping.xsd">
+  <company>VELVETO</company>
+  <merchantid>30322748</merchantid>
+  <offers>
+    <offer sku="7394528014">
+      <model>Мягкая игрушка 1231 Соник жёлтый , высота 30 см, мультиколор</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>4439</price>
+    </offer>
+    <offer sku="9876543456787658">
+      <model>Комплект NOMAD.COM размер универсальный, черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>3499</price>
+    </offer>
+    <offer sku="1109866864">
+      <model>Заколка краб 3 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="6" />
+      </availabilities>
+      <price>1098</price>
+    </offer>
+    <offer sku="9876543456791692">
+      <model>Кофемолка электрическая c керамическими жерновами</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>18200</price>
+    </offer>
+    <offer sku="9876543456791682">
+      <model>Гирлянда на елку 10 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2866</price>
+    </offer>
+    <offer sku="9876543456791683">
+      <model>Блендер погружной RHB-2975</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>78900</price>
+    </offer>
+    <offer sku="9876543456791637">
+      <model>Настольная игра для детей Очки наоборот</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>29766</price>
+    </offer>
+    <offer sku="9876543456789200">
+      <model>Ideal Home придверный коврик 40x60 см, Cats Cat-40х60</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="9" />
+      </availabilities>
+      <price>2596</price>
+    </offer>
+    <offer sku="9876543456787743">
+      <model>HEBIKUO FG-02 4 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3569</price>
+    </offer>
+    <offer sku="9877761601">
+      <model>Перчатки для тренировок J005S-M серый M</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="10" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456791657">
+      <model>Гирлянда роса 2 м на батарейках теплый желтая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2100</price>
+    </offer>
+    <offer sku="7767720993">
+      <model>MARIKA стекломой для мытья окон серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="48" />
+      </availabilities>
+      <price>4000</price>
+    </offer>
+    <offer sku="9876543456787986">
+      <model>Шарф вискоза, полиэстер, нейлон, флис, трикотаж 30 x 200 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>4479</price>
+    </offer>
+    <offer sku="9876543456787924">
+      <model>Takara Tomy мягкая игрушка Стич, высота 30 см, синий, голубой</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>4998</price>
+    </offer>
+    <offer sku="9876543456787696">
+      <model>Брелок K2KANT металл 2 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>1125</price>
+    </offer>
+    <offer sku="9876543456791671">
+      <model>Gourmet Diet с телятиной и кроликом, 85гр х 10шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>10666</price>
+    </offer>
+    <offer sku="9876543456790152">
+      <model>Гирлянда уличная ретро лампочки 15 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>34200</price>
+    </offer>
+    <offer sku="9876543456787753">
+      <model>Сумка кросс-боди искусственная кожа бежевый, коричневый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>5334</price>
+    </offer>
+    <offer sku="9876543456791644">
+      <model>Гирлянда на батарейках на елку или окно шарики 10 м с USB</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>12866</price>
+    </offer>
+    <offer sku="9876543456790507">
+      <model>Гирлянда 7,5 м, 75 диодов, RGB 8 режимов, питание 220В, IP54</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6700</price>
+    </offer>
+    <offer sku="9876543456787730">
+      <model>Контейнер 310017 4 шт, пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>5560</price>
+    </offer>
+    <offer sku="9876543456787786">
+      <model>Рюкзак текстиль, ПВХ желтый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>2672</price>
+    </offer>
+    <offer sku="9876543456787859">
+      <model>Стоппер для дверей Eudemon baby В 4201, 2 шт, EVA, серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="7" />
+      </availabilities>
+      <price>2468</price>
+    </offer>
+    <offer sku="9876543456791638">
+      <model>Настольная игра для детей Балансинг мини</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4933</price>
+    </offer>
+    <offer sku="7037412454">
+      <model>Бутылка Portable 600 мл белый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>1482</price>
+    </offer>
+    <offer sku="9876543456791663">
+      <model>Гирлянда на батарейках роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5966</price>
+    </offer>
+    <offer sku="9876543456791684">
+      <model>USB-кабель для зарядки электробритвы DL42 (восьмерка)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6866</price>
+    </offer>
+    <offer sku="9876543456791651">
+      <model>Кабель зарядки бритвы</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8300</price>
+    </offer>
+    <offer sku="9876543456787803">
+      <model>Коврик для мыши DL 900x400x3 мм рисунок</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>2979</price>
+    </offer>
+    <offer sku="9876543456787716">
+      <model>Косметичка поливинилхлорид 14X21 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3712</price>
+    </offer>
+    <offer sku="9876543456787891">
+      <model>Тренировочный снаряд 361 Degrees Qjxlq01 черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>3600</price>
+    </offer>
+    <offer sku="9876543456787766">
+      <model>Рюкзак оксфорд черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>9768</price>
+    </offer>
+    <offer sku="9876543456791372">
+      <model>Кофемолка электрическая мощная для кофе и перца Для кухни</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>13100</price>
+    </offer>
+    <offer sku="9876543456791626">
+      <model>Настольная игра на везение Ушастые гонки выдерни моркову</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>18033</price>
+    </offer>
+    <offer sku="9631827264">
+      <model>NG home декоративный светильник 21818, дерево, стекло</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>3495</price>
+    </offer>
+    <offer sku="9876543456787780">
+      <model>Рюкзак нейлон синий</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>6328</price>
+    </offer>
+    <offer sku="9876543456787874">
+      <model>Брелок пластик 1 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>699</price>
+    </offer>
+    <offer sku="9876543456791693">
+      <model>Сумка через плечо Кроссбоди</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>9800</price>
+    </offer>
+    <offer sku="9876543456790164">
+      <model>Новогодняя гирлянда на батарейках роса 5м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2400</price>
+    </offer>
+    <offer sku="9876543456791639">
+      <model>Настольная игра ловушка для кроликов 2 часть с игровым полем</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>19600</price>
+    </offer>
+    <offer sku="9876543456787720">
+      <model>Цурикава пластик 1 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="9" />
+      </availabilities>
+      <price>1999</price>
+    </offer>
+    <offer sku="9876543456789180">
+      <model>Набор вешалок 30294842_KZ1-YJTZ серый 10 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>1820</price>
+    </offer>
+    <offer sku="9876543456787898">
+      <model>Косметичка текстиль, хлопок 15X23 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>4580</price>
+    </offer>
+    <offer sku="9876543456791685">
+      <model>Шнур для фонаря, электробритвы</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5366</price>
+    </offer>
+    <offer sku="9876543456791664">
+      <model>Гирлянда роса на елку от сети 30 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>11100</price>
+    </offer>
+    <offer sku="9876543456790508">
+      <model>Гирлянда 5 м, 50 диодов, RGB, 8 режимов, питание 220В, IP54</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5400</price>
+    </offer>
+    <offer sku="9876543456791627">
+      <model>Настольная игра для детей компании и семьи подарок Балансир</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>15466</price>
+    </offer>
+    <offer sku="9876543456791694">
+      <model>Термос 1 литр для чая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>37100</price>
+    </offer>
+    <offer sku="9876543456791645">
+      <model>Кабель для зарядки электробритв</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8266</price>
+    </offer>
+    <offer sku="2257607305">
+      <model>AEON массажная расческа 25 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>1179</price>
+    </offer>
+    <offer sku="9876543456790489">
+      <model>Новогодняя гирлянда на батарейках роса 5м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>2466</price>
+    </offer>
+    <offer sku="9876543456789184">
+      <model>Мягкая игрушка Капучино ассасино Cappuccino Assassino, 25 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>2500</price>
+    </offer>
+    <offer sku="9876543456790165">
+      <model>Новогодняя гирлянда на батарейках роса 2м 3шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5233</price>
+    </offer>
+    <offer sku="9876543456791640">
+      <model>Настольная детская развивающая игра Чепуха</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>11266</price>
+    </offer>
+    <offer sku="9876543456791658">
+      <model>Гирлянда USB матовая светодиодная 6 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>12733</price>
+    </offer>
+    <offer sku="9876543456787843">
+      <model>Шлепанцы TANAT черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>2748</price>
+    </offer>
+    <offer sku="9876543456789201">
+      <model>Декоративный коврик 40x180 см, безворсовый, Китай</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3499</price>
+    </offer>
+    <offer sku="9876543456787892">
+      <model>Термобутылка Boco 0.55 л B005 голубой</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>1556</price>
+    </offer>
+    <offer sku="9876543456789899">
+      <model>Органайзеры для хранения вещей одежды белья канцелярии 6шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>13633</price>
+    </offer>
+    <offer sku="9876543456791628">
+      <model>Настольная игра для детей и взрослых Коп и Роб</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4800</price>
+    </offer>
+    <offer sku="9876543456791629">
+      <model>Настольная игра для детей и взрослых Коп и Роб</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4800</price>
+    </offer>
+    <offer sku="9876543456791672">
+      <model>Корм сухой для стерилизованных кошек, 5кг</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>89366</price>
+    </offer>
+    <offer sku="9876543456787810">
+      <model>Погремушка Green King Baby Ratle</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>1717</price>
+    </offer>
+    <offer sku="9876543456791686">
+      <model>Гирлянда роса мини на батарейках 3 штуки</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5166</price>
+    </offer>
+    <offer sku="9876543456791695">
+      <model>Колонка беспроводная Xiaomi QBH4263GL bluetooth</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>65900</price>
+    </offer>
+    <offer sku="9876543456791652">
+      <model>Gourmet Diet с телятиной и ягнёнком, 85гр х 10шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>10666</price>
+    </offer>
+    <offer sku="4148066067">
+      <model>Пеленка-кокон 30046286_997305164, 1 шт, 86x32 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="11" />
+      </availabilities>
+      <price>1598</price>
+    </offer>
+    <offer sku="9876543456787776">
+      <model>Сумка шоппер DNshop текстиль черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>2299</price>
+    </offer>
+    <offer sku="9876543456787773">
+      <model>MS564321 зеркало</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>1327</price>
+    </offer>
+    <offer sku="9876543456787981">
+      <model>Шар пластик 42 шт, серебристый, черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>9499</price>
+    </offer>
+    <offer sku="9876543456787709">
+      <model>Рюкзак TOP BEAR текстиль, полиэстер розовый, лиловый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>18952</price>
+    </offer>
+    <offer sku="9876543456791646">
+      <model>Гирлянда на батарейках роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>1666</price>
+    </offer>
+    <offer sku="4714173555">
+      <model>Кусторез SA-1704</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>13499</price>
+    </offer>
+    <offer sku="9876543456787964">
+      <model>Балаклава размер универсальный, черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>2899</price>
+    </offer>
+    <offer sku="9876543456787825">
+      <model>Подушка AWESOME GT 4130 на подголовник, на спинку кресла 41x30 см серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>4888</price>
+    </offer>
+    <offer sku="9876543456787805">
+      <model>Рюкзак текстиль, оксфорд черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>9997</price>
+    </offer>
+    <offer sku="9876543456791088">
+      <model>Ежедневник датированный 2026, планер, планинг, блокнот А5</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2600</price>
+    </offer>
+    <offer sku="9876543456791400">
+      <model>Кофемолка электрическая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>10566</price>
+    </offer>
+    <offer sku="9876543456791630">
+      <model>Ретро маджонг, 144 кости + кейс старинная шкатулка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>51533</price>
+    </offer>
+    <offer sku="9876543456787745">
+      <model>Рюкзак полиэстер черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>4697</price>
+    </offer>
+    <offer sku="9876543456787762">
+      <model>Косметичка 600D полиэстер 15X26 см, серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>4093</price>
+    </offer>
+    <offer sku="9876543456787882">
+      <model>Косметичка нейлон 14X22 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>1501</price>
+    </offer>
+    <offer sku="9876543456791687">
+      <model>USB-кабель для зарядки электробритвы DL44 (восьмерка)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6333</price>
+    </offer>
+    <offer sku="9876543456790156">
+      <model>Светодиодная гирлянда хэллоуин на батарейках 5 м,роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2600</price>
+    </offer>
+    <offer sku="9876543456791696">
+      <model>Колонка беспроводная музыкальная портативная с bluetooth</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>14900</price>
+    </offer>
+    <offer sku="9876543456787721">
+      <model>Сумка кросс-боди Lakestone экокожа бежевый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>3649</price>
+    </offer>
+    <offer sku="9876543456791697">
+      <model>Колонка беспроводная большая bluetooth музыкальная BSP26</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>33933</price>
+    </offer>
+    <offer sku="9876543456789190">
+      <model>Пеленка непромокаемая Tompi care GND-0051, 1 шт, 100x150 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>7850</price>
+    </offer>
+    <offer sku="9876543456791067">
+      <model>Мягкая игрушка Гусь обнимусь белый 160 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>19066</price>
+    </offer>
+    <offer sku="982173206">
+      <model>Набор резиновых уплотнительных колец 270 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>1695</price>
+    </offer>
+    <offer sku="9876543456790146">
+      <model>Гирлянда на елку, светодиодная нить на новый год</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4000</price>
+    </offer>
+    <offer sku="9876543456789193">
+      <model>Пеленка-кокон Swaddle baby 1500123, 1 шт, 50x70 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>2297</price>
+    </offer>
+    <offer sku="9876543456791665">
+      <model>Гирлянда на батарейках роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2133</price>
+    </offer>
+    <offer sku="9876543456789185">
+      <model>Подвесная фигурка Декоративные птицы 35 см, дерево, пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>3295</price>
+    </offer>
+    <offer sku="9876543456787875">
+      <model>Брелок металл 1 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>600</price>
+    </offer>
+    <offer sku="9876543456791673">
+      <model>Гирлянда на батарейках светодиодная роса 3 м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2200</price>
+    </offer>
+    <offer sku="9876543456787757">
+      <model>Комплект SALORRI нейлон белый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>18532</price>
+    </offer>
+    <offer sku="9876543456787908">
+      <model>Складной зонт Leodauknow автомат черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="9" />
+      </availabilities>
+      <price>7499</price>
+    </offer>
+    <offer sku="9876543456787935">
+      <model>Дед мороз 35 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>3998</price>
+    </offer>
+    <offer sku="9876543456787767">
+      <model>Сумка шоппер полиэстер белый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>4897</price>
+    </offer>
+    <offer sku="9876543456791653">
+      <model>Светодиодная гирлянда-нить Звездочки, 2 м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>3833</price>
+    </offer>
+    <offer sku="9876543456791631">
+      <model>Настольные игры для детей Дерево баланса 3+</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>9033</price>
+    </offer>
+    <offer sku="9876543456787845">
+      <model>Рюкзак искусственная кожа черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>9557</price>
+    </offer>
+    <offer sku="9876543456790157">
+      <model>Светодиодная гирлянда со снежинками 4 метра</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>3400</price>
+    </offer>
+    <offer sku="9876543456791688">
+      <model>/ Сухой корм Холистик Премьер для кошек Лосось, 2кг</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>49600</price>
+    </offer>
+    <offer sku="9876543456788000">
+      <model>Wellamart электронная зажигалка 4648, ABS пластик, металлический сплав</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>7048</price>
+    </offer>
+    <offer sku="9876543456787706">
+      <model>Сумка шоппер холщовка бежевый, желтый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3792</price>
+    </offer>
+    <offer sku="9876543456787965">
+      <model>Пемза для ног электрическая 3 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>8620</price>
+    </offer>
+    <offer sku="9876543456789055">
+      <model>Thomas Kosmala Candy N4 женские брендовые духи</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>22982</price>
+    </offer>
+    <offer sku="9876543456788995">
+      <model>Parfums de Marly Oriana женские люксовые духи</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>25114</price>
+    </offer>
+    <offer sku="9876543456787987">
+      <model>Электрогирлянда Бахрома, шарики цвет свечения теплый белый 3 м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>9859</price>
+    </offer>
+    <offer sku="9876543456788564">
+      <model>Парфюм Thomas Kosmala Candy</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>25868</price>
+    </offer>
+    <offer sku="9876543456791647">
+      <model>Кабель питания USB для электробритв Philips, DC5V</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6666</price>
+    </offer>
+    <offer sku="9876543456789438">
+      <model>Магнитный конструктор minecraft 250</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>70033</price>
+    </offer>
+    <offer sku="9876543456787732">
+      <model>Дорожная сумка нейлон, полиэстер 30 л</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>13281</price>
+    </offer>
+    <offer sku="9876543456791674">
+      <model>USB-кабель для зарядки электробритвы DL43 (восьмерка)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6866</price>
+    </offer>
+    <offer sku="9876543456791666">
+      <model>Гирлянда на батарейках роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>1666</price>
+    </offer>
+    <offer sku="9876543456790147">
+      <model>Светодиодная гирлянда со звездами 4 метра</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>3800</price>
+    </offer>
+    <offer sku="9876543456787886">
+      <model>Внешний аккумулятор Q9 10000 мАч серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>19212</price>
+    </offer>
+    <offer sku="9876543456787677">
+      <model>Ролик для пресса Zhebo черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>13886</price>
+    </offer>
+    <offer sku="9876543456791659">
+      <model>Гирлянда на елку 15 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>3266</price>
+    </offer>
+    <offer sku="9876543456789181">
+      <model>Набор контейнеров 587874, стекло, ABS-пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>4500</price>
+    </offer>
+    <offer sku="9876543456791698">
+      <model>Сумка замшевая большая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>55666</price>
+    </offer>
+    <offer sku="106768358_162916029">
+      <model>Стучалка Пингвин на льдине пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="7" />
+      </availabilities>
+      <price>1500</price>
+    </offer>
+    <offer sku="9876543456790492">
+      <model>Гирлянда на батарейках светодиодная 3 метра</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>8766</price>
+    </offer>
+    <offer sku="9876543456789199">
+      <model>Конверт для коляски YOYA черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="6" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456791632">
+      <model>Настольная обучающая игра на логику Спаси пингвина</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>9533</price>
+    </offer>
+    <offer sku="9876543456791648">
+      <model>Новогодняя гирлянда на батарейках роса 2м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>2333</price>
+    </offer>
+    <offer sku="9876543456791689">
+      <model>Кабель зарядки для ирригатора</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8266</price>
+    </offer>
+    <offer sku="9876543456787985">
+      <model>Косметичка текстиль 10X20 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>2940</price>
+    </offer>
+    <offer sku="9876543456791699">
+      <model>Термос для чая 1 литр</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>13966</price>
+    </offer>
+    <offer sku="9876543456787812">
+      <model>Мягкая игрушка Тум тум саур Тралалеро Тралала, 24 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>3345</price>
+    </offer>
+    <offer sku="9876543456787741">
+      <model>Комплект искусственная кожа, текстиль, полиэстер черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>21354</price>
+    </offer>
+    <offer sku="9876543456791667">
+      <model>Гирлянда на батарейках роса на новый год</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4433</price>
+    </offer>
+    <offer sku="9876543456791660">
+      <model>Новогодняя гирлянда на батарейках роса 2м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2233</price>
+    </offer>
+    <offer sku="9876543456791675">
+      <model>Шнур для фонаря, электробритвы</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5100</price>
+    </offer>
+    <offer sku="9876543456791654">
+      <model>Сухой корм Холистик Премьер для кошек Утка, 400г</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>13833</price>
+    </offer>
+    <offer sku="5101583245">
+      <model>Ремень пластик, полиэстер 100 см кремовый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="12" />
+      </availabilities>
+      <price>920</price>
+    </offer>
+    <offer sku="9876543456791633">
+      <model>Настольная игра для детей на логику и реакцию Тык Тык</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>45966</price>
+    </offer>
+    <offer sku="9876543456787729">
+      <model>Контейнер 241647, пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>6566</price>
+    </offer>
+    <offer sku="9876543456787903">
+      <model>Мини-зонт механика черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="14" />
+      </availabilities>
+      <price>3006</price>
+    </offer>
+    <offer sku="9876543456791641">
+      <model>Кабель IEC C1 мини-восьмерка - USB фонарей и 5V устройств</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5700</price>
+    </offer>
+    <offer sku="9876543456791642">
+      <model>Кабель IEC C1 мини-восьмерка - USB фонарей и 5V устройств</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5700</price>
+    </offer>
+    <offer sku="9876543456791700">
+      <model>Термос 1 литр для чая, для кофе, из нержавеющей стали</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>16700</price>
+    </offer>
+    <offer sku="9876543456787690">
+      <model>Цурикава AutoLady пластик 1 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="20" />
+      </availabilities>
+      <price>1415</price>
+    </offer>
+    <offer sku="9876543456787799">
+      <model>Рюкзак Vel нейлон черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456791701">
+      <model>Термос 1 литр для чая и кофе металлический</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>13933</price>
+    </offer>
+    <offer sku="9876543456787703">
+      <model>Сумка шоппер полиэстер черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>5220</price>
+    </offer>
+    <offer sku="9876543456789174">
+      <model>Пеленка-кокон 241048606, 1 шт, 50x70 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>4000</price>
+    </offer>
+    <offer sku="9876543456791676">
+      <model>Органайзеры для хранения вещей с каркасом</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>14866</price>
+    </offer>
+    <offer sku="9876543456791358">
+      <model>худи оверсайз с капюшоном варенка с принтом</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>64800</price>
+    </offer>
+    <offer sku="9876543456787769">
+      <model>Контейнер 227473, пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>7898</price>
+    </offer>
+    <offer sku="9876543456791668">
+      <model>Гирлянда 20 м. RGB 8 режимов, питание 220В, IP54</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8833</price>
+    </offer>
+    <offer sku="9876543456791677">
+      <model>Гирлянда на батарейках роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2900</price>
+    </offer>
+    <offer sku="9876543456791661">
+      <model>Гирлянда на батарейках роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2366</price>
+    </offer>
+    <offer sku="9876543456787718">
+      <model>Косметичка текстиль 18X25 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456791655">
+      <model>Гирлянда штора 3х3 теплый белый свет, роса</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8966</price>
+    </offer>
+    <offer sku="9876543456787832">
+      <model>Кепка размер 51, 53, 55, белый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>1895</price>
+    </offer>
+    <offer sku="9876543456791634">
+      <model>Настольная игра на логику Пятнашки в ряд супер-мини</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2533</price>
+    </offer>
+    <offer sku="9876543456787920">
+      <model>Шпилька 1 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="10" />
+      </availabilities>
+      <price>2560</price>
+    </offer>
+    <offer sku="9876543456787851">
+      <model>Накладка на углы HOMECAT-01, 1 шт, силикон, коричневый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>800</price>
+    </offer>
+    <offer sku="9876543456791702">
+      <model>Кофемолка электрическая Costa-1054</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>21666</price>
+    </offer>
+    <offer sku="9876543456787972">
+      <model>Новогодний венок d 30 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>10074</price>
+    </offer>
+    <offer sku="9876543456791690">
+      <model>Кабель для зарядки электропилки для бритв USB 2 pin</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>10700</price>
+    </offer>
+    <offer sku="9876543456787673">
+      <model>Панама NOMAD.COM размер универсальный, серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>4356</price>
+    </offer>
+    <offer sku="9876543456787820">
+      <model>Барсетка VLANDA искусственная кожа черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="8" />
+      </availabilities>
+      <price>4823</price>
+    </offer>
+    <offer sku="9876543456787983">
+      <model>Электрогирлянда Бахрома, звезды, луна цвет свечения теплый белый 3 м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>5234</price>
+    </offer>
+    <offer sku="9876543456790149">
+      <model>Гирлянда светодиодная роса 10м LED желтая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>7333</price>
+    </offer>
+    <offer sku="9876543456791649">
+      <model>Кабель для зарядки электробритвы</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2500</price>
+    </offer>
+    <offer sku="9876543456787751">
+      <model>Набор контейнеров 587874, ABS-пластик, стекло</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>10206</price>
+    </offer>
+    <offer sku="6106777942">
+      <model>Органайзер 4847201 черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="7" />
+      </availabilities>
+      <price>2500</price>
+    </offer>
+    <offer sku="9876543456789182">
+      <model>Сумка мессенджер экокожа черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>12000</price>
+    </offer>
+    <offer sku="9876543456787980">
+      <model>Часы механические Quartz Luminova, МДФ</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>5954</price>
+    </offer>
+    <offer sku="9876543456791678">
+      <model>Новогодняя гирлянда на батарейках роса 3м 3шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4100</price>
+    </offer>
+    <offer sku="9876543456787904">
+      <model>Мини-зонт механика синий</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="19" />
+      </availabilities>
+      <price>3926</price>
+    </offer>
+    <offer sku="9876543456791609">
+      <model>Гантели разборные 20 кг (2х10 кг) штанга трансформер</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>36700</price>
+    </offer>
+    <offer sku="9876543456791387">
+      <model>Гель для стирки 5 литров LAUN, универсальный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>12100</price>
+    </offer>
+    <offer sku="9876543456791466">
+      <model>Кошелек портмоне большой натуральная кожа</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>31000</price>
+    </offer>
+    <offer sku="9876543456791378">
+      <model>Матрас 160х200 на кровать беспружинный ортопедический</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>261900</price>
+    </offer>
+    <offer sku="9876543456791345">
+      <model>Кофемолка электрическая мощная</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>19100</price>
+    </offer>
+    <offer sku="9876543456791635">
+      <model>Настольная игра для детей Космо баланс</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8600</price>
+    </offer>
+    <offer sku="9876543456791191">
+      <model>Фен для волос профессиональный с ионизацией</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>19900</price>
+    </offer>
+    <offer sku="9876543456791679">
+      <model>Погружной блендер с измельчителем 4 в 1</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>42833</price>
+    </offer>
+    <offer sku="9876543456787872">
+      <model>Подставка для спонжа металл</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="17" />
+      </availabilities>
+      <price>991</price>
+    </offer>
+    <offer sku="9876543456790486">
+      <model>Светодиодная гирлянда на елку прозрачный провод 13 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4400</price>
+    </offer>
+    <offer sku="9876543456791542">
+      <model>Умная колонка Капсула Мини с Марусей MRC02BL, синий</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>43500</price>
+    </offer>
+    <offer sku="9876543456791240">
+      <model>Фен-щётка с ионизацией HBI1415, 7 насадок, фиолетовый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>174666</price>
+    </offer>
+    <offer sku="9876543456791282">
+      <model>Бегающий теленок розовая мягкая игрушка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>38233</price>
+    </offer>
+    <offer sku="9876543456791115">
+      <model>Повербанк 30000 mah портативный внешний аккумулятор</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>24833</price>
+    </offer>
+    <offer sku="9876543456791182">
+      <model>Фен для волос профессиональный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>33000</price>
+    </offer>
+    <offer sku="9876543456791299">
+      <model>Мягкая игрушка Домашние любимцы Кошечка белая 15 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4433</price>
+    </offer>
+    <offer sku="9876543456791267">
+      <model>Повербанк 20000 mAh 22.5w с быстрой зарядкой с проводами</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>25533</price>
+    </offer>
+    <offer sku="9876543456791432">
+      <model>Кошелек кожаный портмоне</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>14200</price>
+    </offer>
+    <offer sku="9876543456791276">
+      <model>Худи оверсайз черное</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>45266</price>
+    </offer>
+    <offer sku="9876543456791231">
+      <model>Помада для губ матовая стойкая жидкая Nude Matte нюдовая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8166</price>
+    </offer>
+    <offer sku="9876543456791550">
+      <model>Гантели разборные 20 кг (2 Х10кг) штанга трансформер</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>47533</price>
+    </offer>
+    <offer sku="9876543456791495">
+      <model>Кошелек натуральная кожа портмоне большой</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>32566</price>
+    </offer>
+    <offer sku="9876543456791134">
+      <model>Кофемолка электрическая для кофе, электрокофемолка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>21233</price>
+    </offer>
+    <offer sku="9876543456791486">
+      <model>Профессиональный фен для волос 6000 Ватт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>27566</price>
+    </offer>
+    <offer sku="9876543456791404">
+      <model>Умная колонка Маруся серая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>65233</price>
+    </offer>
+    <offer sku="9876543456791306">
+      <model>Игрушка для кошек интерактивный мяч дразнилка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>5366</price>
+    </offer>
+    <offer sku="9876543456791094">
+      <model>Кофемолка электрическая жерновая FR300</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>114666</price>
+    </offer>
+    <offer sku="9876543456789178">
+      <model>Maximilian фурминатор 91302 черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="7" />
+      </availabilities>
+      <price>2500</price>
+    </offer>
+    <offer sku="9876543456791669">
+      <model>Гирлянда уличная на солнечной батарее</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>12233</price>
+    </offer>
+    <offer sku="9876543456791423">
+      <model>Фен для волос</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>15766</price>
+    </offer>
+    <offer sku="9876543456791144">
+      <model>Профессиональный фен стайлер 5 в 1 для укладки волос</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>32833</price>
+    </offer>
+    <offer sku="9876543456791643">
+      <model>Кабель зарядки USB для электробритв Philips, DC5V</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>7033</price>
+    </offer>
+    <offer sku="9876543456791505">
+      <model>Гантели разборные 1.2 - пластиковые 20 кг</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>36000</price>
+    </offer>
+    <offer sku="9876543456791259">
+      <model>Бегающий теленок мягкая игрушка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>36366</price>
+    </offer>
+    <offer sku="9876543456791589">
+      <model>Логопедический тренажер для дыхания развивающая игрушка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>9533</price>
+    </offer>
+    <offer sku="9876543456790150">
+      <model>Гирлянда уличная бахрома новогодняя 50м</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>43466</price>
+    </offer>
+    <offer sku="9876543456787700">
+      <model>Жесткий футляр пластик, 16 x 5 см черный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>5604</price>
+    </offer>
+    <offer sku="9876543456791154">
+      <model>Фен DEWAL SPECTRUM COMPAСT 03-109 Chameleon</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>79433</price>
+    </offer>
+    <offer sku="9876543456787657">
+      <model>Сумка кросс-боди SALORRI искусственная кожа, джут белый, кремовый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="21" />
+      </availabilities>
+      <price>4911</price>
+    </offer>
+    <offer sku="9876543456791369">
+      <model>Кофемолка электрическая мощная для всего маленькая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>31566</price>
+    </offer>
+    <offer sku="9876543456791575">
+      <model>Фен для волос с ионизацией дорожный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>28200</price>
+    </offer>
+    <offer sku="9876543456787889">
+      <model>Лейка для душа (шланг в комплекте) ABS-33, абс-пластик</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>7850</price>
+    </offer>
+    <offer sku="9876543456791558">
+      <model>Умная колонка Станция Миди с Алисой на YaGPT, с Zigbee</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>231766</price>
+    </offer>
+    <offer sku="9876543456791566">
+      <model>Игрушка для кошки собаки мячик дразнилка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2100</price>
+    </offer>
+    <offer sku="9876543456791105">
+      <model>Игрушки для кошек интерактивные башня</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>7400</price>
+    </offer>
+    <offer sku="9876543456791174">
+      <model>Фен для волос с ионизацией</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>21700</price>
+    </offer>
+    <offer sku="9876543456789175">
+      <model>Поручень для ванны 030 белый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456791414">
+      <model>Умная колонка Станция Миди с Алисой , Zigbee</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>244533</price>
+    </offer>
+    <offer sku="9876543456791249">
+      <model>Повербанк 10000 mAh для iPhone и Андроид быстрый power bank</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>18700</price>
+    </offer>
+    <offer sku="9876543456791353">
+      <model>Повербанк 50000 с проводами солнечная батарея</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>33533</price>
+    </offer>
+    <offer sku="9876543456791514">
+      <model>Гантели разборные A Dumbbell 1,5-5 кг для тренировок</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>151966</price>
+    </offer>
+    <offer sku="9876543456791388">
+      <model>Водолазка лапша с горлом и длинным рукавом</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>11333</price>
+    </offer>
+    <offer sku="9876543456791201">
+      <model>Помада для губ матовая Matte Chic, тон Ежевичное парфе</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6966</price>
+    </offer>
+    <offer sku="9876543456790505">
+      <model>Гирлянда уличная ретро лампочки 25 метров</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>39366</price>
+    </offer>
+    <offer sku="9876543456787733">
+      <model>Набор контейнеров 120905702 4 шт, полипропилен</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>15075</price>
+    </offer>
+    <offer sku="9876543456791211">
+      <model>Помада для губ увлажняющая LIP STICK CREAM 04 Коричневый нюд</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>6733</price>
+    </offer>
+    <offer sku="9876543456789198">
+      <model>Кукольный театр Весёлые зверята</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456791396">
+      <model>Профессиональный фен для укладки волос дорожный с насадкой</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>18300</price>
+    </offer>
+    <offer sku="9876543456791582">
+      <model>Ежедневник датированный 2026, планер, планинг, блокнот А5</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>4433</price>
+    </offer>
+    <offer sku="9876543456791441">
+      <model>Умная станция Миди Zigbee, черная, YNDX-00054BLK</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>299233</price>
+    </offer>
+    <offer sku="9876543456791126">
+      <model>Кофемолка электрическая мощная для всего для кофе КТ-7564</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>21800</price>
+    </offer>
+    <offer sku="9876543456791192">
+      <model>Фен для волос стайлер с насадками 5в1</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>37666</price>
+    </offer>
+    <offer sku="9876543456791525">
+      <model>Фен для волос профессиональный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>20000</price>
+    </offer>
+    <offer sku="9876543456791330">
+      <model>Повербанк 20000 Power bank для телефона внешний аккумулятор</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>36900</price>
+    </offer>
+    <offer sku="9876543456791222">
+      <model>Жидкая помада для губ матовая нюдовая 01</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>9533</price>
+    </offer>
+    <offer sku="9876543456791476">
+      <model>Фен для волос профессиональный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>19300</price>
+    </offer>
+    <offer sku="9876543456791620">
+      <model>Ежедневник датированный 2026, планер, планинг, блокнот А5</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>2600</price>
+    </offer>
+    <offer sku="9876543456791458">
+      <model>Яндекс Станция Мини 3 с Алисой на YaGPT</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>144533</price>
+    </offer>
+    <offer sku="9876543456787999">
+      <model>Чехол для Apple iPhone 14 Pro Max синий</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>4422</price>
+    </offer>
+    <offer sku="9876543456787925">
+      <model>Накладка белая силиконовая Cat</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>700</price>
+    </offer>
+    <offer sku="2253547503">
+      <model>Зонт-трость полуавтомат прозрачный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="22" />
+      </availabilities>
+      <price>3731</price>
+    </offer>
+    <offer sku="9876543456789191">
+      <model>Штора 61btw 180x180 черный, PEVA</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>6000</price>
+    </offer>
+    <offer sku="9876543456791321">
+      <model>Худи оверсайз с капюшоном</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>78633</price>
+    </offer>
+    <offer sku="9876543456791450">
+      <model>Умная Станция Миди Zigbee, YNDX-00054GR</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>287133</price>
+    </offer>
+    <offer sku="9876543456791379">
+      <model>Быстрая зарядка для iPhone 20w Type-C Lightning</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>15800</price>
+    </offer>
+    <offer sku="9876543456791095">
+      <model>Игрушки для собак и щенков набор 10 в 1</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>19633</price>
+    </offer>
+    <offer sku="9876543456791291">
+      <model>Фен для волос, 2 скорости и холодный обдув, 1600 Вт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>27300</price>
+    </offer>
+    <offer sku="9876543456791164">
+      <model>Фен для волос с ионизацией</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>21700</price>
+    </offer>
+    <offer sku="9876543456791691">
+      <model>Зарядка для бритвы с разъемом C7 , шнур для электробритвы</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>7433</price>
+    </offer>
+    <offer sku="9876543456787752">
+      <model>Альбом Биндер 17134067_318568 розовый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3235</price>
+    </offer>
+    <offer sku="9876543456791467">
+      <model>Каталка пушкар со звуком</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>28733</price>
+    </offer>
+    <offer sku="9876543456791116">
+      <model>Кофемолка электрическая Bosch TSM6A011W</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>37166</price>
+    </offer>
+    <offer sku="9876543456787760">
+      <model>Рюкзак оксфорд синий</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4" />
+      </availabilities>
+      <price>11810</price>
+    </offer>
+    <offer sku="9876543456791232">
+      <model>Худи оверсайз теплое с капюшоном y2k с начесом</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>3790</price>
+    </offer>
+    <offer sku="9876543456791543">
+      <model>Кошелек кожаный портмоне</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>18033</price>
+    </offer>
+    <offer sku="9876543456789179">
+      <model>Набор вешалок 31302104 бежевый 10 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>5000</price>
+    </offer>
+    <offer sku="9876543456791487">
+      <model>Фен для волос профессиональный мощный с насадками 5 в 1</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>30733</price>
+    </offer>
+    <offer sku="9876543456791241">
+      <model>Фен для волос профессиональный маленький с насадками 5в1</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>24333</price>
+    </offer>
+    <offer sku="9876543456791680">
+      <model>Органайзер для хранения, кофр</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>21566</price>
+    </offer>
+    <offer sku="9128807954">
+      <model>Шляпа размер 58, коричневый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>2867</price>
+    </offer>
+    <offer sku="9876543456791283">
+      <model>Игрушка для собак и щенков мелких, крупных пород - Зайка</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>9266</price>
+    </offer>
+    <offer sku="9876543456791535">
+      <model>Кошелек натуральная кожа портмоне большой</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>32566</price>
+    </offer>
+    <offer sku="9876543456791681">
+      <model>Кабель зарядки USB для электробритв 5 Вольт, 6 насадок</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>11433</price>
+    </offer>
+    <offer sku="9876543456787785">
+      <model>Рюкзак текстиль, полиэстер серый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>18149</price>
+    </offer>
+    <offer sku="9876543456791650">
+      <model>Гирлянда на батарейках роса 10 м новогодняя</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="20" preOrder="30" />
+      </availabilities>
+      <price>6766</price>
+    </offer>
+    <offer sku="9876543456791496">
+      <model>Кошелек кожаный портмоне</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>17066</price>
+    </offer>
+    <offer sku="9876543456791135">
+      <model>Кофемолка электрическая</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>12233</price>
+    </offer>
+    <offer sku="9876543456791599">
+      <model>Гантели 50 кг разборные без наполнителя трансформеры</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>78933</price>
+    </offer>
+    <offer sku="9876543456791636">
+      <model>Настольные игры набор "50 игр для всей семьи" шашки, шахматы</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>11866</price>
+    </offer>
+    <offer sku="9876543456791656">
+      <model>Корм сухой для стерилизованных кошек, 1,5 кг</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>42266</price>
+    </offer>
+    <offer sku="9876543456791590">
+      <model>Штанга спортивная 25 кг гантели разборные</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>8120</price>
+    </offer>
+    <offer sku="9164313785">
+      <model>Dahao порошок от тараканов 1 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="4624" />
+      </availabilities>
+      <price>55</price>
+    </offer>
+    <offer sku="9876543456787959">
+      <model>Коробка 1 шт, 35х21х16.5 см</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="3" />
+      </availabilities>
+      <price>4455</price>
+    </offer>
+    <offer sku="9876543456791670">
+      <model>Светодиодная гирлянда с сосульками 4 метра</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>3800</price>
+    </offer>
+    <offer sku="9876543456789188">
+      <model>Мешок для стирки KZ1-XXD-GREY серый 2 шт</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>3000</price>
+    </offer>
+    <offer sku="9876543456787905">
+      <model>Зонт-трость детский полуавтомат, прозрачный, с Единорогами</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="18" />
+      </availabilities>
+      <price>3500</price>
+    </offer>
+    <offer sku="9876543456787890">
+      <model>Подушка Aysulu Aysulu 103 набивная розовый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="5" />
+      </availabilities>
+      <price>2500</price>
+    </offer>
+    <offer sku="9876543456791662">
+      <model>Гирлянда штора 3х3 роса мишура хвойная лапа на окно</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP2" stockCount="10" preOrder="30" />
+      </availabilities>
+      <price>25000</price>
+    </offer>
+    <offer sku="9876543456787698">
+      <model>Мягкая игрушка Sprunki Raddy, высота 20 см, красный</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>3547</price>
+    </offer>
+    <offer sku="9876543456787854">
+      <model>Сотуар 30260764_3546846876315651 аксессуар для одежды оранжевый</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>2210</price>
+    </offer>
+    <offer sku="113458685_651758471">
+      <model>Dahao порошок от тараканов 6 шт (Комплект)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="770" />
+      </availabilities>
+      <price>700</price>
+    </offer>
+    <offer sku="102195746_704953693">
+      <model>Dahao порошок от тараканов 50 шт (Комплект)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="92" />
+      </availabilities>
+      <price>2098</price>
+    </offer>
+    <offer sku="83558112">
+      <model>Переходник USB Type-C - RJ-45 0.15 м AP545 (Дубль)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="1" />
+      </availabilities>
+      <price>0</price>
+    </offer>
+    <offer sku="104252581_793606578">
+      <model>Dahao порошок от тараканов 10 шт (Комплект)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="462" />
+      </availabilities>
+      <price>1000</price>
+    </offer>
+    <offer sku="879687587968962">
+      <model>Кусторез SA-1704 (Дубль)</model>
+      <brand>Fixcom</brand>
+      <availabilities>
+        <availability available="yes" storeId="PP1" stockCount="2" />
+      </availabilities>
+      <price>14198</price>
+    </offer>
+  <offer sku="9876543456788625"><model>Спортивный костюм домашний с шортами</model><brand>Nik Nika</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>41366</price></offer><offer sku="9876543456789836"><model>Жидкие обои Silk Plaster Арт Дизайн 230/из шелка/для стен</model><brand>Silk Plaster</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>336100</price></offer><offer sku="9876543456789124"><model>Кроссовки женские серые</model><brand>Beau Today</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>132200</price></offer><offer sku="9876543456789413"><model>Машинка Трактор перевертыш Ферма</model><brand>Автоград</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>6433</price></offer><offer sku="9876543456789256"><model>Набор инструментов детский Винт и Гайка</model><brand>Junion</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>110433</price></offer><offer sku="9876543456789639"><model>Крем для лица антивозрастной Snail Wrinkle Cream</model><brand>Soffi-beauty</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>5966</price></offer><offer sku="9876543456789835"><model>Большая машинка эвакуатор для детей - игрушечная спецтехника</model><brand>Igrulka</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>43600</price></offer><offer sku="9876543456788328"><model>Аромабокс "Хиты продаж селективных ароматов" по 5мл</model><brand>Raspito</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>21566</price></offer><offer sku="9876543456789834"><model>Игровой набор Касса с деньгами</model><brand>Сима-Ленд &amp; IQ-ZABIAKA</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>3000</price></offer><offer sku="9876543456789789"><model>Аромабокс "Хиты продаж селективных ароматов" по 2мл</model><brand>Raspito</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>32200</price></offer><offer sku="9876543456791704"><model>Колонка беспроводная bluetooth, с подсветкой</model><brand>DEFENDER</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>93200</price></offer><offer sku="9876543456789212"><model>Кактус танцующий, музыкальный / развивающая поющая игрушка</model><brand>Zalyland</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>11566</price></offer><offer sku="9876543456789832"><model>Машинка металлическая игрушка детская Land Rover Defender</model><brand>Автопанорама</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>16600</price></offer><offer sku="9876543456789428"><model>Меч детский игрушечный светящийся лазерный катаны</model><brand>STIMAXON</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>11533</price></offer><offer sku="9876543456789712"><model>Машинка металлическая игрушка детская УАЗ PATRIOT</model><brand>Автопанорама</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>27733</price></offer><offer sku="9876543456789262"><model>Развивающие игрушки погремушки для новорожденных малышей 0+</model><brand>FergoKids</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9300</price></offer><offer sku="9876543456789248"><model>Машинка металлическая игрушка детская Lamborghini Aventador</model><brand>Автопанорама</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>27500</price></offer><offer sku="9876543456789453"><model>Аэробол дыхательный логопедический цвет микс</model><brand>Умелец Я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>2833</price></offer><offer sku="9876543456789830"><model>Радиоуправляемый танк машинка</model><brand>Fav To For Kids</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>43366</price></offer><offer sku="9876543456789381"><model>Аромабокс "Хиты продаж HFC" подарочный набор для женщин</model><brand>Raspito</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>21566</price></offer><offer sku="9876543456789800"><model>Тональный кушон для лица для макияжа</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>8433</price></offer><offer sku="9876543456789829"><model>Машинка на пульте управления Карбон выпускает пар</model><brand>Vulpes</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>19566</price></offer><offer sku="9876543456789328"><model>Планшет магнитный для рисования со стилусом</model><brand>Лёвкин дом</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9500</price></offer><offer sku="9876543456789450"><model>Робот трансформер</model><brand>AUTODRIVE</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>11100</price></offer><offer sku="9876543456789849"><model>Робот трансформер Космобот 6в1</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>21866</price></offer><offer sku="9876543456789445"><model>Развивающая игрушка машинка для детей</model><brand>Довольные детки</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>17800</price></offer><offer sku="9876543456789847"><model>Робот трансформер 5в1 Огнебот машинки для мальчиков</model><brand>АВТОБОТЫ</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>17400</price></offer><offer sku="9876543456789329"><model>Рыбалка детская магнитная</model><brand>Умелец Я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>10000</price></offer><offer sku="9876543456789427"><model>Самолёт игрушка инерционная</model><brand>Умелец я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>2666</price></offer><offer sku="9876543456789848"><model>Робот трансформер машинка</model><brand>Умелец Я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>7066</price></offer><offer sku="9876543456789409"><model>Книги для детей</model><brand>Буква-Ленд</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>5100</price></offer><offer sku="9876543456789850"><model>Конструктор электронный Развивающие игрушки</model><brand>Эврики</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>60933</price></offer><offer sku="9876543456789797"><model>Тональный кушон для лица для макияжа</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>24033</price></offer><offer sku="9876543456789827"><model>Робот игрушка интерактивный</model><brand>AUTODRIVE</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>36433</price></offer><offer sku="9876543456789799"><model>Тональный кушон для лица для макияжа</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>34700</price></offer><offer sku="9876543456789841"><model>Детский Шуруповерт на батарейках</model><brand>Unicon</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9400</price></offer><offer sku="9876543456789846"><model>Конструктор винтовой для малышей с отверткой</model><brand>Кубгейм</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9633</price></offer><offer sku="9876543456789440"><model>Развивающая игрушка плакат говорящая карта "Мир животных"</model><brand>MiniMinds</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>35166</price></offer><offer sku="9876543456789823"><model>Машинка экскаватор на пульте управления для улицы</model><brand>Vulpes</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>44300</price></offer><offer sku="9876543456789113"><model>Кроссовки демисезонные черные женские с толстой подошвой</model><brand>Beau Today</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>125500</price></offer><offer sku="9876543456789844"><model>Робот GRAVITONE Интерактивная игрушка для мальчиков</model><brand>IQ BOT</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>47966</price></offer><offer sku="9876543456789441"><model>Машинка детская музыкальная, игрушки для мальчиков</model><brand>Довольные детки</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>17500</price></offer><offer sku="9876543456789842"><model>Робот собака</model><brand>IQ BOT</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>49833</price></offer><offer sku="9876543456789793"><model>Тональный кушон для макияжа</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>36533</price></offer><offer sku="9876543456789327"><model>Детские музыкальные развивающие игрушки для малышей</model><brand>FergoKids</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>12900</price></offer><offer sku="9876543456789843"><model>Дикие Скричеры. Машинка трансформер "Найтвивер" сезон 1</model><brand>Дикие Скричеры</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>43733</price></offer><offer sku="9876543456789322"><model>Развивашки вырезалки для мальчиков развивающие игрушки</model><brand>Мой знайка</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4600</price></offer><offer sku="9876543456789840"><model>Синий трактор с прицепом большой машинка игрушка для детей</model><brand>Полесье</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>11466</price></offer><offer sku="9876543456789845"><model>Автотрек с машинками трасса</model><brand>BESTLIKE</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>13433</price></offer><offer sku="9876543456789821"><model>Конструктор «Встречайте робота-доставщика» от Яндекс</model><brand>Город в деталях</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>68666</price></offer><offer sku="9876543456789278"><model>Развивающая Настольная игра Стульчики На 4 ногах 18шт</model><brand>ЛАС ИГРАС</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>3066</price></offer><offer sku="9876543456789260"><model>Машинка амфибия с пультом управления полицейская</model><brand>Vulpes</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>67200</price></offer><offer sku="9876543456789816"><model>Набор инструментов детский Столяр 11 предметов цвет МИКС</model><brand>Умелец Я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4066</price></offer><offer sku="9876543456789426"><model>Трюковая машинка на пульте управления</model><brand>X-Drift</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>47133</price></offer><offer sku="9876543456789422"><model>Музыкальный боксерский тренажер для мальчиков от 7 до 15 лет</model><brand>Развивашки для детей</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>84966</price></offer><offer sku="9876543456789454"><model>Аэробол тренажер для дыхания Игра парящий шарик цвет МИКС</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>1766</price></offer><offer sku="9876543456789814"><model>Книги для детей</model><brand>Буква-Ленд</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>5366</price></offer><offer sku="9876543456789813"><model>Машинка на пульте управления</model><brand>Vulpes</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>25733</price></offer><offer sku="9876543456789218"><model>Развивающие игрушки 1 год</model><brand>Puzzle Time</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>6733</price></offer><offer sku="9876543456789818"><model>Детский ноутбук, компьютер обучающий для детей c led экраном</model><brand>Умка</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>31966</price></offer><offer sku="9876543456789388"><model>Машинка на пульте управления гоночная дрифт</model><brand>X-Drift</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>55066</price></offer><offer sku="9876543456789839"><model>Юла для малышей музыкальная</model><brand>Умелец Я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9733</price></offer><offer sku="9876543456789272"><model>Машинка на пульте управления , амфибия внедорожник</model><brand>Vulpes</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>54566</price></offer><offer sku="9876543456789808"><model>Набор для опытов, выращиваем траву</model><brand>Эврики</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4333</price></offer><offer sku="9876543456789811"><model>Конструктор Шахта Крипера майнкрафт</model><brand>LEGO</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>25200</price></offer><offer sku="9876543456789810"><model>Электронный поп-ит на русском, игрушка антистресс</model><brand>Pop it на русском</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>7366</price></offer><offer sku="9876543456789803"><model>Конструктор для мальчиков и девочек 700 деталей</model><brand>SAYFUN toys</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>20966</price></offer><offer sku="9876543456789406"><model>Машина детская трансформер игрушка</model><brand>Enjoy toy/</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>14800</price></offer><offer sku="9876543456789398"><model>Робот трансформер 5в1 Стройбот машинки для мальчиков</model><brand>АВТОБОТЫ</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>14300</price></offer><offer sku="9876543456789809"><model>Игрушечный робот на пульте Валли</model><brand>Volmag</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>42066</price></offer><offer sku="9876543456789804"><model>Пиши стирай тетрадь 2-3 года развивающая книга для малышей</model><brand>Ida-Land</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9400</price></offer><offer sku="9876543456789403"><model>Конструктор с крупными деталями развивающий для детей</model><brand>кассон</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>13266</price></offer><offer sku="9876543456789807"><model>Подвижная 3D игрушка для детей Гепард Сара</model><brand>TiMiCo</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>10766</price></offer><offer sku="9876543456789819"><model>Пиши стирай тетрадь 1-2 года развивающая книга для малышей</model><brand>Ida-Land</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9033</price></offer><offer sku="9876543456789395"><model>Робот трансформер</model><brand>AUTODRIVE</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9800</price></offer><offer sku="9876543456788086"><model>Фотостудия Таккуда</model><brand>Издательство АСТ</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>13100</price></offer><offer sku="9876543456789805"><model>Пазлы для детей 3 лет</model><brand>Pazzle Time</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>5466</price></offer><offer sku="9876543456789837"><model>Конструктор для мальчиков военная полиция робот 5 - 10 лет</model><brand>Seller and Buyer</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>33700</price></offer><offer sku="9876543456789806"><model>Планшет для рисования электронный детский</model><brand>Kitso</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>7700</price></offer><offer sku="9876543456789838"><model>Тетрадь играй-рисуй-стирай для мальчиков с машинками</model><brand>Корпорация Шалостей</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>10900</price></offer><offer sku="9876543456789245"><model>Игрушка настольный баскетбол детский</model><brand>Умелец Я</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>1866</price></offer><offer sku="9876543456789815"><model>Набор для детей "Военная техника", МИКС</model><brand>WOOW TOYS</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>2033</price></offer><offer sku="9876543456789812"><model>Развивающая музыкальная игрушка для малышей</model><brand>toys island</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>25533</price></offer><offer sku="9876543456789817"><model>Робот динозавр Бронтозавр, трансформируется в яйцо</model><brand>АВТОБОТЫ.</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>7266</price></offer><offer sku="9876543456789400"><model>Набор игрушечных машинок для мальчиков 6 шт заводные</model><brand>Junium</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4633</price></offer><offer sku="9876543456789393"><model>Развивающая игрушка</model><brand>Мамин Ньютон</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>10066</price></offer><offer sku="9876543456789820"><model>Конструктор «Вас ожидает такси» от Яндекс</model><brand>Город в деталях</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>37566</price></offer><offer sku="9876543456789822"><model>Игрушка для мальчиков Фингербайк BMX металлический</model><brand>Funny Toys</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>3366</price></offer><offer sku="9876543456789824"><model>Танцующий осьминог кальмар музыкальный</model><brand>АНТИСТРЕСС</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>14133</price></offer><offer sku="9876543456789429"><model>Машинка Трактор перевертыш</model><brand>Автоград</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>7033</price></offer><offer sku="9876543456789291"><model>Пирамидка сортер деревянный развивающий для детей</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4633</price></offer><offer sku="9876543456789455"><model>Опыты и эксперименты для детей 16 в 1 на подарок</model><brand>PRO опыты</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>30333</price></offer><offer sku="9876543456789825"><model>Парковка для машинок с трамплином и горкой</model><brand>Hot Wheels</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>31400</price></offer><offer sku="9876543456789265"><model>Машинка на пульте управлении дрифт с паром</model><brand>Vulpes</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>40933</price></offer><offer sku="9876543456789826"><model>Сортер Лабиринт деревянный развивающий для малышей от 1 года</model><brand>Наши Игрушки</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4833</price></offer><offer sku="9876543456789828"><model>Музыкальная игрушка для малышей "Детский руль"</model><brand>Smart Baby</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>49300</price></offer><offer sku="9876543456789446"><model>Интерактивная игрушка музыкальный заяц</model><brand>play rus</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>22600</price></offer><offer sku="9876543456789421"><model>Развивающая игрушка пазл для детей</model><brand>Generic</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>9500</price></offer><offer sku="9876543456789831"><model>Машина Future 09 Диско шар</model><brand>Lashyn</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4733</price></offer><offer sku="9876543456789431"><model>Планшет для рисования электронный детский</model><brand>Kitso</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>4700</price></offer><offer sku="9876543456789833"><model>Машинка металлическая игрушка детская BMW X6</model><brand>Автопанорама</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>16033</price></offer><offer sku="9876543456791703"><model>Кофемолка электрическая ручная PCG 2055</model><brand>POLARIS</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>56666</price></offer><offer sku="9876543456791705"><model>Термос 0,5 литр с датчиком для чая и кофе</model><brand>SmartTherm</brand><availabilities /><availabilities><availability available="yes" storeId="PP1" preorder="true" /></availabilities><price>10800</price></offer></offers>
+</kaspi_catalog>
