@@ -16,14 +16,20 @@ export async function POST(request) {
             await new Promise(resolve => setTimeout(resolve, 1500));
 
             let images = [];
-            const randomSig = () => Math.floor(Math.random() * 1000);
 
-            if (style.includes('Минимализм')) {
-                images.push(`https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80&sig=${randomSig()}`);
-                images.push(`https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80&sig=${randomSig()}`);
+            // Try to find keyword in product name for better mock
+            const isGadget = (product || '').toLowerCase().match(/часы|наушники|телефон|смарт/);
+            const isKitchen = (product || '').toLowerCase().match(/блендер|миксер|кофе|чай/);
+
+            if (isKitchen) {
+                images.push(`https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500&q=80`); // Kitchen
+                images.push(`https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=80`); // Food prep
+            } else if (isGadget) {
+                images.push(`https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80`); // Headphones
+                images.push(`https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80`); // Watch
             } else {
-                images.push(`https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&q=80&sig=${randomSig()}`);
-                images.push(`https://images.unsplash.com/photo-1535378437323-9555f3e7f5bb?w=500&q=80&sig=${randomSig()}`);
+                images.push(`https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80`); // Gadget
+                images.push(`https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80`); // Tech
             }
             return NextResponse.json({ images });
         }

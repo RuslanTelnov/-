@@ -6,6 +6,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegStatic from 'ffmpeg-static';
 import { createClient } from '@supabase/supabase-js';
+import { execFile } from 'child_process';
+import util from 'util';
 
 // Set ffmpeg path for fluent-ffmpeg
 // Set ffmpeg path for fluent-ffmpeg
@@ -27,11 +29,18 @@ if (!ffmpegPath || !fs.existsSync(ffmpegPath)) {
         }
     }
 }
+// Fallback to purely static if still not found
+if (!ffmpegPath) ffmpegPath = ffmpegStatic;
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 // Initialize Supabase Client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const getSupabaseKey = () => {
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '').trim();
+    if (!key) console.warn('[Supabase] Both Service Role Key and Anon Key are missing!');
+    return key;
+};
+const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim();
+const supabaseKey = getSupabaseKey();
 // Note: SERVICE_ROLE_KEY is preferred for uploading if RLS policies are strict, 
 // but ANON_KEY works if bucket is public and policies allow.
 
@@ -86,72 +95,8 @@ async function generateSlogan(productName, apiKey) {
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic'; // Prevent static optimization issues
 
-const execFilePromise = util.promisify(execFile);
-
-// Simple GET endpoint to verify the route is loadable
-export async function GET(request) {
-    const defaultPath = ffmpegStatic;
-    let lsCwd = [];
-    let lsNodeModules = [];
-    let ffmpegVersionOutput = '';
-    let ffmpegErrorOutput = '';
-
-    try {
-        lsCwd = fs.readdirSync(process.cwd());
-        if (fs.existsSync(path.join(process.cwd(), 'node_modules'))) {
-            lsNodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'));
-        }
-    } catch (e) { }
-
-    // Attempt to run ffmpeg -version
-    try {
-        if (ffmpegPath && fs.existsSync(ffmpegPath)) {
-            const { stdout } = await execFilePromise(ffmpegPath, ['-version'], { timeout: 5000 });
-            ffmpegVersionOutput = stdout.slice(0, 500); // Limit output
-        } else {
-            ffmpegVersionOutput = 'FFmpeg path not found';
-        }
-    } catch (err) {
-        ffmpegErrorOutput = err.message + '\n' + (err.stderr || '');
-
-        // Try to fix permissions? No, read-only.
-        // Try copy to tmp? 
-        if (err.message.includes('EACCES')) {
-            ffmpegErrorOutput += '\nAttempting copy workaround...';
-            try {
-                const tmpFfmpeg = path.join(os.tmpdir(), 'ffmpeg');
-                await fs.promises.copyFile(ffmpegPath, tmpFfmpeg);
-                await fs.promises.chmod(tmpFfmpeg, 0o755);
-                ffmpegPath = tmpFfmpeg; // Update global path
-                const { stdout } = await execFilePromise(ffmpegPath, ['-version'], { timeout: 5000 });
-                ffmpegVersionOutput = 'WORKAROUND SUCCESS: ' + stdout.slice(0, 500);
-                ffmpeg.setFfmpegPath(ffmpegPath); // Update fluent-ffmpeg
-            } catch (cpErr) {
-                ffmpegErrorOutput += '\nCopy workaround failed: ' + cpErr.message;
-            }
-        }
-    }
-
-    return NextResponse.json({
-        status: 'ok',
-        debug: {
-            cwd: process.cwd(),
-            ffmpegPathResolved: ffmpegPath,
-            ffmpegVersion: ffmpegVersionOutput,
-            ffmpegError: ffmpegErrorOutput,
-            lsCwd: lsCwd,
-            lsNodeModules: lsNodeModules.slice(0, 50),
-            env: {
-                hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-                hasSupabaseKey: !!(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
-            }
-        }
-    });
-}
-
 export async function POST(request) {
     const startTime = Date.now();
-    console.log('[API] Start video generation request');
 
     try {
         const { image, product, text } = await request.json();
@@ -163,42 +108,30 @@ export async function POST(request) {
 
         // Validate Supabase
         if (!supabaseUrl || !supabaseKey) {
-            throw new Error('Supabase credentials missing in environment variables');
+            throw new Error('Supabase credentials missing');
         }
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         // API Key (Try Google first, then generic env)
         const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
-        // 1. Determine Slogan - restore
+        // 1. Determine Slogan
         let slogan = text;
         if (!slogan) {
             try {
                 slogan = await generateSlogan(product, apiKey);
             } catch (slgErr) {
-                console.warn('[API] Slogan gen failed, using fallback', slgErr);
                 slogan = "ЛУЧШИЙ ВЫБОР";
             }
         }
-        console.log(`[API] Slogan generated in ${Date.now() - startTime}ms: ${slogan}`);
-
-        // Escape slogan for FFmpeg
-        const safeSlogan = escapeFFmpegText(slogan || "ЛУЧШИЙ ВЫБОР");
 
         // 2. Download Image
-        console.log(`[API] Downloading image...`);
-        const dlStart = Date.now();
         let inputPath;
-        if (image.startsWith('http')) {
-            try {
-                inputPath = await downloadImage(image);
-            } catch (dlErr) {
-                return NextResponse.json({ error: 'Download Failed: ' + dlErr.message }, { status: 400 });
-            }
-        } else {
-            return NextResponse.json({ error: 'Local paths not supported in Vercel' }, { status: 400 });
+        try {
+            inputPath = await downloadImage(image);
+        } catch (dlErr) {
+            return NextResponse.json({ error: 'Image download failed' }, { status: 400 });
         }
-        console.log(`[API] Image downloaded in ${Date.now() - dlStart}ms`);
 
         // 3. Setup Paths (Use TMPDIR for Vercel)
         const videoId = Date.now();
@@ -206,60 +139,35 @@ export async function POST(request) {
         const outputStartPath = path.join(os.tmpdir(), outputFilename); // Write to /tmp
         const fontsDir = path.join(process.cwd(), 'public', 'fonts'); // Read fonts from project
 
-        // 4. Generate Video with FFmpeg
-        console.log(`[API] Starting FFmpeg render...`);
-        const renderStart = Date.now();
+        // Generate ASS file
+        const assPath = path.join(os.tmpdir(), `slogan_${videoId}.ass`);
+        const assContent = createAssContent(slogan || "ЛУЧШИЙ ВЫБОР");
+        await fs.promises.writeFile(assPath, assContent);
 
-        const MAX_RETRIES = 3;
-        let attempt = 0;
-        let ffmpegSuccess = false;
-        let ffmpegError = null;
+        // 4. Generate Video with FFmpeg (Optimized for Vercel)
+        await new Promise((resolve, reject) => {
+            ffmpeg(inputPath)
+                .inputOptions(['-loop 1', '-t 3'])
+                .videoFilters([
+                    'scale=-2:960',
+                    'crop=720:960',
+                    `subtitles=${assPath}:fontsdir=${fontsDir}`
+                ])
+                .outputOptions([
+                    '-c:v libx264',
+                    '-preset ultrafast',
+                    '-pix_fmt yuv420p',
+                    '-r 20',
+                    '-crf 28'
+                ])
+                .save(outputStartPath)
+                .on('end', () => resolve())
+                .on('error', (err) => reject(err));
+        });
 
-        while (attempt < MAX_RETRIES && !ffmpegSuccess) {
-            attempt++;
-            console.log(`[API] FFmpeg render attempt ${attempt}/${MAX_RETRIES}...`);
-            try {
-                await new Promise((resolve, reject) => {
-                    ffmpeg(inputPath)
-                        .inputOptions(['-loop 1', '-t 3'])
-                        .videoFilters([
-                            'scale=-2:960',
-                            'crop=720:960',
-                            // `subtitles=${assPath}:fontsdir=${fontsDir}` // DISABLED TO ISOLATE CRASH (Font/ASS issue?)
-                        ])
-                        .outputOptions([
-                            '-c:v libx264',
-                            '-preset ultrafast',
-                            '-pix_fmt yuv420p',
-                            '-r 20',
-                            '-crf 28'
-                        ])
-                        .save(outputStartPath)
-                        .on('end', () => {
-                            ffmpegSuccess = true;
-                            resolve();
-                        })
-                        .on('error', (err) => {
-                            ffmpegError = err;
-                            reject(err);
-                        });
-                });
-            } catch (err) {
-                console.error(`[API] FFmpeg attempt ${attempt} failed:`, err.message);
-                if (attempt >= MAX_RETRIES) {
-                    throw ffmpegError; // Re-throw the last error if all retries fail
-                }
-                // Optional: Add a small delay before retrying
-                await new Promise(res => setTimeout(res, 1000 * attempt));
-            }
-        }
-        console.log(`[API] FFmpeg render completed in ${Date.now() - renderStart}ms`);
-
-        // 5. Upload to Supabase
-        console.log(`[API] Uploading to Supabase bucket 'videos'...`);
-        const uploadStart = Date.now();
         const videoBuffer = await fs.promises.readFile(outputStartPath);
 
+        // 5. Upload to Supabase
         const { error: uploadError } = await supabase.storage
             .from('videos')
             .upload(outputFilename, videoBuffer, {
@@ -268,9 +176,8 @@ export async function POST(request) {
             });
 
         if (uploadError) {
-            throw new Error(`Supabase upload failed: ${uploadError.message}`);
+            throw new Error(`Upload failed: ${uploadError.message}`);
         }
-        console.log(`[API] Upload completed in ${Date.now() - uploadStart}ms`);
 
         // Get Public URL
         const { data: { publicUrl } } = supabase.storage
@@ -282,9 +189,7 @@ export async function POST(request) {
             await fs.promises.unlink(inputPath);
             await fs.promises.unlink(assPath);
             await fs.promises.unlink(outputStartPath);
-        } catch (e) { /* ignore */ }
-
-        console.log(`[API] Video generated and uploaded: ${publicUrl}`);
+        } catch (e) { /* ignore cleanup errors */ }
 
         return NextResponse.json({
             success: true,
@@ -294,39 +199,8 @@ export async function POST(request) {
 
     } catch (error) {
         console.error('[API] Video Generation Error:', error);
-
-        let debugInfo = {
-            message: error.message,
-            stack: error.stack,
-            env: {
-                hasGoogleKey: !!apiKey,
-                hasSupabaseUrl: !!supabaseUrl,
-                hasSupabaseKey: !!supabaseKey,
-                nodeEnv: process.env.NODE_ENV
-            },
-            fs: {
-                cwd: process.cwd(),
-                filesInCwd: [],
-                filesInPublic: [],
-                fontPathExists: false
-            }
-        };
-
-        try {
-            debugInfo.fs.filesInCwd = fs.readdirSync(process.cwd());
-            const publicPath = path.join(process.cwd(), 'public');
-            if (fs.existsSync(publicPath)) {
-                debugInfo.fs.filesInPublic = fs.readdirSync(publicPath);
-                const fontPath = path.join(publicPath, 'fonts', 'NotoSans-Regular.ttf');
-                debugInfo.fs.fontPathExists = fs.existsSync(fontPath);
-            }
-        } catch (e) {
-            debugInfo.fs.error = e.message;
-        }
-
         return NextResponse.json({
-            error: 'Failed to generate video: ' + error.message,
-            debug: debugInfo
+            error: 'Failed to generate video: ' + error.message
         }, { status: 500 });
     }
 }

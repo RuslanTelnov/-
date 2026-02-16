@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
@@ -11,6 +11,26 @@ export default function ContentFactoryPage() {
     const [tone, setTone] = useState('Профессиональный')
     const [generatedText, setGeneratedText] = useState('')
     const [isGeneratingText, setIsGeneratingText] = useState(false)
+    const [msProducts, setMsProducts] = useState([])
+    const [isLoadingProducts, setIsLoadingProducts] = useState(false)
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setIsLoadingProducts(true);
+            try {
+                const res = await fetch('/api/moysklad/products');
+                const data = await res.json();
+                if (data.products) {
+                    setMsProducts(data.products);
+                }
+            } catch (e) {
+                console.error('Failed to fetch products:', e);
+            } finally {
+                setIsLoadingProducts(false);
+            }
+        };
+        fetchProducts();
+    }, []);
 
     const [visualStyle, setVisualStyle] = useState('Студийный минимализм')
     const [generatedImages, setGeneratedImages] = useState([])
@@ -40,11 +60,17 @@ export default function ContentFactoryPage() {
         setIsGeneratingVideo(true)
         setGeneratedVideo(null)
         try {
+            // If no image uploaded/selected, try to use the first generated image if available
+            let imageToUse = uploadedImage;
+            if (!imageToUse && generatedImages.length > 0) {
+                imageToUse = generatedImages[0];
+            }
+
             const res = await fetch('/api/content/generate-video', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    image: uploadedImage || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
+                    image: imageToUse || `https://images.unsplash.com/photo-1540348563409-19f3aa9b3046?w=800&q=80`, // Generic kithen/tools if nothing else
                     product: product || 'Новый товар',
                 })
             })
@@ -121,6 +147,10 @@ export default function ContentFactoryPage() {
             }
 
             setGeneratedImages(data.images)
+            // Automatically set the first generated image as the "active" image for video
+            if (data.images && data.images.length > 0 && !uploadedImage) {
+                setUploadedImage(data.images[0]);
+            }
         } catch (e) {
             console.error(e)
             alert('Ошибка при генерации изображений: ' + e.message)
@@ -164,7 +194,14 @@ export default function ContentFactoryPage() {
                     <div style={{ display: 'flex', gap: '1rem', maxWidth: '800px' }}>
                         <select
                             value={product}
-                            onChange={(e) => setProduct(e.target.value)}
+                            onChange={(e) => {
+                                setProduct(e.target.value);
+                                // Try to find image if it's one of msProducts
+                                const p = msProducts.find(item => item.name === e.target.value);
+                                if (p && p.imageUrl) {
+                                    setUploadedImage(p.imageUrl);
+                                }
+                            }}
                             style={{
                                 flex: 1,
                                 padding: '1rem',
@@ -177,11 +214,11 @@ export default function ContentFactoryPage() {
                             }}
                         >
                             <option value="">Выберите товар из МойСклад...</option>
-                            <option value="Беспроводные наушники X1">Беспроводные наушники X1 (Арт: 10293)</option>
-                            <option value="Смарт-часы Series 8">Смарт-часы Series 8 (Арт: 48291)</option>
-                            <option value="Робот-пылесос">Робот-пылесос (Арт: 55921)</option>
-                            {/* If the product is not in the list, add it dynamically so it shows up */}
-                            {product && !["Беспроводные наушники X1", "Смарт-часы Series 8", "Робот-пылесос"].includes(product) && (
+                            {msProducts.map(p => (
+                                <option key={p.id} value={p.name}>{p.name} {p.article ? `(Арт: ${p.article})` : ''}</option>
+                            ))}
+                            {/* If the product is not in the list (e.g. from search), add it dynamically */}
+                            {product && !msProducts.some(p => p.name === product) && (
                                 <option value={product}>{product}</option>
                             )}
                         </select>
@@ -217,9 +254,14 @@ export default function ContentFactoryPage() {
                                             setProduct(data.name);
                                             if (data.imageUrl) {
                                                 setUploadedImage(data.imageUrl);
+                                            } else {
+                                                setUploadedImage(null);
+                                                alert(`Товар "${data.name}" найден, но у него нет фото в МойСклад. Вы можете загрузить фото вручную или сгенерировать его в "Визуальной Студии".`);
                                             }
                                             setActiveTab('video');
-                                            alert(`Найден товар: ${data.name}. Автоматически переходим в Видео Студию.`);
+                                            if (data.imageUrl) {
+                                                alert(`Найден товар: ${data.name}. Автоматически переходим в Видео Студию.`);
+                                            }
                                         }
                                     } catch (e) {
                                         console.error(e);
