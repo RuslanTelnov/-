@@ -128,10 +128,6 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Image is required' }, { status: 400 });
         }
 
-        // --- DEBUG RETURN EARLY ---
-        return NextResponse.json({ status: 'ok', step: 'checkpoint_1_json_parsed', image: image.slice(0, 50) });
-        // --------------------------
-
         // Validate Supabase
         if (!supabaseUrl || !supabaseKey) {
             throw new Error('Supabase credentials missing in environment variables');
@@ -141,15 +137,13 @@ export async function POST(request) {
         // API Key (Try Google first, then generic env)
         const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
-        // CHECKPOINT 2: Init and Env
-        return NextResponse.json({ status: 'ok', step: 'checkpoint_2_clients_init', apiKeyAvailable: !!apiKey });
-
-        // 1. Determine Slogan
+        // 1. Determine Slogan - Force Bypass Google AI for now
+        let slogan = "DEBUG MODE SKIP AI";
         /*
-        let slogan = text;
         if (!slogan) {
             slogan = await generateSlogan(product, apiKey);
         }
+        */
         console.log(`[API] Slogan generated in ${Date.now() - startTime}ms: ${slogan}`);
 
         // Escape slogan for FFmpeg
@@ -160,11 +154,18 @@ export async function POST(request) {
         const dlStart = Date.now();
         let inputPath;
         if (image.startsWith('http')) {
-            inputPath = await downloadImage(image);
+            try {
+                inputPath = await downloadImage(image);
+            } catch (dlErr) {
+                return NextResponse.json({ error: 'Download Failed: ' + dlErr.message }, { status: 400 });
+            }
         } else {
             return NextResponse.json({ error: 'Local paths not supported in Vercel' }, { status: 400 });
         }
         console.log(`[API] Image downloaded in ${Date.now() - dlStart}ms`);
+
+        // CHECKPOINT 3: Image Downloaded
+        return NextResponse.json({ status: 'ok', step: 'checkpoint_3_image_downloaded', imagePath: inputPath });
 
         // 3. Setup Paths (Use TMPDIR for Vercel)
         const videoId = Date.now();
