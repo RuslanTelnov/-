@@ -137,13 +137,16 @@ export async function POST(request) {
         // API Key (Try Google first, then generic env)
         const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
-        // 1. Determine Slogan - Force Bypass Google AI for now
-        let slogan = "DEBUG MODE SKIP AI";
-        /*
+        // 1. Determine Slogan - restore
+        let slogan = text;
         if (!slogan) {
-            slogan = await generateSlogan(product, apiKey);
+            try {
+                slogan = await generateSlogan(product, apiKey);
+            } catch (slgErr) {
+                console.warn('[API] Slogan gen failed, using fallback', slgErr);
+                slogan = "ЛУЧШИЙ ВЫБОР";
+            }
         }
-        */
         console.log(`[API] Slogan generated in ${Date.now() - startTime}ms: ${slogan}`);
 
         // Escape slogan for FFmpeg
@@ -164,50 +167,60 @@ export async function POST(request) {
         }
         console.log(`[API] Image downloaded in ${Date.now() - dlStart}ms`);
 
-        // CHECKPOINT 3: Image Downloaded
-        return NextResponse.json({ status: 'ok', step: 'checkpoint_3_image_downloaded', imagePath: inputPath });
-
         // 3. Setup Paths (Use TMPDIR for Vercel)
         const videoId = Date.now();
         const outputFilename = `video_${videoId}.mp4`;
         const outputStartPath = path.join(os.tmpdir(), outputFilename); // Write to /tmp
         const fontsDir = path.join(process.cwd(), 'public', 'fonts'); // Read fonts from project
 
-        // Generate ASS file
-        const assPath = path.join(os.tmpdir(), `slogan_${videoId}.ass`);
-        const assContent = createAssContent(slogan || "ЛУЧШИЙ ВЫБОР");
-        await fs.promises.writeFile(assPath, assContent);
-
         // 4. Generate Video with FFmpeg
         console.log(`[API] Starting FFmpeg render...`);
         const renderStart = Date.now();
 
-        /*
-        await new Promise((resolve, reject) => {
-            ffmpeg(inputPath)
-                .inputOptions(['-loop 1', '-t 3'])
-                .videoFilters([
-                    'scale=-2:960',
-                    'crop=720:960',
-                    `subtitles=${assPath}:fontsdir=${fontsDir}`
-                ])
-                .outputOptions([
-                    '-c:v libx264',
-                    '-preset ultrafast',
-                    '-pix_fmt yuv420p',
-                    '-r 20',
-                    '-crf 28'
-                ])
-                .save(outputStartPath)
-                .on('end', () => resolve())
-                .on('error', (err) => reject(err));
-        });
-        console.log(`[API] FFmpeg render completed in ${Date.now() - renderStart}ms`);
-        */
+        const MAX_RETRIES = 3;
+        let attempt = 0;
+        let ffmpegSuccess = false;
+        let ffmpegError = null;
 
-        // Mock success for debugging
-        await fs.promises.copyFile(inputPath, outputStartPath); // Just copy image as video (corrupt but proves flow)
-        console.log(`[API] Skipped FFmpeg render for debug`);
+        while (attempt < MAX_RETRIES && !ffmpegSuccess) {
+            attempt++;
+            console.log(`[API] FFmpeg render attempt ${attempt}/${MAX_RETRIES}...`);
+            try {
+                await new Promise((resolve, reject) => {
+                    ffmpeg(inputPath)
+                        .inputOptions(['-loop 1', '-t 3'])
+                        .videoFilters([
+                            'scale=-2:960',
+                            'crop=720:960',
+                            // `subtitles=${assPath}:fontsdir=${fontsDir}` // DISABLED TO ISOLATE CRASH (Font/ASS issue?)
+                        ])
+                        .outputOptions([
+                            '-c:v libx264',
+                            '-preset ultrafast',
+                            '-pix_fmt yuv420p',
+                            '-r 20',
+                            '-crf 28'
+                        ])
+                        .save(outputStartPath)
+                        .on('end', () => {
+                            ffmpegSuccess = true;
+                            resolve();
+                        })
+                        .on('error', (err) => {
+                            ffmpegError = err;
+                            reject(err);
+                        });
+                });
+            } catch (err) {
+                console.error(`[API] FFmpeg attempt ${attempt} failed:`, err.message);
+                if (attempt >= MAX_RETRIES) {
+                    throw ffmpegError; // Re-throw the last error if all retries fail
+                }
+                // Optional: Add a small delay before retrying
+                await new Promise(res => setTimeout(res, 1000 * attempt));
+            }
+        }
+        console.log(`[API] FFmpeg render completed in ${Date.now() - renderStart}ms`);
 
         // 5. Upload to Supabase
         console.log(`[API] Uploading to Supabase bucket 'videos'...`);
