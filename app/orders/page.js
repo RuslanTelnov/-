@@ -1,0 +1,255 @@
+'use client'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import BackButton from '../../components/BackButton'
+
+export default function OrdersPage() {
+    const [orders, setOrders] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+    const [filter, setFilter] = useState('ALL') // ALL, PP1 (WB Warehouse)
+    const [searchQuery, setSearchQuery] = useState('')
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            setLoading(true)
+            setError(null)
+            try {
+                const res = await fetch('/api/kaspi/orders')
+                if (res.ok) {
+                    const data = await res.json()
+                    setOrders(data)
+                } else {
+                    const errData = await res.json().catch(() => ({ error: 'Unknown API error' }))
+                    setError(errData.error || `HTTP ${res.status}`)
+                }
+            } catch (e) {
+                console.error("Fetch orders error", e)
+                setError(e.message)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchOrders()
+    }, [])
+
+    const filteredOrders = orders.filter(order => {
+        const matchesFilter = filter === 'ALL' || (filter === 'PP1' && order.warehouse === 'PP1')
+        const matchesSearch = order.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            order.customer_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            order.entries.some(e => e.name.toLowerCase().includes(searchQuery.toLowerCase()))
+        return matchesFilter && matchesSearch
+    })
+
+    const statusColors = {
+        'NEW': '#3b82f6',
+        'ACCEPTED_BY_MERCHANT': '#f59e0b',
+        'COMPLETED': '#10b981',
+        'CANCELLED': '#ef4444',
+        'DELIVERY': '#8b5cf6',
+        'PICKUP': '#8b5cf6',
+        // MS States
+        'Новый': '#3b82f6',
+        'В работе': '#f59e0b',
+        'Отгружен': '#10b981',
+        'Отменен': '#ef4444',
+        'Доставка': '#8b5cf6'
+    }
+
+    return (
+        <div style={{ minHeight: '100vh', background: 'var(--velveto-bg-primary)', color: 'var(--velveto-text-primary)' }}>
+            {/* Nav */}
+            <nav className="orders-nav" style={{ padding: '2rem 3rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                <BackButton />
+                <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                    <Link href="/analytics" style={{
+                        color: 'var(--velveto-text-muted)',
+                        fontSize: '0.8rem',
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.3s',
+                        textDecoration: 'none'
+                    }}>
+                        Аналитика
+                    </Link>
+                    <div className="desktop-only" style={{ fontSize: '0.9rem', color: 'var(--velveto-text-muted)' }}>KASPI ORDERS MODULE</div>
+                </div>
+            </nav>
+
+            <main className="container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '1rem 3rem' }}>
+                <header style={{ marginBottom: '4rem' }}>
+                    <h1 style={{ fontSize: '3rem', fontWeight: '200', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>
+                        Заказы <span style={{ color: 'var(--velveto-accent-primary)' }}>Kaspi</span>
+                    </h1>
+                    <p style={{ color: 'var(--velveto-text-secondary)', maxWidth: '600px', lineHeight: '1.6' }}>
+                        Мониторинг заказов. Фильтр "WB Warehouse" показывает только товары, отправляемые с нашего склада.
+                    </p>
+                </header>
+
+                {/* Filters */}
+                <div className="orders-filters" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '4px' }}>
+                        <button
+                            onClick={() => setFilter('ALL')}
+                            style={{
+                                padding: '0.6rem 1.2rem', borderRadius: '6px', border: 'none',
+                                background: filter === 'ALL' ? 'var(--velveto-accent-primary)' : 'transparent',
+                                color: 'white', cursor: 'pointer', transition: 'all 0.2s'
+                            }}
+                        >
+                            Все заказы
+                        </button>
+                        <button
+                            onClick={() => setFilter('PP1')}
+                            style={{
+                                padding: '0.6rem 1.2rem', borderRadius: '6px', border: 'none',
+                                background: filter === 'PP1' ? 'var(--velveto-accent-primary)' : 'transparent',
+                                color: 'white', cursor: 'pointer', transition: 'all 0.2s'
+                            }}
+                        >
+                            📦 Склад ВБ
+                        </button>
+                    </div>
+
+                    <input
+                        type="text"
+                        placeholder="Поиск..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="orders-search-input"
+                        style={{
+                            background: 'rgba(255,255,255,0.05)', border: '1px solid #333',
+                            borderRadius: '8px', padding: '0.7rem 1.2rem', color: 'white',
+                            minWidth: '300px'
+                        }}
+                    />
+
+                    <div className="desktop-only" style={{ marginLeft: 'auto', fontSize: '0.9rem', color: 'var(--velveto-text-muted)' }}>
+                        Показано: {filteredOrders.length}
+                    </div>
+                </div>
+
+                {/* Orders List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {loading ? (
+                        <div style={{ padding: '6rem', textAlign: 'center', color: 'var(--velveto-text-muted)' }}>
+                            <div className="animate-pulse" style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>📦 Загрузка заказов из МойСклад...</div>
+                            <div style={{ fontSize: '0.8rem', opacity: 0.5 }}>Это может занять до 15 секунд при первом запросе</div>
+                        </div>
+                    ) : error ? (
+                        <div className="velveto-card" style={{ padding: '4rem', textAlign: 'center', border: '1px solid #ef444455' }}>
+                            <div style={{ color: '#ef4444', fontSize: '1.2rem', marginBottom: '1rem' }}>❌ Ошибка загрузки</div>
+                            <div style={{ color: 'var(--velveto-text-secondary)' }}>{error}</div>
+                            <button
+                                onClick={() => window.location.reload()}
+                                style={{
+                                    marginTop: '2rem', padding: '0.6rem 1.5rem', background: '#333',
+                                    color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer'
+                                }}
+                            >
+                                Попробовать снова
+                            </button>
+                        </div>
+                    ) : filteredOrders.length === 0 ? (
+                        <div className="velveto-card" style={{ padding: '6rem', textAlign: 'center', opacity: 0.5 }}>
+                            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📭</div>
+                            Заказов не найдено
+                            {searchQuery && <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Попробуйте изменить запрос поиска</div>}
+                        </div>
+                    ) : (
+                        filteredOrders.map(order => (
+                            <motion.div
+                                key={order.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="velveto-card order-card"
+                                style={{ padding: '1.5rem', display: 'grid', gridTemplateColumns: '120px 1fr 200px 150px', alignItems: 'center', gap: '2rem' }}
+                            >
+                                <div className="order-id-section" style={{ textAlign: 'center' }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--velveto-text-muted)', marginBottom: '0.3rem' }}>ID ЗАКАЗА</div>
+                                    <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{order.code}</div>
+                                </div>
+
+                                <div className="order-items-section">
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--velveto-text-muted)', marginBottom: '0.5rem' }}>ТОВАРЫ</div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                        {order.entries.map((entry, i) => (
+                                            <div key={i} style={{ fontSize: '0.9rem', display: 'flex', justifyContent: 'space-between' }}>
+                                                <span>{entry.quantity}x {entry.name}</span>
+                                                <span style={{ color: 'var(--velveto-text-muted)', fontSize: '0.8rem' }} className="desktop-only">{entry.sku}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="order-info-section" style={{ textAlign: 'right' }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--velveto-text-muted)', marginBottom: '0.3rem' }}>ИНФО</div>
+                                    <div style={{ fontSize: '0.9rem' }}>{order.customer_name}</div>
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--velveto-text-muted)' }}>
+                                        {new Date(order.creation_date).toLocaleString()}
+                                    </div>
+                                    <div style={{ fontSize: '0.8rem', color: order.warehouse === 'PP1' ? '#10b981' : '#f59e0b', fontWeight: 'bold', marginTop: '0.2rem' }}>
+                                        {order.warehouse === 'PP1' ? '📍 Склад ВБ' : '🏢 Другой'}
+                                    </div>
+                                </div>
+
+                                <div className="order-status-section" style={{ textAlign: 'right' }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--velveto-text-muted)', marginBottom: '0.3rem' }}>СТАТУС / ЦЕНА</div>
+                                    <div style={{
+                                        display: 'inline-block', padding: '4px 8px', borderRadius: '4px',
+                                        background: statusColors[order.status] || '#333', color: 'white',
+                                        fontSize: '0.75rem', fontWeight: 'bold', marginBottom: '0.5rem'
+                                    }}>
+                                        {order.status}
+                                    </div>
+                                    <div style={{ fontSize: '1.2rem', fontWeight: '200', color: 'var(--velveto-accent-primary)' }}>
+                                        {order.total_price?.toLocaleString()} ₸
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))
+                    )}
+                </div>
+            </main>
+            <style jsx>{`
+                @media (max-width: 768px) {
+                    .orders-nav {
+                        padding: 1rem !important;
+                    }
+                    main {
+                        padding: 1rem !important;
+                    }
+                    header h1 {
+                        font-size: 2rem !important;
+                    }
+                    .orders-filters {
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+                    }
+                    .orders-search-input {
+                        min-width: 0 !important;
+                        width: 100% !important;
+                    }
+                    .order-card {
+                        grid-template-columns: 1fr !important;
+                        gap: 1rem !important;
+                        padding: 1rem !important;
+                    }
+                    .order-id-section, .order-info-section, .order-status-section {
+                        text-align: left !important;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .order-id-section div, .order-info-section div, .order-status-section div {
+                        margin-bottom: 0 !important;
+                    }
+                    .desktop-only {
+                        display: none !important;
+                    }
+                }
+            `}</style>
+        </div>
+    )
+}
