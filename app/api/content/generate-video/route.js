@@ -44,7 +44,17 @@ async function downloadImage(imageInput) {
         return tempPath;
     }
 
-    const response = await fetch(imageInput);
+    const headers = {};
+    if (imageInput.includes('api.moysklad.ru')) {
+        const login = process.env.MOYSKLAD_LOGIN;
+        const password = process.env.MOYSKLAD_PASSWORD;
+        if (login && password) {
+            const auth = Buffer.from(`${login}:${password}`).toString('base64');
+            headers['Authorization'] = `Basic ${auth}`;
+        }
+    }
+
+    const response = await fetch(imageInput, { headers });
     if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     const buffer = Buffer.from(await response.arrayBuffer());
     await fs.promises.writeFile(tempPath, buffer);
