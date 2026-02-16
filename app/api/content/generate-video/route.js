@@ -76,6 +76,19 @@ async function generateSlogan(productName, apiKey) {
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic'; // Prevent static optimization issues
 
+// Simple GET endpoint to verify the route is loadable
+export async function GET(request) {
+    return NextResponse.json({
+        status: 'ok',
+        env: {
+            hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+            hasSupabaseKey: !!(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
+            nodeEnv: process.env.NODE_ENV,
+            ffmpegPathExists: fs.existsSync(ffmpegStatic || '')
+        }
+    });
+}
+
 export async function POST(request) {
     const startTime = Date.now();
     console.log('[API] Start video generation request');
