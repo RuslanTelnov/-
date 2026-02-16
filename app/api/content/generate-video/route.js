@@ -123,9 +123,14 @@ export async function POST(request) {
     try {
         const { image, product, text } = await request.json();
 
+        // CHECKPOINT 1: Basic validation
         if (!image) {
             return NextResponse.json({ error: 'Image is required' }, { status: 400 });
         }
+
+        // --- DEBUG RETURN EARLY ---
+        return NextResponse.json({ status: 'ok', step: 'checkpoint_1_json_parsed', image: image.slice(0, 50) });
+        // --------------------------
 
         // Validate Supabase
         if (!supabaseUrl || !supabaseKey) {
