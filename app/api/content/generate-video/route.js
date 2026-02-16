@@ -5,6 +5,7 @@ import os from 'os';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegStatic from 'ffmpeg-static';
+import { createClient } from '@supabase/supabase-js';
 
 // Set ffmpeg path for fluent-ffmpeg
 let ffmpegPath = ffmpegStatic;
@@ -17,6 +18,12 @@ if (!ffmpegPath || ffmpegPath.startsWith('/ROOT') || !fs.existsSync(ffmpegPath))
     }
 }
 ffmpeg.setFfmpegPath(ffmpegPath);
+
+// Initialize Supabase Client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Note: SERVICE_ROLE_KEY is preferred for uploading if RLS policies are strict, 
+// but ANON_KEY works if bucket is public and policies allow.
 
 // Helper to download image to temp file
 async function downloadImage(url) {
@@ -73,6 +80,12 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Image is required' }, { status: 400 });
         }
 
+        // Validate Supabase
+        if (!supabaseUrl || !supabaseKey) {
+            throw new Error('Supabase credentials missing in environment variables');
+        }
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
         // API Key (Try Google first, then generic env)
         const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
@@ -91,24 +104,18 @@ export async function POST(request) {
         if (image.startsWith('http')) {
             inputPath = await downloadImage(image);
         } else {
-            // If local path (testing), ensure it exists
             return NextResponse.json({ error: 'Local paths not supported in Vercel' }, { status: 400 });
         }
 
-        // 3. Setup Paths
+        // 3. Setup Paths (Use TMPDIR for Vercel)
         const videoId = Date.now();
         const outputFilename = `video_${videoId}.mp4`;
-        const publicDir = path.join(process.cwd(), 'public', 'videos');
-        const outputPath = path.join(publicDir, outputFilename);
-        const fontsDir = path.join(process.cwd(), 'public', 'fonts'); // Directory for libass
-
-        if (!fs.existsSync(publicDir)) {
-            fs.mkdirSync(publicDir, { recursive: true });
-        }
+        const outputStartPath = path.join(os.tmpdir(), outputFilename); // Write to /tmp
+        const fontsDir = path.join(process.cwd(), 'public', 'fonts'); // Read fonts from project
 
         // Generate ASS file
         const assPath = path.join(os.tmpdir(), `slogan_${videoId}.ass`);
-        const assContent = createAssContent(slogan || "ЛУЧШИЙ ВЫБОР"); // Use unescaped slogan here
+        const assContent = createAssContent(slogan || "ЛУЧШИЙ ВЫБОР");
         await fs.promises.writeFile(assPath, assContent);
 
         // 4. Generate Video with FFmpeg
@@ -128,22 +135,43 @@ export async function POST(request) {
                     '-pix_fmt yuv420p',
                     '-r 25'
                 ])
-                .save(outputPath)
+                .save(outputStartPath)
                 .on('end', () => resolve())
                 .on('error', (err) => reject(err));
         });
+
+        // 5. Upload to Supabase
+        console.log(`[API] Uploading to Supabase bucket 'videos'...`);
+        const videoBuffer = await fs.promises.readFile(outputStartPath);
+
+        const { error: uploadError } = await supabase.storage
+            .from('videos')
+            .upload(outputFilename, videoBuffer, {
+                contentType: 'video/mp4',
+                upsert: true
+            });
+
+        if (uploadError) {
+            throw new Error(`Supabase upload failed: ${uploadError.message}`);
+        }
+
+        // Get Public URL
+        const { data: { publicUrl } } = supabase.storage
+            .from('videos')
+            .getPublicUrl(outputFilename);
 
         // Cleanup temp files
         try {
             await fs.promises.unlink(inputPath);
             await fs.promises.unlink(assPath);
+            await fs.promises.unlink(outputStartPath);
         } catch (e) { /* ignore */ }
 
-        console.log(`[API] Video generated: ${outputFilename}`);
+        console.log(`[API] Video generated and uploaded: ${publicUrl}`);
 
         return NextResponse.json({
             success: true,
-            videoUrl: `/videos/${outputFilename}`,
+            videoUrl: publicUrl,
             slogan: slogan
         });
 
