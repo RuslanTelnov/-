@@ -8,13 +8,23 @@ import ffmpegStatic from 'ffmpeg-static';
 import { createClient } from '@supabase/supabase-js';
 
 // Set ffmpeg path for fluent-ffmpeg
+// Set ffmpeg path for fluent-ffmpeg
 let ffmpegPath = ffmpegStatic;
-// Fix for Next.js dev environment or erratic path resolution
-if (!ffmpegPath || ffmpegPath.startsWith('/ROOT') || !fs.existsSync(ffmpegPath)) {
-    // Try standard node_modules location
-    const possiblePath = path.join(process.cwd(), 'node_modules', 'ffmpeg-static', 'ffmpeg');
-    if (fs.existsSync(possiblePath)) {
-        ffmpegPath = possiblePath;
+
+// Fix for Vercel/Next.js environment
+if (!ffmpegPath || !fs.existsSync(ffmpegPath)) {
+    // Attempt to locate ffmpeg in node_modules recursively or common paths
+    const pathsToCheck = [
+        path.join(process.cwd(), 'node_modules', 'ffmpeg-static', 'ffmpeg'),
+        path.join(process.cwd(), 'node_modules', 'ffmpeg-static', 'bin', 'linux', 'x64', 'ffmpeg'),
+        '/var/task/node_modules/ffmpeg-static/ffmpeg', // Common Vercel Lambda path
+    ];
+
+    for (const p of pathsToCheck) {
+        if (fs.existsSync(p)) {
+            ffmpegPath = p;
+            break;
+        }
     }
 }
 ffmpeg.setFfmpegPath(ffmpegPath);
