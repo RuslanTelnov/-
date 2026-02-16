@@ -7,7 +7,7 @@ export async function GET(request) {
 
     try {
         // Fetch 50 recent products with images expanded
-        const response = await fetch(`https://api.moysklad.ru/api/remap/1.2/entity/product?limit=50&expand=images`, {
+        const response = await fetch(`https://api.moysklad.ru/api/remap/1.2/entity/product?limit=50`, {
             headers: {
                 'Authorization': `Basic ${auth}`,
                 'Accept': 'application/json',
