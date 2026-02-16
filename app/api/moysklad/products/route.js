@@ -11,7 +11,7 @@ export async function GET(request) {
     const auth = Buffer.from(`${login}:${password}`).toString('base64');
 
     try {
-        const url = `https://api.moysklad.ru/api/remap/1.2/entity/product?limit=20&expand=images`;
+        const url = `https://api.moysklad.ru/api/remap/1.2/entity/product?limit=20`;
         const response = await fetch(url, {
             headers: {
                 'Authorization': `Basic ${auth}`,
