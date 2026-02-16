@@ -72,6 +72,9 @@ async function generateSlogan(productName, apiKey) {
     }
 }
 
+// Set max execution time for Vercel (60 seconds)
+export const maxDuration = 60;
+
 export async function POST(request) {
     try {
         const { image, product, text } = await request.json();
@@ -132,8 +135,9 @@ export async function POST(request) {
                 ])
                 .outputOptions([
                     '-c:v libx264',
+                    '-preset ultrafast', // Omit compression for speed
                     '-pix_fmt yuv420p',
-                    '-r 25'
+                    '-r 20' // Reduce framerate from 25 to 20
                 ])
                 .save(outputStartPath)
                 .on('end', () => resolve())
