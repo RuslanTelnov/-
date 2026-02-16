@@ -74,8 +74,12 @@ async function generateSlogan(productName, apiKey) {
 
 // Set max execution time for Vercel (60 seconds)
 export const maxDuration = 60;
+export const dynamic = 'force-dynamic'; // Prevent static optimization issues
 
 export async function POST(request) {
+    const startTime = Date.now();
+    console.log('[API] Start video generation request');
+
     try {
         const { image, product, text } = await request.json();
 
@@ -97,18 +101,21 @@ export async function POST(request) {
         if (!slogan) {
             slogan = await generateSlogan(product, apiKey);
         }
+        console.log(`[API] Slogan generated in ${Date.now() - startTime}ms: ${slogan}`);
 
         // Escape slogan for FFmpeg
         const safeSlogan = escapeFFmpegText(slogan || "ЛУЧШИЙ ВЫБОР");
 
         // 2. Download Image
-        console.log(`[API] Downloading image for ${product}...`);
+        console.log(`[API] Downloading image...`);
+        const dlStart = Date.now();
         let inputPath;
         if (image.startsWith('http')) {
             inputPath = await downloadImage(image);
         } else {
             return NextResponse.json({ error: 'Local paths not supported in Vercel' }, { status: 400 });
         }
+        console.log(`[API] Image downloaded in ${Date.now() - dlStart}ms`);
 
         // 3. Setup Paths (Use TMPDIR for Vercel)
         const videoId = Date.now();
@@ -122,30 +129,35 @@ export async function POST(request) {
         await fs.promises.writeFile(assPath, assContent);
 
         // 4. Generate Video with FFmpeg
-        console.log(`[API] Rendering video... Slogan: ${slogan}`);
+        console.log(`[API] Starting FFmpeg render...`);
+        const renderStart = Date.now();
 
         await new Promise((resolve, reject) => {
             ffmpeg(inputPath)
-                .inputOptions(['-loop 1', '-t 5']) // 5 seconds loop
+                .inputOptions(['-loop 1', '-t 3']) // Reduced duration to 3 seconds for speed
                 .videoFilters([
-                    'scale=-2:1440',
-                    'crop=1080:1440',
-                    "zoompan=z='min(zoom+0.0006,1.1)':d=125:s=1080x1440:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'",
+                    // Reduced resolution to 720x960 (half of 1440p) for faster encoding
+                    'scale=-2:960',
+                    'crop=720:960',
+                    // "zoompan=..." removed due to high CPU usage causing 504 timeouts
                     `subtitles=${assPath}:fontsdir=${fontsDir}`
                 ])
                 .outputOptions([
                     '-c:v libx264',
-                    '-preset ultrafast', // Omit compression for speed
+                    '-preset ultrafast', // Maximum speed
                     '-pix_fmt yuv420p',
-                    '-r 20' // Reduce framerate from 25 to 20
+                    '-r 20', // Low framerate
+                    '-crf 28' // Lower quality for speed
                 ])
                 .save(outputStartPath)
                 .on('end', () => resolve())
                 .on('error', (err) => reject(err));
         });
+        console.log(`[API] FFmpeg render completed in ${Date.now() - renderStart}ms`);
 
         // 5. Upload to Supabase
         console.log(`[API] Uploading to Supabase bucket 'videos'...`);
+        const uploadStart = Date.now();
         const videoBuffer = await fs.promises.readFile(outputStartPath);
 
         const { error: uploadError } = await supabase.storage
@@ -158,6 +170,7 @@ export async function POST(request) {
         if (uploadError) {
             throw new Error(`Supabase upload failed: ${uploadError.message}`);
         }
+        console.log(`[API] Upload completed in ${Date.now() - uploadStart}ms`);
 
         // Get Public URL
         const { data: { publicUrl } } = supabase.storage
