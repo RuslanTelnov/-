@@ -194,13 +194,39 @@ export async function POST(request) {
 
     } catch (error) {
         console.error('[API] Video Generation Error:', error);
+
+        let debugInfo = {
+            message: error.message,
+            stack: error.stack,
+            env: {
+                hasGoogleKey: !!apiKey,
+                hasSupabaseUrl: !!supabaseUrl,
+                hasSupabaseKey: !!supabaseKey,
+                nodeEnv: process.env.NODE_ENV
+            },
+            fs: {
+                cwd: process.cwd(),
+                filesInCwd: [],
+                filesInPublic: [],
+                fontPathExists: false
+            }
+        };
+
+        try {
+            debugInfo.fs.filesInCwd = fs.readdirSync(process.cwd());
+            const publicPath = path.join(process.cwd(), 'public');
+            if (fs.existsSync(publicPath)) {
+                debugInfo.fs.filesInPublic = fs.readdirSync(publicPath);
+                const fontPath = path.join(publicPath, 'fonts', 'NotoSans-Regular.ttf');
+                debugInfo.fs.fontPathExists = fs.existsSync(fontPath);
+            }
+        } catch (e) {
+            debugInfo.fs.error = e.message;
+        }
+
         return NextResponse.json({
             error: 'Failed to generate video: ' + error.message,
-            debug: {
-                ffmpegPath: ffmpegStatic,
-                cwd: process.cwd(),
-                env: process.env.NODE_ENV
-            }
+            debug: debugInfo
         }, { status: 500 });
     }
 }
