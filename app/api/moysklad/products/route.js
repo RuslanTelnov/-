@@ -3,15 +3,19 @@ import { NextResponse } from 'next/server';
 export async function GET(request) {
     const login = process.env.MOYSKLAD_LOGIN;
     const password = process.env.MOYSKLAD_PASSWORD;
+
+    if (!login || !password) {
+        return NextResponse.json({ error: 'MoySklad credentials missing' }, { status: 500 });
+    }
+
     const auth = Buffer.from(`${login}:${password}`).toString('base64');
 
     try {
-        // Fetch 50 recent products with images expanded
-        const response = await fetch(`https://api.moysklad.ru/api/remap/1.2/entity/product?limit=50`, {
+        const url = `https://api.moysklad.ru/api/remap/1.2/entity/product?limit=20&expand=images`;
+        const response = await fetch(url, {
             headers: {
                 'Authorization': `Basic ${auth}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Accept': 'application/json'
             }
         });
 
@@ -20,6 +24,10 @@ export async function GET(request) {
         }
 
         const data = await response.json();
+
+        if (!data.rows) {
+            return NextResponse.json({ products: [] });
+        }
 
         const products = data.rows.map(product => {
             let imageUrl = null;
