@@ -13,7 +13,7 @@ export async function GET(request) {
     try {
         console.log('[Products API] Calling MoySklad...');
         // Match the working pattern from search API
-        const url = `https://api.moysklad.ru/api/remap/1.2/entity/product?limit=50&offset=0`;
+        const url = `https://api.moysklad.ru/api/remap/1.2/entity/product?limit=50&offset=0&expand=images`;
         const response = await fetch(url, {
             headers: {
                 'Authorization': `Basic ${auth}`,
