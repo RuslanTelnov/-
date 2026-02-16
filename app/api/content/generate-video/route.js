@@ -141,7 +141,11 @@ export async function POST(request) {
         // API Key (Try Google first, then generic env)
         const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
+        // CHECKPOINT 2: Init and Env
+        return NextResponse.json({ status: 'ok', step: 'checkpoint_2_clients_init', apiKeyAvailable: !!apiKey });
+
         // 1. Determine Slogan
+        /*
         let slogan = text;
         if (!slogan) {
             slogan = await generateSlogan(product, apiKey);
