@@ -18,12 +18,22 @@ export default function Home() {
         show: { opacity: 1, y: 0 }
     }
 
-    const cards = [
+    const highlightCards = [
+        {
+            title: "Заказы Kaspi",
+            description: "Мониторинг и управление заказами Kaspi",
+            href: "/orders",
+            color: "linear-gradient(135deg, #f87171 0%, #b91c1c 100%)",
+            icon: "🚨"
+        }
+    ];
+
+    const toolCards = [
         {
             title: "Content Factory",
             description: "Генерация контента (SEO, Фото, Видео) с помощью ИИ",
             href: "/content-factory",
-            color: "linear-gradient(135deg, #f472b6 0%, #db2777 100%)", // Pink
+            color: "linear-gradient(135deg, #f472b6 0%, #db2777 100%)",
             icon: "🏭",
             isNew: true
         },
@@ -31,40 +41,173 @@ export default function Home() {
             title: "Номенклатуры WB",
             description: "Управление товарами Wildberries",
             href: "/wb-products",
-            color: "linear-gradient(135deg, #cb11ab 0%, #481173 100%)", // WB colors roughly
+            color: "linear-gradient(135deg, #cb11ab 0%, #481173 100%)",
             icon: "🛍️",
-            backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')" // Shopping/E-commerce bg
+            backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"
         },
         {
             title: "Новые номенклатуры",
             description: "Недавно созданные товары",
             href: "/new-products",
-            color: "linear-gradient(135deg, #10B981 0%, #059669 100%)", // Green
+            color: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
             icon: "✨"
         },
         {
             title: "Номенклатуры МойСклад",
             description: "Полная база товаров из МойСклад",
             href: "/ms-products",
-            color: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)", // Blue
+            color: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
             icon: "📦"
         },
         {
             title: "Market Scout",
             description: "Поиск и верификация товаров на WB",
             href: "/market-scout",
-            color: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", // Amber/Orange
+            color: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
             icon: "🔍"
+        },
+        {
+            title: "Система Контроля",
+            description: "Мониторинг очередей, ошибок и прогресса",
+            href: "/conveyor",
+            color: "linear-gradient(135deg, #10B981 0%, #3b82f6 100%)",
+            icon: "⚙️"
+        }
+    ];
+
+    const analyticsCards = [
+        {
+            title: "Анализ S-Parfum",
+            description: "Мониторинг цен конкурентов и новинок",
+            href: "/s-parfum",
+            color: "linear-gradient(135deg, #c9a05a 0%, #a88241 100%)",
+            icon: "✨"
         },
         {
             title: "Tоп Товаров WB",
             description: "Мониторинг топ выдачи и хитов продаж",
             href: "/wb-top",
-            color: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)", // Pink/Purple
+            color: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)",
             icon: "🔥"
         },
+        {
+            title: "ABC / XYZ Анализ",
+            description: "Классификация товаров по прибыли и спросу",
+            href: "/analytics",
+            color: "linear-gradient(135deg, #10b981 0%, #3b82f6 100%)",
+            icon: "📊"
+        }
+    ];
 
-    ]
+    const Card = ({ card }) => (
+        <Link href={card.href} style={{ textDecoration: 'none' }}>
+            <motion.div
+                variants={item}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="velveto-card"
+                style={{
+                    padding: '2.5rem',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    transition: 'all 0.3s ease'
+                }}
+            >
+                {card.backgroundImage && (
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundImage: card.backgroundImage,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        opacity: 0.1,
+                        transition: 'opacity 0.3s ease',
+                        zIndex: 0,
+                        filter: 'grayscale(100%)'
+                    }} />
+                )}
+
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: card.color,
+                    zIndex: 1,
+                    boxShadow: `0 0 20px ${card.color}`
+                }} />
+
+                <div style={{
+                    fontSize: '3rem',
+                    marginBottom: '2rem',
+                    background: 'rgba(255,255,255,0.03)',
+                    width: '70px',
+                    height: '70px',
+                    borderRadius: '18px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    zIndex: 1,
+                    border: '1px solid rgba(255,255,255,0.05)'
+                }}>
+                    {card.icon}
+                </div>
+
+                <h3 style={{
+                    fontSize: '1.4rem',
+                    fontWeight: '400',
+                    color: 'var(--velveto-text-primary)',
+                    marginBottom: '1rem',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem'
+                }}>
+                    {card.title}
+                    {card.isNew && (
+                        <span style={{
+                            fontSize: '0.55rem',
+                            padding: '2px 6px',
+                            borderRadius: '4px',
+                            background: card.color,
+                            color: '#fff',
+                            fontWeight: 'bold',
+                            letterSpacing: '0.1em'
+                        }}>
+                            NEW
+                        </span>
+                    )}
+                </h3>
+
+                <p style={{ color: 'var(--velveto-text-secondary)', lineHeight: '1.6', fontSize: '0.95rem' }}>
+                    {card.description}
+                </p>
+
+                <div style={{
+                    marginTop: 'auto',
+                    paddingTop: '3rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'var(--velveto-accent-primary)',
+                    fontWeight: '600',
+                    fontSize: '0.85rem',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase'
+                }}>
+                    Перейти <span style={{ marginLeft: '0.5rem' }}>→</span>
+                </div>
+            </motion.div>
+        </Link>
+    );
 
     return (
         <div style={{ minHeight: '100vh', background: 'var(--velveto-bg-primary)' }}>
@@ -134,10 +277,10 @@ export default function Home() {
                 </div>
             </header>
 
-            <main className="container" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-                <div style={{ marginBottom: '4rem', textAlign: 'center', padding: '0 1rem' }}>
+            <main className="container" style={{ paddingTop: '4rem', paddingBottom: '4rem', maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
+                <div style={{ marginBottom: '5rem', textAlign: 'center' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2rem, 8vw, 4rem)',
+                        fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
                         marginBottom: '1.5rem',
                         letterSpacing: '0.05em',
                         color: 'var(--velveto-text-primary)',
@@ -148,7 +291,7 @@ export default function Home() {
                     </h2>
                     <p style={{
                         color: 'var(--velveto-text-muted)',
-                        fontSize: '1.1rem',
+                        fontSize: '1.2rem',
                         maxWidth: '600px',
                         margin: '0 auto',
                         lineHeight: '1.6'
@@ -157,131 +300,95 @@ export default function Home() {
                     </p>
                 </div>
 
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    animate="show"
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                        gap: '2rem',
-                        maxWidth: '1400px',
-                        margin: '0 auto',
-                        padding: '0 1rem'
-                    }}
-                >
-                    {cards.map((card, index) => (
-                        <Link key={index} href={card.href}>
-                            <motion.div
-                                variants={item}
-                                whileHover={{ y: -10, scale: 1.02 }}
-                                className="velveto-card"
-                                style={{
-                                    padding: '2rem',
-                                    cursor: 'pointer',
-                                    position: 'relative',
-                                    overflow: 'hidden',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: '100%',
-                                    transition: 'all 0.3s ease'
-                                }}
-                            >
-                                {card.backgroundImage && (
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        right: 0,
-                                        bottom: 0,
-                                        backgroundImage: card.backgroundImage,
-                                        backgroundSize: 'cover',
-                                        backgroundPosition: 'center',
-                                        opacity: 0.1,
-                                        transition: 'opacity 0.3s ease',
-                                        zIndex: 0,
-                                        filter: 'grayscale(100%)'
-                                    }} />
-                                )}
+                {/* Kaspi Section */}
+                <div style={{ marginBottom: '5rem' }}>
+                    <h3 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: '300',
+                        color: '#ef4444',
+                        marginBottom: '2.5rem',
+                        borderLeft: '2px solid #ef4444',
+                        paddingLeft: '1.5rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em'
+                    }}>
+                        Kaspi
+                    </h3>
+                    <motion.div
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                            gap: '2.5rem'
+                        }}
+                    >
+                        {highlightCards.map((card, index) => (
+                            <Card key={index} card={card} />
+                        ))}
+                    </motion.div>
+                </div>
 
-                                {/* Gradient Background Effect */}
-                                <div style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    height: '2px',
-                                    background: card.color,
-                                    zIndex: 1,
-                                    boxShadow: `0 0 20px ${card.color}`
-                                }} />
+                {/* Tools Section */}
+                <div style={{ marginBottom: '5rem' }}>
+                    <h3 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: '300',
+                        color: 'var(--velveto-text-secondary)',
+                        marginBottom: '2.5rem',
+                        borderLeft: '2px solid var(--velveto-accent-primary)',
+                        paddingLeft: '1.5rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em'
+                    }}>
+                        Инструменты Управления
+                    </h3>
+                    <motion.div
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                            gap: '2.5rem'
+                        }}
+                    >
+                        {toolCards.map((card, index) => (
+                            <Card key={index} card={card} />
+                        ))}
+                    </motion.div>
+                </div>
 
-                                <div style={{
-                                    fontSize: '3rem',
-                                    marginBottom: '2rem',
-                                    background: 'rgba(255,255,255,0.03)',
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '20px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    position: 'relative',
-                                    zIndex: 1,
-                                    border: '1px solid rgba(255,255,255,0.05)'
-                                }}>
-                                    {card.icon}
-                                </div>
-
-                                <h3 style={{
-                                    fontSize: '1.5rem',
-                                    fontWeight: '400',
-                                    color: 'var(--velveto-text-primary)',
-                                    marginBottom: '1rem',
-                                    letterSpacing: '0.05em',
-                                    fontFamily: 'var(--velveto-font-display)',
-                                    textTransform: 'uppercase',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.75rem'
-                                }}>
-                                    {card.title}
-                                    {card.isNew && (
-                                        <span style={{
-                                            fontSize: '0.6rem',
-                                            padding: '2px 6px',
-                                            borderRadius: '4px',
-                                            background: card.color,
-                                            color: '#fff',
-                                            fontWeight: 'bold',
-                                            letterSpacing: '0.1em'
-                                        }}>
-                                            NEW
-                                        </span>
-                                    )}
-                                </h3>
-
-                                <p style={{ color: 'var(--velveto-text-secondary)', lineHeight: '1.6', fontSize: '1rem' }}>
-                                    {card.description}
-                                </p>
-
-                                <div style={{
-                                    marginTop: 'auto',
-                                    paddingTop: '3rem',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    color: 'var(--velveto-accent-primary)',
-                                    fontWeight: '600',
-                                    fontSize: '0.9rem',
-                                    letterSpacing: '0.1em',
-                                    textTransform: 'uppercase'
-                                }}>
-                                    Перейти <span style={{ marginLeft: '0.5rem' }}>→</span>
-                                </div>
-                            </motion.div>
-                        </Link>
-                    ))}
-                </motion.div>
+                {/* Analytics Section */}
+                <div style={{ marginBottom: '2rem' }}>
+                    <h3 style={{
+                        fontSize: '1.5rem',
+                        fontWeight: '300',
+                        color: 'var(--velveto-text-secondary)',
+                        marginBottom: '2.5rem',
+                        borderLeft: '2px solid var(--velveto-accent-primary)',
+                        paddingLeft: '1.5rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em'
+                    }}>
+                        Аналитика и Финансы
+                    </h3>
+                    <motion.div
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                            gap: '2.5rem'
+                        }}
+                    >
+                        {analyticsCards.map((card, index) => (
+                            <Card key={index} card={card} />
+                        ))}
+                    </motion.div>
+                </div>
             </main>
         </div>
     )

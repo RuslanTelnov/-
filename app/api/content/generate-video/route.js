@@ -6,22 +6,17 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegStatic from 'ffmpeg-static';
 import { createClient } from '@supabase/supabase-js';
-import { execFile } from 'child_process';
-import util from 'util';
 
-// Set ffmpeg path for fluent-ffmpeg
 // Set ffmpeg path for fluent-ffmpeg
 let ffmpegPath = ffmpegStatic;
 
 // Fix for Vercel/Next.js environment
 if (!ffmpegPath || !fs.existsSync(ffmpegPath)) {
-    // Attempt to locate ffmpeg in node_modules recursively or common paths
     const pathsToCheck = [
         path.join(process.cwd(), 'node_modules', 'ffmpeg-static', 'ffmpeg'),
         path.join(process.cwd(), 'node_modules', 'ffmpeg-static', 'bin', 'linux', 'x64', 'ffmpeg'),
-        '/var/task/node_modules/ffmpeg-static/ffmpeg', // Common Vercel Lambda path
+        '/var/task/node_modules/ffmpeg-static/ffmpeg',
     ];
-
     for (const p of pathsToCheck) {
         if (fs.existsSync(p)) {
             ffmpegPath = p;
@@ -29,27 +24,29 @@ if (!ffmpegPath || !fs.existsSync(ffmpegPath)) {
         }
     }
 }
-// Fallback to purely static if still not found
 if (!ffmpegPath) ffmpegPath = ffmpegStatic;
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 // Initialize Supabase Client
 const getSupabaseKey = () => {
-    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '').trim();
-    if (!key) console.warn('[Supabase] Both Service Role Key and Anon Key are missing!');
-    return key;
+    return (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '').trim();
 };
 const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim();
 const supabaseKey = getSupabaseKey();
-// Note: SERVICE_ROLE_KEY is preferred for uploading if RLS policies are strict, 
-// but ANON_KEY works if bucket is public and policies allow.
 
-// Helper to download image to temp file
-async function downloadImage(url) {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`);
-    const buffer = Buffer.from(await response.arrayBuffer());
+// Helper to download image to temp file (supports URLs and Base64)
+async function downloadImage(imageInput) {
     const tempPath = path.join(os.tmpdir(), `temp_img_${Date.now()}.jpg`);
+
+    if (imageInput.startsWith('data:')) {
+        const base64Data = imageInput.split(';base64,').pop();
+        await fs.promises.writeFile(tempPath, base64Data, { encoding: 'base64' });
+        return tempPath;
+    }
+
+    const response = await fetch(imageInput);
+    if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    const buffer = Buffer.from(await response.arrayBuffer());
     await fs.promises.writeFile(tempPath, buffer);
     return tempPath;
 }
@@ -60,7 +57,6 @@ function escapeFFmpegText(text) {
 }
 
 function createAssContent(text) {
-    // Escape backslashes and braces for ASS
     const safeText = text.replace(/\\/g, '\\\\').replace(/{/g, '\\{').replace(/}/g, '\\}');
     return `[Script Info]
 ScriptType: v4.00+
@@ -91,31 +87,24 @@ async function generateSlogan(productName, apiKey) {
     }
 }
 
-// Set max execution time for Vercel (60 seconds)
 export const maxDuration = 60;
-export const dynamic = 'force-dynamic'; // Prevent static optimization issues
+export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
-    const startTime = Date.now();
-
     try {
         const { image, product, text } = await request.json();
 
-        // CHECKPOINT 1: Basic validation
         if (!image) {
             return NextResponse.json({ error: 'Image is required' }, { status: 400 });
         }
 
-        // Validate Supabase
         if (!supabaseUrl || !supabaseKey) {
             throw new Error('Supabase credentials missing');
         }
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // API Key (Try Google first, then generic env)
         const apiKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
-        // 1. Determine Slogan
         let slogan = text;
         if (!slogan) {
             try {
@@ -125,26 +114,22 @@ export async function POST(request) {
             }
         }
 
-        // 2. Download Image
         let inputPath;
         try {
             inputPath = await downloadImage(image);
         } catch (dlErr) {
-            return NextResponse.json({ error: 'Image download failed' }, { status: 400 });
+            return NextResponse.json({ error: 'Image download failed: ' + dlErr.message }, { status: 400 });
         }
 
-        // 3. Setup Paths (Use TMPDIR for Vercel)
         const videoId = Date.now();
         const outputFilename = `video_${videoId}.mp4`;
-        const outputStartPath = path.join(os.tmpdir(), outputFilename); // Write to /tmp
-        const fontsDir = path.join(process.cwd(), 'public', 'fonts'); // Read fonts from project
+        const outputStartPath = path.join(os.tmpdir(), outputFilename);
+        const fontsDir = path.join(process.cwd(), 'public', 'fonts');
 
-        // Generate ASS file
         const assPath = path.join(os.tmpdir(), `slogan_${videoId}.ass`);
-        const assContent = createAssContent(slogan || "ЛУЧШИЙ ВЫБОР");
+        const assContent = createAssContent(slogan);
         await fs.promises.writeFile(assPath, assContent);
 
-        // 4. Generate Video with FFmpeg (Optimized for Vercel)
         await new Promise((resolve, reject) => {
             ffmpeg(inputPath)
                 .inputOptions(['-loop 1', '-t 3'])
@@ -167,7 +152,6 @@ export async function POST(request) {
 
         const videoBuffer = await fs.promises.readFile(outputStartPath);
 
-        // 5. Upload to Supabase
         const { error: uploadError } = await supabase.storage
             .from('videos')
             .upload(outputFilename, videoBuffer, {
@@ -179,17 +163,15 @@ export async function POST(request) {
             throw new Error(`Upload failed: ${uploadError.message}`);
         }
 
-        // Get Public URL
         const { data: { publicUrl } } = supabase.storage
             .from('videos')
             .getPublicUrl(outputFilename);
 
-        // Cleanup temp files
         try {
             await fs.promises.unlink(inputPath);
             await fs.promises.unlink(assPath);
             await fs.promises.unlink(outputStartPath);
-        } catch (e) { /* ignore cleanup errors */ }
+        } catch (e) { }
 
         return NextResponse.json({
             success: true,
