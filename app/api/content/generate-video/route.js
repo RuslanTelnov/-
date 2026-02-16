@@ -88,13 +88,30 @@ export const dynamic = 'force-dynamic'; // Prevent static optimization issues
 
 // Simple GET endpoint to verify the route is loadable
 export async function GET(request) {
+    const defaultPath = ffmpegStatic;
+    let lsCwd = [];
+    let lsNodeModules = [];
+    try {
+        lsCwd = fs.readdirSync(process.cwd());
+        if (fs.existsSync(path.join(process.cwd(), 'node_modules'))) {
+            lsNodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'));
+        }
+    } catch (e) { }
+
     return NextResponse.json({
         status: 'ok',
-        env: {
-            hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-            hasSupabaseKey: !!(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
-            nodeEnv: process.env.NODE_ENV,
-            ffmpegPathExists: fs.existsSync(ffmpegStatic || '')
+        debug: {
+            cwd: process.cwd(),
+            defaultFfmpegPath: defaultPath,
+            defaultExists: fs.existsSync(defaultPath || ''),
+            lsCwd: lsCwd,
+            lsNodeModules: lsNodeModules.slice(0, 50), // Limit output
+            env: {
+                hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+                hasSupabaseKey: !!(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
+                ffmpegPathResolved: ffmpegPath,
+                ffmpegPathExists: fs.existsSync(ffmpegPath || '')
+            }
         }
     });
 }
