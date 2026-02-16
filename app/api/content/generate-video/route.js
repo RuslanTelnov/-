@@ -172,28 +172,32 @@ export async function POST(request) {
         console.log(`[API] Starting FFmpeg render...`);
         const renderStart = Date.now();
 
+        /*
         await new Promise((resolve, reject) => {
             ffmpeg(inputPath)
-                .inputOptions(['-loop 1', '-t 3']) // Reduced duration to 3 seconds for speed
+                .inputOptions(['-loop 1', '-t 3'])
                 .videoFilters([
-                    // Reduced resolution to 720x960 (half of 1440p) for faster encoding
                     'scale=-2:960',
                     'crop=720:960',
-                    // "zoompan=..." removed due to high CPU usage causing 504 timeouts
                     `subtitles=${assPath}:fontsdir=${fontsDir}`
                 ])
                 .outputOptions([
                     '-c:v libx264',
-                    '-preset ultrafast', // Maximum speed
+                    '-preset ultrafast',
                     '-pix_fmt yuv420p',
-                    '-r 20', // Low framerate
-                    '-crf 28' // Lower quality for speed
+                    '-r 20',
+                    '-crf 28'
                 ])
                 .save(outputStartPath)
                 .on('end', () => resolve())
                 .on('error', (err) => reject(err));
         });
         console.log(`[API] FFmpeg render completed in ${Date.now() - renderStart}ms`);
+        */
+
+        // Mock success for debugging
+        await fs.promises.copyFile(inputPath, outputStartPath); // Just copy image as video (corrupt but proves flow)
+        console.log(`[API] Skipped FFmpeg render for debug`);
 
         // 5. Upload to Supabase
         console.log(`[API] Uploading to Supabase bucket 'videos'...`);
