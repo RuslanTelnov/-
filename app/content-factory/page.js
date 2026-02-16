@@ -75,7 +75,10 @@ export default function ContentFactoryPage() {
                 })
             })
 
-            if (!res.ok) throw new Error(`Ошибка сервера: ${res.status}`)
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+                throw new Error(errorData.error || `Ошибка сервера: ${res.status}`);
+            }
             const data = await res.json()
             if (data.error) throw new Error(data.error)
 
