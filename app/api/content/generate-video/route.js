@@ -86,11 +86,16 @@ async function generateSlogan(productName, apiKey) {
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic'; // Prevent static optimization issues
 
+const execFilePromise = util.promisify(execFile);
+
 // Simple GET endpoint to verify the route is loadable
 export async function GET(request) {
     const defaultPath = ffmpegStatic;
     let lsCwd = [];
     let lsNodeModules = [];
+    let ffmpegVersionOutput = '';
+    let ffmpegErrorOutput = '';
+
     try {
         lsCwd = fs.readdirSync(process.cwd());
         if (fs.existsSync(path.join(process.cwd(), 'node_modules'))) {
@@ -98,19 +103,47 @@ export async function GET(request) {
         }
     } catch (e) { }
 
+    // Attempt to run ffmpeg -version
+    try {
+        if (ffmpegPath && fs.existsSync(ffmpegPath)) {
+            const { stdout } = await execFilePromise(ffmpegPath, ['-version'], { timeout: 5000 });
+            ffmpegVersionOutput = stdout.slice(0, 500); // Limit output
+        } else {
+            ffmpegVersionOutput = 'FFmpeg path not found';
+        }
+    } catch (err) {
+        ffmpegErrorOutput = err.message + '\n' + (err.stderr || '');
+
+        // Try to fix permissions? No, read-only.
+        // Try copy to tmp? 
+        if (err.message.includes('EACCES')) {
+            ffmpegErrorOutput += '\nAttempting copy workaround...';
+            try {
+                const tmpFfmpeg = path.join(os.tmpdir(), 'ffmpeg');
+                await fs.promises.copyFile(ffmpegPath, tmpFfmpeg);
+                await fs.promises.chmod(tmpFfmpeg, 0o755);
+                ffmpegPath = tmpFfmpeg; // Update global path
+                const { stdout } = await execFilePromise(ffmpegPath, ['-version'], { timeout: 5000 });
+                ffmpegVersionOutput = 'WORKAROUND SUCCESS: ' + stdout.slice(0, 500);
+                ffmpeg.setFfmpegPath(ffmpegPath); // Update fluent-ffmpeg
+            } catch (cpErr) {
+                ffmpegErrorOutput += '\nCopy workaround failed: ' + cpErr.message;
+            }
+        }
+    }
+
     return NextResponse.json({
         status: 'ok',
         debug: {
             cwd: process.cwd(),
-            defaultFfmpegPath: defaultPath,
-            defaultExists: fs.existsSync(defaultPath || ''),
+            ffmpegPathResolved: ffmpegPath,
+            ffmpegVersion: ffmpegVersionOutput,
+            ffmpegError: ffmpegErrorOutput,
             lsCwd: lsCwd,
-            lsNodeModules: lsNodeModules.slice(0, 50), // Limit output
+            lsNodeModules: lsNodeModules.slice(0, 50),
             env: {
                 hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
                 hasSupabaseKey: !!(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
-                ffmpegPathResolved: ffmpegPath,
-                ffmpegPathExists: fs.existsSync(ffmpegPath || '')
             }
         }
     });
