@@ -3,10 +3,23 @@ import requests
 import json
 import base64
 import argparse
+# Load environment variables
 from dotenv import load_dotenv
+load_dotenv() # Try default first
 
-# Load environment variables from web project
-load_dotenv("moysklad-web/.env.local")
+if not os.getenv("MOYSKLAD_LOGIN"):
+    try:
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        web_dir = os.path.dirname(os.path.dirname(current_dir)) # Up 2 levels
+        env_path = os.path.join(web_dir, ".env.local")
+        # print(f"Loading env from {env_path}")
+        load_dotenv(env_path)
+    except:
+        pass
+
+# Fallback manual load if still missing
+if not os.getenv("MOYSKLAD_LOGIN"):
+     load_dotenv("moysklad-web/.env.local") 
 
 # MoySklad settings
 LOGIN = os.getenv("MOYSKLAD_LOGIN")
@@ -54,6 +67,21 @@ def find_product_by_article(article):
         if rows:
             return rows[0]
     return None
+
+def get_total_stock(product_id):
+    """Check total stock for a product across all warehouses"""
+    url = f"{BASE_URL}/entity/assortment?filter=productid={product_id}"
+    try:
+        resp = requests.get(url, headers=HEADERS)
+        if resp.status_code == 200:
+            rows = resp.json().get('rows', [])
+            total_stock = 0
+            for row in rows:
+                total_stock += row.get('stock', 0)
+            return total_stock
+    except Exception as e:
+        print(f"Error checking stock: {e}")
+    return 0
 
 def create_enter(product_meta, quantity, price):
     url = f"{BASE_URL}/entity/enter"

@@ -197,14 +197,24 @@ def run_conveyor(single_pass=False, skip_parser=False):
                              ms_prod = ms_stock.find_product_by_article(wb_id)
                         
                         if ms_prod:
-                             price = int(product.get('price_kzt', 0) or 0)
-                             res = ms_stock.create_enter(ms_prod['meta'], 10, price)
-                             if res.get('success'):
+                             # Check existing stock first!
+                             ms_real_id = ms_prod['id']
+                             current_stock = ms_stock.get_total_stock(ms_real_id)
+                             
+                             if current_stock > 0:
+                                 logger.info(f"Stock already exists ({current_stock}). Skipping initial fake stock.")
                                  update_status(wb_id, {"stock_added": True})
                                  stock_added = True
                              else:
-                                 logger.error(f"Stock error: {res.get('error')}")
-                                 update_status(wb_id, {"conveyor_log": f"Stock Error: {res.get('error')}"})
+                                 # Only add fake stock if 0
+                                 price = int(product.get('price_kzt', 0) or 0)
+                                 res = ms_stock.create_enter(ms_prod['meta'], 10, price)
+                                 if res.get('success'):
+                                     update_status(wb_id, {"stock_added": True})
+                                     stock_added = True
+                                 else:
+                                     logger.error(f"Stock error: {res.get('error')}")
+                                     update_status(wb_id, {"conveyor_log": f"Stock Error: {res.get('error')}"})
                         else:
                             logger.error("Product not found in MS for stocking")
                             pass

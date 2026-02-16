@@ -216,8 +216,33 @@ def create_product(name, article, price, image_urls=None):
                 return {"error": f"Error updating product: {resp.text}"}
         
         # --- OPRIMODOVANIE (ENTER) ---
-        store_meta = get_or_create_store("Склад ВБ")
-        enter_id = create_enter(product_meta, store_meta, price)
+        # --- OPRIMODOVANIE (ENTER) ---
+        # Check stock first using shared logic if possible, but here we can check locally
+        # Reuse get_total_stock logic (inline here to avoid dependency issues if not shared lib)
+        total_stock = 0
+        try:
+             stock_url = f"{BASE_URL}/entity/assortment?filter=productid={ms_product_id}"
+             stock_resp = requests.get(stock_url, headers=HEADERS)
+             if stock_resp.status_code == 200:
+                 rows = stock_resp.json().get('rows', [])
+                 for row in rows:
+                     total_stock += row.get('stock', 0)
+        except:
+             pass
+
+        print(f"DEBUG: Current total stock for {ms_product_id} is {total_stock}")
+
+        enter_id = None
+        store_name = "Склад ВБ"
+        
+        if total_stock > 0:
+             print("Stock already exists. Skipping oprihodovanie.")
+             action += " (Stock already exists)"
+        else:
+             store_meta = get_or_create_store(store_name)
+             enter_id = create_enter(product_meta, store_meta, price)
+             if enter_id:
+                 action += " + Stock Added"
         
         return {
             "success": True, 

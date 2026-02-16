@@ -21,10 +21,11 @@ export default function Home() {
     const cards = [
         {
             title: "Content Factory",
-            description: "Генерация контента (SEO, Фото) с помощью ИИ",
+            description: "Генерация контента (SEO, Фото, Видео) с помощью ИИ",
             href: "/content-factory",
             color: "linear-gradient(135deg, #f472b6 0%, #db2777 100%)", // Pink
-            icon: "🏭"
+            icon: "🏭",
+            isNew: true
         },
         {
             title: "Номенклатуры WB",
@@ -239,9 +240,25 @@ export default function Home() {
                                     marginBottom: '1rem',
                                     letterSpacing: '0.05em',
                                     fontFamily: 'var(--velveto-font-display)',
-                                    textTransform: 'uppercase'
+                                    textTransform: 'uppercase',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem'
                                 }}>
                                     {card.title}
+                                    {card.isNew && (
+                                        <span style={{
+                                            fontSize: '0.6rem',
+                                            padding: '2px 6px',
+                                            borderRadius: '4px',
+                                            background: card.color,
+                                            color: '#fff',
+                                            fontWeight: 'bold',
+                                            letterSpacing: '0.1em'
+                                        }}>
+                                            NEW
+                                        </span>
+                                    )}
                                 </h3>
 
                                 <p style={{ color: 'var(--velveto-text-secondary)', lineHeight: '1.6', fontSize: '1rem' }}>
