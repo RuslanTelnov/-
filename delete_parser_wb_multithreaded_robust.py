@@ -7,8 +7,8 @@ from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 from dotenv import load_dotenv
 
-# Load env from the velveto-app directory
-env_path = os.path.join(os.getcwd(), "temp_tlnv_parser", "velveto-app", ".env.local")
+# Load env from the root directory
+env_path = os.path.join(os.getcwd(), ".env")
 load_dotenv(env_path)
 
 LOGIN = os.getenv("MOYSKLAD_LOGIN")
