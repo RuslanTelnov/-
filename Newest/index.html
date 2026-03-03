@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEWEST | Стильная защита и аксессуары</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Cinematic Background Noise -->
+  <div class="noise-overlay"></div>
+
+  <!-- Infinite Marquee Text Background -->
+  <div class="marquee-container">
+    <div class="marquee-content">NEWEST &bull; SMART HOME &bull; ПРЕМИАЛЬНАЯ ЗАЩИТА &bull; NEWEST &bull; SMART HOME
+      &bull; ПРЕМИАЛЬНАЯ ЗАЩИТА &bull; </div>
+  </div>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <svg viewBox="166 142 127 126" xmlns="http://www.w3.org/2000/svg" style="height: 40px; margin-bottom: 20px;">
+          <path fill="#82AADD"
+            d="M 187.72 267.96 L 245.5 267.96 C 257.5 267.96 267.23 258.19 267.23 246.15 L 267.23 243.3 L 249.1 243.3 C 247.72 243.3 246.45 242.87 245.41 242.13 C 244.79 241.7 244.26 241.17 243.82 240.55 L 238.91 235.61 L 222.36 219.01 L 215.14 211.75 L 215.14 243.3 L 197.0 243.3 C 193.45 243.3 190.57 240.41 190.57 236.84 L 190.57 190.68 L 187.73 190.68 C 175.72 190.68 166 200.44 166 212.49 L 166 246.16 C 166 258.2 175.72 267.96 187.73 267.96 Z" />
+          <path fill="#E2552C"
+            d="M 271.01 142.01 L 213.22 142.01 C 201.22 142.01 191.5 151.76 191.5 163.81 L 191.5 166.66 L 209.63 166.66 C 211.17 166.66 212.58 167.2 213.69 168.1 C 214.03 168.38 214.35 168.7 214.63 169.05 L 236.46 190.95 L 243.59 198.12 L 243.59 166.66 L 261.73 166.66 C 265.28 166.66 268.16 169.55 268.16 173.11 L 268.16 219.28 L 271.01 219.28 C 283.01 219.28 292.73 209.51 292.73 197.47 L 292.73 163.8 C 292.73 151.76 283.01 142 271.01 142 Z" />
+        </svg>
+      </div>
+      <div class="preloader-loading">
+        <div class="preloader-line"></div>
+      </div>
+      <div class="preloader-text">0%</div>
+    </div>
+  </div>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Dynamic Glowing Aura behind 3D logo -->
+  <div class="glow-aura"></div>
+
+  <canvas id="webgl-canvas"></canvas>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <nav class="navbar">
+        <a href="#" class="logo">
+          <svg class="nav-logo-symbol" viewBox="166 142 127 126" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#82AADD"
+              d="M 187.726562 267.964844 L 245.507812 267.964844 C 257.507812 267.964844 267.238281 258.199219 267.238281 246.15625 L 267.238281 243.304688 L 249.101562 243.304688 C 247.726562 243.304688 246.453125 242.871094 245.410156 242.136719 C 244.796875 241.703125 244.261719 241.171875 243.828125 240.550781 L 238.914062 235.617188 L 222.363281 219.007812 L 215.140625 211.757812 L 215.140625 243.304688 L 197.003906 243.304688 C 193.453125 243.304688 190.570312 240.414062 190.570312 236.847656 L 190.570312 190.6875 L 187.730469 190.6875 C 175.726562 190.6875 166 200.449219 166 212.492188 L 166 246.160156 C 166 258.203125 175.726562 267.964844 187.730469 267.964844 Z" />
+            <path fill="#E2552C"
+              d="M 271.015625 142.007812 L 213.226562 142.007812 C 201.226562 142.007812 191.503906 151.769531 191.503906 163.8125 L 191.503906 166.667969 L 209.636719 166.667969 C 211.171875 166.667969 212.585938 167.203125 213.691406 168.105469 C 214.039062 168.386719 214.355469 168.707031 214.636719 169.054688 L 236.460938 190.957031 L 243.597656 198.121094 L 243.597656 166.664062 L 261.734375 166.664062 C 265.285156 166.664062 268.167969 169.554688 268.167969 173.117188 L 268.167969 219.28125 L 271.011719 219.28125 C 283.011719 219.28125 292.738281 209.519531 292.738281 197.472656 L 292.738281 163.804688 C 292.738281 151.761719 283.011719 142 271.011719 142 Z" />
+          </svg>
+          <div class="nav-logo-text">
+            <span class="nav-logo-brand"><span style="color: #E2552C;">NEW</span><span
+                style="color: #19275D;">EST</span></span>
+            <span class="nav-logo-sub">SMART HOME</span>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="#about">О бренде</a>
+          <a href="#product">Преимущества</a>
+          <a href="#contacts">Связаться</a>
+        </div>
+        <button class="btn-primary-outline">Перейти в каталог</button>
+      </nav>
+
+      <section class="hero" id="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Стильная защита <br><span class="gradient-text">вашей техники</span></h1>
+          <p class="hero-subtitle">NEWEST — это эксклюзивные чехлы и аксессуары для бытовой техники, объединяющие
+            надежную защиту, долговечность и премиальную эстетику вашего дома.</p>
+          <div class="hero-actions">
+            <button class="btn-primary">Смотреть продукцию</button>
+            <button class="btn-secondary">Узнать больше</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="section-content">
+          <div class="about-header">
+            <h2 class="section-title">Продлеваем <br><span class="gradient-text">Жизнь</span> Устройствам</h2>
+            <p class="section-text">Мы создаем не просто чехлы, а архитектуру защиты. Минимализм, прочность и
+              безупречная эргономика для любого современного интерьера.</p>
+          </div>
+
+          <div class="grid-layout">
+            <div class="premium-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h3>Абсолютная защита</h3>
+              <p>Износостойкие технологичные материалы, надежно закрывающие от пыли, влаги и царапин.</p>
+            </div>
+            <div class="premium-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </div>
+              <h3>Эстетика дома</h3>
+              <p>Практичность формы, подчеркивающая элегантность пространства.</p>
+            </div>
+            <div class="premium-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+              </div>
+              <h3>Безупречная эргономика</h3>
+              <p>Идеальная посадка по габаритам устройства для легкого повседневного использования.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="product" id="product">
+        <div class="section-content split-layout">
+          <div class="text-content">
+            <div class="badge">ИННОВАЦИИ</div>
+            <h2 class="section-title">Качество <br>в <span class="gradient-text">деталях</span></h2>
+            <p class="section-text mt-4">Мы используем только премиальный, мягкий и долговечный силикон. Наши чехлы
+              надежно защищают вашу технику от случайных падений, пыли и влаги, сохраняя её первозданный вид на долгие
+              годы.</p>
+            <ul class="benefits-list mt-8">
+              <li>Высококачественный ударопрочный силикон</li>
+              <li>Приятное на ощупь покрытие, которое легко мыть</li>
+              <li>Идеальное облегание устройства без зазоров</li>
+            </ul>
+            <button class="btn-primary mt-8">Выбрать чехол</button>
+          </div>
+          <div class="visual-content"></div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="contacts">
+        <div class="minimal-panel">
+          <h2 class="cta-title">Ваша техника<br>достойна лучшего</h2>
+          <form class="cta-form">
+            <div class="input-group">
+              <input type="email" placeholder="Ваш Email или Телефон" class="clean-input" required>
+              <button class="btn-primary">Запросить</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer id="footer">
+        <div class="footer-content">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <div class="logo">
+                <svg class="nav-logo-symbol" viewBox="166 142 127 126" xmlns="http://www.w3.org/2000/svg"
+                  style="height: 24px;">
+                  <path fill="#82AADD"
+                    d="M 187.726562 267.964844 L 245.507812 267.964844 C 257.507812 267.964844 267.238281 258.199219 267.238281 246.15625 L 267.238281 243.304688 L 249.101562 243.304688 C 247.726562 243.304688 246.453125 242.871094 245.410156 242.136719 C 244.796875 241.703125 244.261719 241.171875 243.828125 240.550781 L 238.914062 235.617188 L 222.363281 219.007812 L 215.140625 211.757812 L 215.140625 243.304688 L 197.003906 243.304688 C 193.453125 243.304688 190.570312 240.414062 190.570312 236.847656 L 190.570312 190.6875 L 187.730469 190.6875 C 175.726562 190.6875 166 200.449219 166 212.492188 L 166 246.160156 C 166 258.203125 175.726562 267.964844 187.730469 267.964844 Z" />
+                  <path fill="#E2552C"
+                    d="M 271.015625 142.007812 L 213.226562 142.007812 C 201.226562 142.007812 191.503906 151.769531 191.503906 163.8125 L 191.503906 166.667969 L 209.636719 166.667969 C 211.171875 166.667969 212.585938 167.203125 213.691406 168.105469 C 214.039062 168.386719 214.355469 168.707031 214.636719 169.054688 L 236.460938 190.957031 L 243.597656 198.121094 L 243.597656 166.664062 L 261.734375 166.664062 C 265.285156 166.664062 268.167969 169.554688 268.167969 173.117188 L 268.167969 219.28125 L 271.011719 219.28125 C 283.011719 219.28125 292.738281 209.519531 292.738281 197.472656 L 292.738281 163.804688 C 292.738281 151.761719 283.011719 142 271.011719 142 Z" />
+                </svg>
+                <div class="nav-logo-text">
+                  <span class="nav-logo-brand"><span style="color: #E2552C;">NEW</span><span
+                      style="color: #19275D;">EST</span></span>
+                </div>
+              </div>
+              <p>Защищаем технику, сохраняем эстетику.</p>
+            </div>
+            <div class="footer-links">
+              <a href="#">Политика конфиденциальности</a>
+              <a href="#">Каталог</a>
+              <a href="#">Служба поддержки</a>
+            </div>
+          </div>
+          <p class="copyright">© 2026 NEWEST. Все права защищены.</p>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
