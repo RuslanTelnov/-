@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "fal-3d": {
+      "source": "fal-ai-community/skills",
+      "sourceType": "github",
+      "computedHash": "36c5e33791d5b8189948ca4236d8cce31d6904154570678f1b9fd45e73d70a06"
+    }
+  }
+}
