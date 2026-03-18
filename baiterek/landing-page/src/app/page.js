@@ -184,31 +184,29 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* 3D Carousel */}
-        <div className="w-full py-20 md:py-28 border-b border-white/5 overflow-hidden">
-          <div className="carousel-container mx-auto">
-            <div className="carousel-track">
+        {/* 3D Orbit Carousel */}
+        <div className="w-full py-20 md:py-28 border-b border-white/5">
+          <div className="orbit-scene">
+            <div className="orbit-ring">
               {[
                 { src: "/assets/perfumes/astana_box.png", name: "ASTANA" },
                 { src: "/assets/perfumes/almaty_box.png", name: "ALMATY" },
                 { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU" },
                 { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN" },
-                { src: "/assets/perfumes/astana_box.png", name: "ASTANA" },
-                { src: "/assets/perfumes/almaty_box.png", name: "ALMATY" },
-                { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU" },
-                { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN" },
               ].map((item, i) => (
-                <div key={i} className="carousel-item">
-                  <div className="carousel-card">
-                    <Image
-                      src={item.src}
-                      alt={item.name}
-                      width={350}
-                      height={450}
-                      className="object-contain h-[45vh] w-auto"
-                    />
-                    <p className="text-center text-white font-black text-lg tracking-[0.15em] mt-4">{item.name}</p>
-                  </div>
+                <div
+                  key={i}
+                  className="orbit-item"
+                  style={{ '--i': i, '--total': 4 }}
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.name}
+                    width={300}
+                    height={400}
+                    className="object-contain h-[40vh] md:h-[50vh] w-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+                  />
+                  <p className="text-center text-white/80 font-bold text-sm tracking-[0.2em] mt-4">{item.name}</p>
                 </div>
               ))}
             </div>
