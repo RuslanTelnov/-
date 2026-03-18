@@ -49,18 +49,9 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
-        {/* Logo */}
-        <a
-          href="#hero"
-          onClick={(e) => scrollTo(e, "#hero")}
-          className="text-lg font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 select-none"
-        >
-          BAITEREK
-        </a>
-
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-center h-16 md:h-20">
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a
               key={link.href}

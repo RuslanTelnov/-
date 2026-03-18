@@ -78,21 +78,21 @@ export default function ProductSection({ product, index }) {
           className={`w-full md:w-1/2 flex flex-col px-6 ${isEven ? "md:pl-16 lg:pl-24 md:pr-12" : "md:pr-16 lg:pr-24 md:pl-12"}`}
         >
           {/* Number */}
-          <span className="text-gold-500/20 text-8xl md:text-9xl font-black leading-none mb-2">
+          <span className="text-gold-500/20 text-5xl md:text-6xl font-black leading-none mb-2">
             {String(index + 1).padStart(2, '0')}
           </span>
 
           {/* Title */}
-          <h2 className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-black tracking-tight text-white mb-4 [text-shadow:_0_4px_30px_rgba(0,0,0,0.8)]">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-4 [text-shadow:_0_4px_25px_rgba(0,0,0,0.7)]">
             {product.title}
           </h2>
 
           {/* Type */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-2 mb-7">
             {product.type.split('•').map((t, i) => (
               <span
                 key={i}
-                className="text-base font-semibold tracking-[0.15em] uppercase text-gold-400 bg-dark-900/50 backdrop-blur-sm border border-gold-500/20 px-6 py-2.5 rounded-full"
+                className="text-sm font-semibold tracking-[0.15em] uppercase text-gold-400 bg-dark-900/50 backdrop-blur-sm border border-gold-500/20 px-5 py-2 rounded-full"
               >
                 {t.trim()}
               </span>
@@ -100,10 +100,10 @@ export default function ProductSection({ product, index }) {
           </div>
 
           {/* Gold line */}
-          <div className="w-20 h-0.5 bg-gradient-to-r from-gold-500 to-transparent mb-8" />
+          <div className="w-20 h-0.5 bg-gradient-to-r from-gold-500 to-transparent mb-7" />
 
           {/* Description */}
-          <p className="text-2xl md:text-3xl text-white/80 leading-relaxed mb-10 font-light [text-shadow:_0_2px_10px_rgba(0,0,0,0.6)]">
+          <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-9 font-light [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]">
             {product.description}
           </p>
 
@@ -124,7 +124,7 @@ export default function ProductSection({ product, index }) {
                     <span className="text-sm font-bold tracking-[0.2em] uppercase text-gold-500/60">
                       {note.label}
                     </span>
-                    <p className="text-lg md:text-xl text-white/70 mt-1">
+                    <p className="text-base md:text-lg text-white/70 mt-1">
                       {product.notes[note.key]}
                     </p>
                   </div>

@@ -130,130 +130,191 @@ export default function Home() {
 
 
 
-      {/* ═══════════ BRAND STORY — CENTERED + CAROUSEL ═══════════ */}
-      <section id="about" className="relative z-10 bg-dark-900">
+      {/* ═══════════ BRAND STORY + CREATORS ═══════════ */}
+      <section id="about" className="relative z-10 bg-dark-900 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/brand_story_bg.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-15"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-900/80 to-dark-900" />
+        </div>
 
-        {/* Text — centered */}
-        <div className="w-full py-24 md:py-32 border-b border-white/5">
+        {/* Floating particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-gold-500/30 animate-float-particle"
+              style={{
+                left: `${5 + Math.floor(i * 4.7) % 90}%`,
+                top: `${3 + Math.floor(i * 7.3) % 90}%`,
+                animationDelay: `${(i * 0.7) % 8}s`,
+                animationDuration: `${7 + (i % 5)}s`,
+              }}
+            />
+          ))}
+        </div>
+        {/* Text */}
+        <div className="relative z-10 w-full flex items-center justify-center py-40 md:py-52 border-b border-white/5">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="max-w-4xl mx-auto px-6 md:px-16 text-center"
+            className="max-w-4xl mx-auto px-8 md:px-16 text-center"
           >
-            <motion.span
+            <motion.p
               variants={fadeUp}
               custom={0}
-              className="text-gold-500 text-xs font-bold tracking-[0.3em] uppercase mb-6 block"
+              className="text-base md:text-lg text-white/40 leading-relaxed mb-4"
             >
-              The Spirit of Kazakhstan
-            </motion.span>
+              Первая Казахстанская парфюмерная фабрика
+            </motion.p>
+
+            <motion.p
+              variants={fadeUp}
+              custom={0.08}
+              className="text-lg md:text-xl text-white/60 leading-relaxed mb-6"
+            >
+              ТОО «АРОМАТ» представляет премиальные ароматы бренда
+            </motion.p>
 
             <motion.h2
               variants={fadeUp}
-              custom={0.1}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.2] mb-8"
+              custom={0.15}
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-[0.15em] mb-10"
             >
-              Искусство{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
-                Парфюмерии
-              </span>
+              THE SPIRIT OF KAZAKHSTAN
             </motion.h2>
 
             <motion.div
               variants={fadeUp}
-              custom={0.15}
-              className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8"
+              custom={0.25}
+              className="w-20 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-10"
             />
 
             <motion.p
               variants={fadeUp}
-              custom={0.2}
-              className="text-base md:text-lg text-white/50 leading-relaxed mb-4 max-w-2xl mx-auto"
+              custom={0.3}
+              className="text-lg md:text-xl text-white/50 leading-relaxed mb-6 max-w-2xl mx-auto"
             >
-              Линейка ароматов производится в Казахстане, на фабрике полного цикла в г. Астана — единственном производстве такого масштаба на территории Центральной Азии.
+              Новая парфюмерная линейка, созданная в 2025 году, представляет собой ароматы, которые символизируют нашу страну, наш любимый Казахстан.
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              custom={0.3}
-              className="text-sm md:text-base text-gold-500/70 italic"
+              custom={0.4}
+              className="text-base md:text-lg text-gold-500/70 italic"
             >
-              Парфюмерные компоненты произведены во Франции
+              Произведено в Казахстане, г. Астана
             </motion.p>
           </motion.div>
         </div>
 
-        {/* Product Marquee */}
-        <div className="w-full py-16 md:py-24 border-b border-white/5 overflow-hidden">
-          <div className="animate-marquee-wrapper">
-            {[...Array(2)].map((_, setIdx) => (
-              <div key={setIdx} className="flex items-end gap-10 md:gap-16 px-5 md:px-8">
-                {[
-                  { src: "/assets/perfumes/astana_box.png", name: "ASTANA", type: "Восточный • Древесный" },
-                  { src: "/assets/perfumes/almaty_box.png", name: "ALMATY", type: "Фруктовый • Гурманский" },
-                  { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU", type: "Цветочный • Восточный" },
-                  { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN", type: "Восточный • Древесный" },
-                ].map((item, i) => (
-                  <div key={`${setIdx}-${i}`} className="flex-shrink-0 group cursor-pointer">
-                    <div className="relative overflow-hidden rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-gold-500/20 transition-all duration-500 p-6 md:p-8 w-[260px] md:w-[320px]">
-                      {/* Image */}
-                      <div className="flex justify-center mb-6">
-                        <Image
-                          src={item.src}
-                          alt={item.name}
-                          width={240}
-                          height={320}
-                          className="object-contain h-[35vh] md:h-[40vh] w-auto group-hover:scale-105 transition-transform duration-700 drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)]"
-                        />
-                      </div>
-                      {/* Info */}
-                      <div className="text-center">
-                        <h3 className="text-white font-black text-xl tracking-[0.1em] mb-1">{item.name}</h3>
-                        <p className="text-white/30 text-xs tracking-[0.1em] uppercase">{item.type}</p>
-                      </div>
-                      {/* Hover glow */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-gold-500/[0.05] to-transparent rounded-2xl pointer-events-none" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats — full width grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="relative z-10 w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 border-b border-white/5"
-        >
-          {[
-            { value: "4", label: "Аромата" },
-            { value: "100%", label: "Сделано в РК" },
-            { value: "FR", label: "Компоненты" },
-            { value: "2025", label: "Год запуска" },
-            { value: "EDP", label: "Концентрация" },
-            { value: "50", label: "мл объём" },
-            { value: "1", label: "Фабрика в ЦА" },
-            { value: "∞", label: "Вдохновение" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
+        {/* Creators */}
+        <div className="relative z-10 w-full py-36 md:py-48 border-b border-white/5">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-7xl mx-auto px-8 md:px-16"
+          >
+            <motion.h3
               variants={fadeUp}
-              custom={i * 0.08}
-              className="py-20 md:py-28 text-center border-r border-b md:border-b-0 border-white/5 last:border-r-0 hover:bg-white/[0.02] transition-colors duration-500 group"
+              custom={0}
+              className="text-center text-2xl md:text-3xl font-light text-white mb-4"
             >
-              <div className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gold-300 to-gold-600 mb-3">
-                {stat.value}
-              </div>
-              <div className="text-[0.65rem] md:text-xs text-white/35 uppercase tracking-[0.2em] font-medium group-hover:text-white/50 transition-colors duration-500">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              Создатели{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 font-bold">
+                ароматов
+              </span>
+            </motion.h3>
+
+            <motion.div
+              variants={fadeUp}
+              custom={0.1}
+              className="w-12 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-16"
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 max-w-6xl mx-auto">
+              {[
+                {
+                  photo: "/assets/creators/quentin.jpg",
+                  name: "Квентин Биш",
+                  nameEn: "Quentin Bisch",
+                  role: "Создатель ASTANA",
+                  company: "Givaudan",
+                  desc: "Автор Fleur Narcotique Ex Nihilo, Angel Muse Mugler, Mandarina Corsica L'Artisan Parfumeur.",
+                  brands: "Zara, Gucci, Amouage, Kenzo, YSL, Chloé, Mugler, Penhaligon's, Carolina Herrera, Jean Paul Gaultier",
+                  count: "145",
+                },
+                {
+                  photo: "/assets/creators/ayse.jpg",
+                  name: "Айше Сиркеджиоглу",
+                  nameEn: "Ayşe Sirkecioğlu",
+                  role: "Создатель ALMATY",
+                  company: "EPS Fragrances",
+                  desc: "Работала с Superz., Soleil de Grâce, Max Volmer. Автор Patchouli Dream для Soleil de Grâce.",
+                  brands: "Superz., Soleil de Grâce, Max Volmer",
+                  count: "6",
+                },
+                {
+                  photo: "/assets/creators/gael.jpg",
+                  name: "Гаэль Монтеро",
+                  nameEn: "Gaël Montero",
+                  role: "Создатель ULYTAU и QARA ALTYN",
+                  company: "Givaudan",
+                  desc: "Работал с Zara, Attar Collection, Ex Nihilo, Memo, The Merchant of Venice, Genyum, Maison Crivelli.",
+                  brands: "Zara, Gucci, Amouage, Kenzo, YSL, Chloé, Van Cleef & Arpels, Rabanne, Loewe, Parfums de Marly",
+                  count: "145",
+                },
+              ].map((creator, i) => (
+                <motion.div
+                  key={creator.nameEn}
+                  variants={fadeUp}
+                  custom={i * 0.15 + 0.15}
+                  className="text-center group hover:-translate-y-4 transition-transform duration-500"
+                >
+                  {/* Photo */}
+                  <div className="w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-2 border-gold-500/15 group-hover:border-gold-500/50 transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]">
+                    <Image
+                      src={creator.photo}
+                      alt={creator.nameEn}
+                      width={400}
+                      height={400}
+                      className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
+                    />
+                  </div>
+
+                  {/* Name */}
+                  <h4 className="text-xl font-bold text-white mb-1">{creator.name}</h4>
+                  <p className="text-gold-500 text-sm font-medium mb-2">{creator.nameEn}</p>
+
+                  {/* Role badge */}
+                  <p className="text-gold-500/80 text-xs tracking-[0.15em] uppercase mb-2 font-semibold">{creator.role}</p>
+                  <p className="text-white/30 text-xs mb-6">{creator.company} · {creator.count} ароматов</p>
+
+                  {/* Divider */}
+                  <div className="w-10 h-px bg-gold-500/20 mx-auto mb-6" />
+
+                  {/* Description */}
+                  <p className="text-sm text-white/45 leading-relaxed mb-5 max-w-xs mx-auto">
+                    {creator.desc}
+                  </p>
+
+                  {/* Brands */}
+                  <p className="text-xs text-white/25 leading-relaxed max-w-xs mx-auto">
+                    {creator.brands}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ═══════════ PRODUCT SHOWCASE ═══════════ */}

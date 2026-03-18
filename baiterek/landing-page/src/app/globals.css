@@ -166,6 +166,60 @@ body {
   animation: marquee 25s linear infinite;
 }
 
+/* 3D Orbit */
+.orbit-3d-scene {
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.orbit-3d-ring {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: orbit3dSpin 30s linear infinite;
+  margin-left: auto;
+  margin-right: -100px;
+}
+
+.orbit-3d-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -140px;
+  margin-top: -200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotateY(var(--angle)) translateZ(380px);
+}
+
+@keyframes orbit3dSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+@media (max-width: 768px) {
+  .orbit-3d-ring {
+    width: 300px;
+    height: 300px;
+  }
+  .orbit-3d-item {
+    margin-left: -80px;
+    margin-top: -100px;
+    transform: rotateY(var(--angle)) translateZ(180px);
+  }
+  .orbit-3d-scene {
+    min-height: 50vh;
+  }
+}
+
 
 
 /* Line clamp utilities */
