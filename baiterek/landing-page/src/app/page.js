@@ -184,32 +184,41 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* 3D Orbit Carousel */}
-        <div className="w-full py-20 md:py-28 border-b border-white/5">
-          <div className="orbit-scene">
-            <div className="orbit-ring">
-              {[
-                { src: "/assets/perfumes/astana_box.png", name: "ASTANA" },
-                { src: "/assets/perfumes/almaty_box.png", name: "ALMATY" },
-                { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU" },
-                { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="orbit-item"
-                  style={{ '--i': i, '--total': 4 }}
-                >
-                  <Image
-                    src={item.src}
-                    alt={item.name}
-                    width={300}
-                    height={400}
-                    className="object-contain h-[40vh] md:h-[50vh] w-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
-                  />
-                  <p className="text-center text-white/80 font-bold text-sm tracking-[0.2em] mt-4">{item.name}</p>
-                </div>
-              ))}
-            </div>
+        {/* Product Marquee */}
+        <div className="w-full py-16 md:py-24 border-b border-white/5 overflow-hidden">
+          <div className="animate-marquee-wrapper">
+            {[...Array(2)].map((_, setIdx) => (
+              <div key={setIdx} className="flex items-end gap-10 md:gap-16 px-5 md:px-8">
+                {[
+                  { src: "/assets/perfumes/astana_box.png", name: "ASTANA", type: "Восточный • Древесный" },
+                  { src: "/assets/perfumes/almaty_box.png", name: "ALMATY", type: "Фруктовый • Гурманский" },
+                  { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU", type: "Цветочный • Восточный" },
+                  { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN", type: "Восточный • Древесный" },
+                ].map((item, i) => (
+                  <div key={`${setIdx}-${i}`} className="flex-shrink-0 group cursor-pointer">
+                    <div className="relative overflow-hidden rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-gold-500/20 transition-all duration-500 p-6 md:p-8 w-[260px] md:w-[320px]">
+                      {/* Image */}
+                      <div className="flex justify-center mb-6">
+                        <Image
+                          src={item.src}
+                          alt={item.name}
+                          width={240}
+                          height={320}
+                          className="object-contain h-[35vh] md:h-[40vh] w-auto group-hover:scale-105 transition-transform duration-700 drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)]"
+                        />
+                      </div>
+                      {/* Info */}
+                      <div className="text-center">
+                        <h3 className="text-white font-black text-xl tracking-[0.1em] mb-1">{item.name}</h3>
+                        <p className="text-white/30 text-xs tracking-[0.1em] uppercase">{item.type}</p>
+                      </div>
+                      {/* Hover glow */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-gold-500/[0.05] to-transparent rounded-2xl pointer-events-none" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
 

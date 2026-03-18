@@ -166,62 +166,7 @@ body {
   animation: marquee 25s linear infinite;
 }
 
-/* 3D Orbit Carousel */
-.orbit-scene {
-  perspective: 1200px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-}
 
-.orbit-ring {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  transform-style: preserve-3d;
-  animation: orbitSpin 20s linear infinite;
-}
-
-.orbit-item {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform:
-    translate(-50%, -50%)
-    rotateY(calc(360deg / var(--total) * var(--i)))
-    translateZ(400px)
-    rotateY(calc(-360deg / var(--total) * var(--i)));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: orbitCounterSpin 20s linear infinite;
-  animation-delay: calc(var(--i) * -5s);
-}
-
-@keyframes orbitSpin {
-  0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
-}
-
-@keyframes orbitCounterSpin {
-  0% { opacity: 0.4; }
-  25% { opacity: 1; }
-  50% { opacity: 0.4; }
-  75% { opacity: 1; }
-  100% { opacity: 0.4; }
-}
-
-@media (max-width: 768px) {
-  .orbit-item {
-    transform:
-      translate(-50%, -50%)
-      rotateY(calc(360deg / var(--total) * var(--i)))
-      translateZ(250px)
-      rotateY(calc(-360deg / var(--total) * var(--i)));
-  }
-}
 
 /* Line clamp utilities */
 .line-clamp-3 {
