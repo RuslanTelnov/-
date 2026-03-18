@@ -60,9 +60,9 @@ export default function ProductSection({ product, index }) {
             <Image
               src={product.productImage}
               alt={product.title}
-              width={650}
-              height={850}
-              className={`object-contain relative z-10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_30px_80px_rgba(212,175,55,0.25)] transition-all duration-700 max-h-[80vh] ${index % 2 === 0 ? '-scale-x-100' : ''}`}
+              width={800}
+              height={1000}
+              className={`object-contain relative z-10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_30px_80px_rgba(212,175,55,0.25)] transition-all duration-700 max-h-[85vh] ${index % 2 === 0 ? '-scale-x-100' : ''}`}
             />
           </motion.div>
 
