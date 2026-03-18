@@ -25,7 +25,7 @@ const products = [
       base: "Ветивер, ваниль",
     },
     bgImage: "/assets/generated/bg_astana.png",
-    productImage: "/assets/perfumes/4870236881454 Astana (1).png",
+    productImage: "/assets/perfumes/astana_box.png",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-astana-parfjumernaja-voda-edp-100-ml-uniseks-141140289/?m=30353973&ms=true",
   },
   {
@@ -40,7 +40,7 @@ const products = [
       base: "Пачули, сандал, ваниль, амбра, мускус",
     },
     bgImage: "/assets/generated/bg_almaty.png",
-    productImage: "/assets/perfumes/4870236881461 Almaty (1).png",
+    productImage: "/assets/perfumes/almaty_box.png",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-almaty-parfjumernaja-voda-edp-100-ml-uniseks-141211866/?m=30353973&ms=true",
   },
   {
@@ -55,7 +55,7 @@ const products = [
       base: "Пачули, ваниль, кожа, амбра",
     },
     bgImage: "/assets/generated/bg_ulytau.png",
-    productImage: "/assets/perfumes/4870236881478 Ulytau (1).png",
+    productImage: "/assets/perfumes/ulytau_box.png",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-ulytau-parfjumernaja-voda-edp-100-ml-uniseks-141211835/?m=30353973&ms=true",
   },
   {
@@ -70,7 +70,7 @@ const products = [
       base: "Ваниль, дуб",
     },
     bgImage: "/assets/generated/bg_qara_altyn.png",
-    productImage: "/assets/perfumes/4870236881485 qara altyn (1).png",
+    productImage: "/assets/perfumes/qara_altyn_box.png",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-qara-altyn-parfjumernaja-voda-edp-100-ml-uniseks-141211823/?m=30353973&ms=true",
   },
 ];
@@ -325,92 +325,91 @@ export default function Home() {
       </section>
 
       {/* ═══════════ FOOTER ═══════════ */}
-      <footer id="contacts" className="relative z-10 bg-dark-950">
-        {/* Main footer content */}
-        <div className="w-full border-t border-gold-500/10">
-          <div className="max-w-7xl mx-auto px-6 md:px-16">
-            {/* Top row — Logo + navigation */}
-            <div className="py-20 md:py-24 flex flex-col md:flex-row gap-16 md:gap-0">
-              {/* Brand */}
-              <div className="md:w-1/3">
-                <h2 className="text-4xl md:text-5xl font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 mb-4">
-                  BAITEREK
-                </h2>
-                <p className="text-sm tracking-[0.3em] uppercase text-white/25 mb-6">
-                  The Spirit of Kazakhstan
-                </p>
-                <div className="w-16 h-0.5 bg-gold-500/30 mb-6" />
-                <p className="text-base text-white/30 leading-relaxed max-w-sm">
-                  Парфюмерная линейка, созданная в 2025 году. Символ нашей страны, нашего любимого Казахстана.
-                </p>
-              </div>
+      <footer id="contacts" className="relative z-10 bg-dark-950 border-t border-gold-500/10">
+        <div className="max-w-[1600px] mx-auto px-10 md:px-24">
 
-              {/* Columns */}
-              <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-3 gap-12 md:pl-20">
-                {/* Production */}
-                <div>
-                  <h5 className="text-white/70 font-bold uppercase tracking-[0.2em] text-sm mb-6">
-                    Производство
-                  </h5>
-                  <ul className="space-y-3">
-                    <li className="text-white/35 text-base">ТОО «Аромат»</li>
-                    <li className="text-white/35 text-base">г. Астана, Казахстан</li>
-                    <li className="text-white/35 text-base">ул. Актекше, здание 4</li>
-                    <li className="text-gold-500/50 text-base mt-4">Фабрика полного цикла</li>
-                    <li className="text-gold-500/50 text-base">Единственная в Центральной Азии</li>
-                  </ul>
-                </div>
+          {/* Main content — 4 columns */}
+          <div className="py-28 md:py-36 grid grid-cols-1 md:grid-cols-4 gap-20 md:gap-20">
 
-                {/* Collection */}
-                <div>
-                  <h5 className="text-white/70 font-bold uppercase tracking-[0.2em] text-sm mb-6">
-                    Коллекция
-                  </h5>
-                  <ul className="space-y-3">
-                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Astana</li>
-                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Almaty</li>
-                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Ulytau</li>
-                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Qara Altyn</li>
-                  </ul>
-                </div>
+            {/* Brand */}
+            <div className="md:col-span-1">
+              <h2 className="text-3xl md:text-4xl font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-gold-300 to-gold-600 mb-3">
+                BAITEREK
+              </h2>
+              <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">
+                The Spirit of Kazakhstan
+              </p>
+              <div className="w-12 h-0.5 bg-gold-500/30 mb-8" />
+              <p className="text-sm text-white/30 leading-loose">
+                Парфюмерная линейка, созданная в 2025 году.
+              </p>
+              <p className="text-sm text-white/30 leading-loose mt-2">
+                Символ нашей страны, нашего любимого Казахстана.
+              </p>
+            </div>
 
-                {/* Contact */}
-                <div>
-                  <h5 className="text-white/70 font-bold uppercase tracking-[0.2em] text-sm mb-6">
-                    Контакты
-                  </h5>
-                  <ul className="space-y-3">
-                    <li>
-                      <a
-                        href="https://thespiritofkazakhstan.kz"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gold-500/60 hover:text-gold-400 transition-colors duration-300 text-base"
-                      >
-                        thespiritofkazakhstan.kz
-                      </a>
-                    </li>
-                    <li className="text-white/35 text-base mt-6">Компоненты из Франции</li>
-                    <li className="text-white/35 text-base">Концентрация: EDP</li>
-                    <li className="text-white/35 text-base">Объём: 50 мл</li>
-                  </ul>
-                </div>
-              </div>
+            {/* Production */}
+            <div>
+              <h5 className="text-white/60 font-bold uppercase tracking-[0.25em] text-xs mb-8">
+                Производство
+              </h5>
+              <ul className="space-y-4">
+                <li className="text-white/35 text-sm leading-relaxed">ТОО «Аромат»</li>
+                <li className="text-white/35 text-sm leading-relaxed">г. Астана, Казахстан</li>
+                <li className="text-white/35 text-sm leading-relaxed">ул. Актекше, здание 4</li>
+                <li className="text-gold-500/50 text-sm leading-relaxed pt-4 border-t border-white/5">Фабрика полного цикла</li>
+                <li className="text-gold-500/50 text-sm leading-relaxed">Единственная в Центральной Азии</li>
+              </ul>
+            </div>
+
+            {/* Collection */}
+            <div>
+              <h5 className="text-white/60 font-bold uppercase tracking-[0.25em] text-xs mb-8">
+                Коллекция
+              </h5>
+              <ul className="space-y-4">
+                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Astana</li>
+                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Almaty</li>
+                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Ulytau</li>
+                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Qara Altyn</li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h5 className="text-white/60 font-bold uppercase tracking-[0.25em] text-xs mb-8">
+                Контакты
+              </h5>
+              <ul className="space-y-4">
+                <li>
+                  <a
+                    href="https://thespiritofkazakhstan.kz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold-500/70 hover:text-gold-400 transition-colors duration-300 text-sm"
+                  >
+                    thespiritofkazakhstan.kz
+                  </a>
+                </li>
+                <li className="text-white/35 text-sm leading-relaxed pt-4 border-t border-white/5">Компоненты из Франции</li>
+                <li className="text-white/35 text-sm leading-relaxed">Концентрация: EDP</li>
+                <li className="text-white/35 text-sm leading-relaxed">Объём: 50 мл</li>
+              </ul>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-6 md:px-16 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/20 text-sm tracking-wider">
+          <div className="max-w-[1600px] mx-auto px-10 md:px-24 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-white/20 text-xs tracking-[0.15em]">
               © {new Date().getFullYear()} BAITEREK. Все права защищены.
             </p>
             <button
               onClick={() => document.querySelector('#hero')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-white/25 hover:text-gold-500 transition-colors duration-300 text-sm uppercase tracking-[0.2em] flex items-center gap-3"
+              className="text-white/25 hover:text-gold-500 transition-colors duration-300 text-xs uppercase tracking-[0.2em] flex items-center gap-2"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
               Наверх
