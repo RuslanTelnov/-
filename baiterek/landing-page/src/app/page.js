@@ -134,46 +134,29 @@ export default function Home() {
       <section id="about" className="relative z-10">
         {/* Scrolling photo marquee background */}
         <div className="absolute inset-0 flex items-center overflow-hidden opacity-40 pointer-events-none">
-          <div className="animate-marquee flex gap-8 items-center whitespace-nowrap">
-            {[
-              "/assets/perfumes/4870236881454 Astana (1).png",
-              "/assets/perfumes/4870236881461 Almaty (1).png",
-              "/assets/perfumes/4870236881478 Ulytau (1).png",
-              "/assets/perfumes/4870236881485 qara altyn (1).png",
-              "/assets/perfumes/4870236881454 Astana (3).png",
-              "/assets/perfumes/4870236881461 Almaty (3).png",
-              "/assets/perfumes/4870236881478 Ulytau (3).png",
-              "/assets/perfumes/4870236881485 qara altyn (3).png",
-            ].map((src, i) => (
-              <Image
-                key={i}
-                src={src}
-                alt="Baiterek perfume"
-                width={300}
-                height={400}
-                className="object-contain h-[50vh] w-auto flex-shrink-0"
-              />
-            ))}
-          </div>
-          <div className="animate-marquee flex gap-8 items-center whitespace-nowrap" aria-hidden="true">
-            {[
-              "/assets/perfumes/4870236881454 Astana (1).png",
-              "/assets/perfumes/4870236881461 Almaty (1).png",
-              "/assets/perfumes/4870236881478 Ulytau (1).png",
-              "/assets/perfumes/4870236881485 qara altyn (1).png",
-              "/assets/perfumes/4870236881454 Astana (3).png",
-              "/assets/perfumes/4870236881461 Almaty (3).png",
-              "/assets/perfumes/4870236881478 Ulytau (3).png",
-              "/assets/perfumes/4870236881485 qara altyn (3).png",
-            ].map((src, i) => (
-              <Image
-                key={`dup-${i}`}
-                src={src}
-                alt="Baiterek perfume"
-                width={300}
-                height={400}
-                className="object-contain h-[50vh] w-auto flex-shrink-0"
-              />
+          <div className="animate-marquee-wrapper">
+            {[...Array(2)].map((_, setIdx) => (
+              <div key={setIdx} className="flex gap-12 items-center px-6">
+                {[
+                  "/assets/perfumes/4870236881454 Astana (1).png",
+                  "/assets/perfumes/4870236881461 Almaty (1).png",
+                  "/assets/perfumes/4870236881478 Ulytau (1).png",
+                  "/assets/perfumes/4870236881485 qara altyn (1).png",
+                  "/assets/perfumes/4870236881454 Astana (3).png",
+                  "/assets/perfumes/4870236881461 Almaty (3).png",
+                  "/assets/perfumes/4870236881478 Ulytau (3).png",
+                  "/assets/perfumes/4870236881485 qara altyn (3).png",
+                ].map((src, i) => (
+                  <Image
+                    key={`${setIdx}-${i}`}
+                    src={src}
+                    alt="Baiterek perfume"
+                    width={300}
+                    height={400}
+                    className="object-contain h-[50vh] w-auto flex-shrink-0"
+                  />
+                ))}
+              </div>
             ))}
           </div>
         </div>
