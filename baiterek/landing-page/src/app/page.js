@@ -130,72 +130,88 @@ export default function Home() {
 
 
 
-      {/* ═══════════ BRAND STORY — FULL WIDTH ═══════════ */}
-      <section id="about" className="relative z-10">
-        {/* Scrolling photo marquee background */}
-        <div className="absolute inset-0 flex items-center overflow-hidden opacity-40 pointer-events-none">
-          <div className="animate-marquee-wrapper">
-            {[...Array(2)].map((_, setIdx) => (
-              <div key={setIdx} className="flex gap-12 items-center px-6">
-                {[
-                  "/assets/perfumes/4870236881454 Astana (1).png",
-                  "/assets/perfumes/4870236881461 Almaty (1).png",
-                  "/assets/perfumes/4870236881478 Ulytau (1).png",
-                  "/assets/perfumes/4870236881485 qara altyn (1).png",
-                  "/assets/perfumes/4870236881454 Astana (3).png",
-                  "/assets/perfumes/4870236881461 Almaty (3).png",
-                  "/assets/perfumes/4870236881478 Ulytau (3).png",
-                  "/assets/perfumes/4870236881485 qara altyn (3).png",
-                ].map((src, i) => (
-                  <Image
-                    key={`${setIdx}-${i}`}
-                    src={src}
-                    alt="Baiterek perfume"
-                    width={300}
-                    height={400}
-                    className="object-contain h-[50vh] w-auto flex-shrink-0"
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-dark-900 via-transparent to-dark-900" />
-        <div className="absolute inset-0 bg-dark-900/30" />
-        {/* Top section — title + description */}
-        <div className="relative z-10 w-full min-h-[70vh] flex items-center py-32 md:py-40 border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-6 md:px-16">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="flex flex-col md:flex-row items-start md:items-center gap-12 md:gap-20"
-            >
-              {/* Left — heading */}
-              <motion.div variants={fadeUp} custom={0} className="md:w-1/2">
-                <span className="text-gold-500 text-sm font-bold tracking-[0.3em] uppercase mb-6 block">
-                  The Spirit of Kazakhstan
-                </span>
-                <h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
-                  Искусство
-                  <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
-                    Парфюмерии
-                  </span>
-                </h2>
-              </motion.div>
+      {/* ═══════════ BRAND STORY — CENTERED + CAROUSEL ═══════════ */}
+      <section id="about" className="relative z-10 bg-dark-900">
 
-              {/* Right — text */}
-              <motion.div variants={fadeUp} custom={0.2} className="md:w-1/2">
-                <div className="w-16 h-0.5 bg-gold-500 mb-8" />
-                <p className="text-xl md:text-2xl text-white/60 leading-relaxed mb-6">
-                  Линейка ароматов производится в Казахстане, на фабрике полного цикла в г. Астана — единственном производстве такого масштаба на территории Центральной Азии.
-                </p>
-                <p className="text-lg text-gold-500/80 italic">
-                  Парфюмерные компоненты произведены во Франции
-                </p>
-              </motion.div>
-            </motion.div>
+        {/* Text — centered */}
+        <div className="w-full py-24 md:py-32 border-b border-white/5">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-4xl mx-auto px-6 md:px-16 text-center"
+          >
+            <motion.span
+              variants={fadeUp}
+              custom={0}
+              className="text-gold-500 text-xs font-bold tracking-[0.3em] uppercase mb-6 block"
+            >
+              The Spirit of Kazakhstan
+            </motion.span>
+
+            <motion.h2
+              variants={fadeUp}
+              custom={0.1}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.2] mb-8"
+            >
+              Искусство{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+                Парфюмерии
+              </span>
+            </motion.h2>
+
+            <motion.div
+              variants={fadeUp}
+              custom={0.15}
+              className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8"
+            />
+
+            <motion.p
+              variants={fadeUp}
+              custom={0.2}
+              className="text-base md:text-lg text-white/50 leading-relaxed mb-4 max-w-2xl mx-auto"
+            >
+              Линейка ароматов производится в Казахстане, на фабрике полного цикла в г. Астана — единственном производстве такого масштаба на территории Центральной Азии.
+            </motion.p>
+
+            <motion.p
+              variants={fadeUp}
+              custom={0.3}
+              className="text-sm md:text-base text-gold-500/70 italic"
+            >
+              Парфюмерные компоненты произведены во Франции
+            </motion.p>
+          </motion.div>
+        </div>
+
+        {/* 3D Carousel */}
+        <div className="w-full py-20 md:py-28 border-b border-white/5 overflow-hidden">
+          <div className="carousel-container mx-auto">
+            <div className="carousel-track">
+              {[
+                { src: "/assets/perfumes/astana_box.png", name: "ASTANA" },
+                { src: "/assets/perfumes/almaty_box.png", name: "ALMATY" },
+                { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU" },
+                { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN" },
+                { src: "/assets/perfumes/astana_box.png", name: "ASTANA" },
+                { src: "/assets/perfumes/almaty_box.png", name: "ALMATY" },
+                { src: "/assets/perfumes/ulytau_box.png", name: "ULYTAU" },
+                { src: "/assets/perfumes/qara_altyn_box.png", name: "QARA ALTYN" },
+              ].map((item, i) => (
+                <div key={i} className="carousel-item">
+                  <div className="carousel-card">
+                    <Image
+                      src={item.src}
+                      alt={item.name}
+                      width={350}
+                      height={450}
+                      className="object-contain h-[45vh] w-auto"
+                    />
+                    <p className="text-center text-white font-black text-lg tracking-[0.15em] mt-4">{item.name}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
