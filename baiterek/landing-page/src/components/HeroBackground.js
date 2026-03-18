@@ -150,14 +150,13 @@ function GlowOrb() {
 function Scene() {
   return (
     <>
-      <color attach="background" args={["#080808"]} />
+      {/* transparent bg — photo shows through */}
       <fog attach="fog" args={["#080808", 8, 25]} />
       <ambientLight intensity={0.03} />
       <pointLight position={[0, 2, 0]} color="#d4af37" intensity={2} distance={20} />
       <pointLight position={[3, -1, 2]} color="#b8860b" intensity={0.8} distance={15} />
       <pointLight position={[-3, 1, -2]} color="#f5d78e" intensity={0.5} distance={12} />
       <GoldenParticles />
-      <GlowOrb />
     </>
   );
 }
@@ -177,24 +176,22 @@ export default function HeroBackground() {
   }
 
   return (
-    <div className="h-full w-full" style={{ background: "#080808" }}>
+    <div className="h-full w-full">
       <Suspense
-        fallback={
-          <div className="h-full w-full" style={{ background: "#080808" }} />
-        }
+        fallback={<div className="h-full w-full" />}
       >
         <Canvas
           camera={{ position: [0, 0, 10], fov: 60, near: 0.1, far: 100 }}
           gl={{
             antialias: true,
-            alpha: false,
+            alpha: true,
             powerPreference: "high-performance",
             failIfMajorPerformanceCaveat: false,
           }}
           dpr={[1, 1.5]}
           style={{ width: "100%", height: "100%" }}
           onCreated={({ gl }) => {
-            gl.setClearColor("#080808");
+            gl.setClearColor("#000000", 0);
           }}
         >
           <Scene />

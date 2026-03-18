@@ -140,6 +140,26 @@ body {
   animation: borderGlow 3s ease-in-out infinite;
 }
 
+/* Floating gold particles */
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(-200px) translateX(30px); opacity: 0; }
+}
+.animate-float-particle {
+  animation: floatParticle 8s ease-in-out infinite;
+}
+
+/* Marquee scrolling */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
 /* Line clamp utilities */
 .line-clamp-3 {
   display: -webkit-box;

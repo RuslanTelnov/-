@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import ProductSection from "@/components/ProductSection";
 
@@ -25,6 +26,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_astana.png",
     productImage: "/assets/perfumes/4870236881454 Astana (1).png",
+    kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-astana-parfjumernaja-voda-edp-100-ml-uniseks-141140289/?m=30353973&ms=true",
   },
   {
     id: "almaty",
@@ -39,6 +41,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_almaty.png",
     productImage: "/assets/perfumes/4870236881461 Almaty (1).png",
+    kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-almaty-parfjumernaja-voda-edp-100-ml-uniseks-141211866/?m=30353973&ms=true",
   },
   {
     id: "ulytau",
@@ -53,6 +56,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_ulytau.png",
     productImage: "/assets/perfumes/4870236881478 Ulytau (1).png",
+    kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-ulytau-parfjumernaja-voda-edp-100-ml-uniseks-141211835/?m=30353973&ms=true",
   },
   {
     id: "qara-altyn",
@@ -67,6 +71,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_qara_altyn.png",
     productImage: "/assets/perfumes/4870236881485 qara altyn (1).png",
+    kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-qara-altyn-parfjumernaja-voda-edp-100-ml-uniseks-141211823/?m=30353973&ms=true",
   },
 ];
 
@@ -85,75 +90,32 @@ export default function Home() {
     <main className="relative bg-dark-900">
       {/* ═══════════ HERO ═══════════ */}
       <section id="hero" className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
-        {/* WebGL Background */}
+        {/* Hero Photo Background */}
         <div className="absolute inset-0 z-0">
+          <Image
+            src="/assets/hero_bottle.jpg"
+            alt="Baiterek perfume"
+            fill
+            priority
+            className="object-cover opacity-50"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900/60 via-dark-900/20 to-dark-900/80" />
+        </div>
+
+        {/* WebGL Particles overlay */}
+        <div className="absolute inset-0 z-[1]">
           <HeroBackground />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <motion.span
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-              className="inline-block text-gold-500/50 text-[0.6rem] sm:text-[0.7rem] font-semibold tracking-[0.4em] uppercase mb-4"
-            >
-              Парфюмерная коллекция
-            </motion.span>
 
-            <motion.h1
-              initial={{ letterSpacing: "0.5em", opacity: 0 }}
-              animate={{ letterSpacing: "0.15em", opacity: 1 }}
-              transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gold-300 via-gold-500 to-gold-700 glow-gold select-none"
-            >
-              BAITEREK
-            </motion.h1>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 1, ease: "easeOut" }}
-            className="mt-4 md:mt-6 text-sm sm:text-base md:text-lg tracking-[0.4em] uppercase text-white/60 font-light"
-          >
-            The Spirit of Kazakhstan
-          </motion.p>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-6 w-24 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent"
-          />
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.8, ease: "easeOut" }}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto"
-          >
-            <a href="#collection" onClick={(e) => { e.preventDefault(); document.querySelector('#collection')?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-gold">
-              Открыть коллекцию
-            </a>
-            <a href="#about" onClick={(e) => { e.preventDefault(); document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-gold-outline">
-              О бренде
-            </a>
-          </motion.div>
-        </div>
 
         {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 1 }}
-          className="absolute bottom-8 z-10 flex flex-col items-center gap-2"
+          className="absolute bottom-8 z-[2] flex flex-col items-center gap-2"
         >
           <span className="text-[0.6rem] uppercase tracking-[0.3em] text-white/30">
             Scroll
@@ -166,85 +128,126 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ═══════════ BRAND STORY ═══════════ */}
-      <section id="about" className="relative z-10 py-28 md:py-36 bg-dark-900">
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-center"
-          >
-            <motion.span
-              variants={fadeUp}
-              custom={0}
-              className="inline-block text-gold-500/70 text-[0.65rem] font-bold tracking-[0.35em] uppercase mb-4"
-            >
-              The Spirit of Kazakhstan
-            </motion.span>
 
-            <motion.h2
-              variants={fadeUp}
-              custom={0.1}
-              className="text-3xl sm:text-4xl md:text-5xl font-medium text-white mb-4"
-            >
-              Искусство Парфюмерии
-            </motion.h2>
 
-            <motion.div
-              variants={fadeUp}
-              custom={0.2}
-              className="gold-divider mx-auto my-8"
-            />
-
-            <motion.p
-              variants={fadeUp}
-              custom={0.3}
-              className="text-white/55 text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            >
-              Линейка ароматов производится в Казахстане, на фабрике полного
-              цикла в г. Астана — единственном производстве такого масштаба на
-              территории Центральной Азии.
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              custom={0.45}
-              className="mt-6 text-gold-500/80 text-sm md:text-base italic tracking-wide"
-            >
-              Парфюмерные компоненты произведены во Франции
-            </motion.p>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
-          >
+      {/* ═══════════ BRAND STORY — FULL WIDTH ═══════════ */}
+      <section id="about" className="relative z-10">
+        {/* Scrolling photo marquee background */}
+        <div className="absolute inset-0 flex items-center overflow-hidden opacity-40 pointer-events-none">
+          <div className="animate-marquee flex gap-8 items-center whitespace-nowrap">
             {[
-              { value: "4", label: "Уникальных аромата" },
-              { value: "100%", label: "Произведено в РК" },
-              { value: "FR", label: "Французские компоненты" },
-              { value: "2025", label: "Год основания" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                variants={fadeUp}
-                custom={i * 0.1 + 0.2}
-                className="glass-gold rounded-xl p-5 text-center"
-              >
-                <div className="text-2xl md:text-3xl font-black text-gold-500 mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-[0.7rem] text-white/40 uppercase tracking-widest">
-                  {stat.label}
-                </div>
-              </motion.div>
+              "/assets/perfumes/4870236881454 Astana (1).png",
+              "/assets/perfumes/4870236881461 Almaty (1).png",
+              "/assets/perfumes/4870236881478 Ulytau (1).png",
+              "/assets/perfumes/4870236881485 qara altyn (1).png",
+              "/assets/perfumes/4870236881454 Astana (3).png",
+              "/assets/perfumes/4870236881461 Almaty (3).png",
+              "/assets/perfumes/4870236881478 Ulytau (3).png",
+              "/assets/perfumes/4870236881485 qara altyn (3).png",
+            ].map((src, i) => (
+              <Image
+                key={i}
+                src={src}
+                alt="Baiterek perfume"
+                width={300}
+                height={400}
+                className="object-contain h-[50vh] w-auto flex-shrink-0"
+              />
             ))}
-          </motion.div>
+          </div>
+          <div className="animate-marquee flex gap-8 items-center whitespace-nowrap" aria-hidden="true">
+            {[
+              "/assets/perfumes/4870236881454 Astana (1).png",
+              "/assets/perfumes/4870236881461 Almaty (1).png",
+              "/assets/perfumes/4870236881478 Ulytau (1).png",
+              "/assets/perfumes/4870236881485 qara altyn (1).png",
+              "/assets/perfumes/4870236881454 Astana (3).png",
+              "/assets/perfumes/4870236881461 Almaty (3).png",
+              "/assets/perfumes/4870236881478 Ulytau (3).png",
+              "/assets/perfumes/4870236881485 qara altyn (3).png",
+            ].map((src, i) => (
+              <Image
+                key={`dup-${i}`}
+                src={src}
+                alt="Baiterek perfume"
+                width={300}
+                height={400}
+                className="object-contain h-[50vh] w-auto flex-shrink-0"
+              />
+            ))}
+          </div>
         </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-900 via-transparent to-dark-900" />
+        <div className="absolute inset-0 bg-dark-900/30" />
+        {/* Top section — title + description */}
+        <div className="relative z-10 w-full min-h-[70vh] flex items-center py-32 md:py-40 border-b border-white/5">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex flex-col md:flex-row items-start md:items-center gap-12 md:gap-20"
+            >
+              {/* Left — heading */}
+              <motion.div variants={fadeUp} custom={0} className="md:w-1/2">
+                <span className="text-gold-500 text-sm font-bold tracking-[0.3em] uppercase mb-6 block">
+                  The Spirit of Kazakhstan
+                </span>
+                <h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
+                  Искусство
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+                    Парфюмерии
+                  </span>
+                </h2>
+              </motion.div>
+
+              {/* Right — text */}
+              <motion.div variants={fadeUp} custom={0.2} className="md:w-1/2">
+                <div className="w-16 h-0.5 bg-gold-500 mb-8" />
+                <p className="text-xl md:text-2xl text-white/60 leading-relaxed mb-6">
+                  Линейка ароматов производится в Казахстане, на фабрике полного цикла в г. Астана — единственном производстве такого масштаба на территории Центральной Азии.
+                </p>
+                <p className="text-lg text-gold-500/80 italic">
+                  Парфюмерные компоненты произведены во Франции
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Stats — full width grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="relative z-10 w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 border-b border-white/5"
+        >
+          {[
+            { value: "4", label: "Аромата" },
+            { value: "100%", label: "Сделано в РК" },
+            { value: "FR", label: "Компоненты" },
+            { value: "2025", label: "Год запуска" },
+            { value: "EDP", label: "Концентрация" },
+            { value: "50", label: "мл объём" },
+            { value: "1", label: "Фабрика в ЦА" },
+            { value: "∞", label: "Вдохновение" },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              variants={fadeUp}
+              custom={i * 0.08}
+              className="py-20 md:py-28 text-center border-r border-b md:border-b-0 border-white/5 last:border-r-0 hover:bg-white/[0.02] transition-colors duration-500 group"
+            >
+              <div className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-gold-300 to-gold-600 mb-3">
+                {stat.value}
+              </div>
+              <div className="text-[0.65rem] md:text-xs text-white/35 uppercase tracking-[0.2em] font-medium group-hover:text-white/50 transition-colors duration-500">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
       {/* ═══════════ PRODUCT SHOWCASE ═══════════ */}
@@ -263,110 +266,154 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ═══════════ CTA SECTION ═══════════ */}
-      <section className="relative z-10 py-28 md:py-36 bg-dark-900 overflow-hidden">
-        {/* Gold divider top */}
-        <div className="flex items-center justify-center mb-16">
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
-          <div className="mx-3 w-2 h-2 rotate-45 border border-gold-500/40" />
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
+      {/* ═══════════ CTA SECTION — FULL SCREEN ═══════════ */}
+      <section className="relative z-10 h-screen flex items-center justify-center overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/boxes_bg.jpg"
+            alt="Baiterek collection boxes"
+            fill
+            className="object-cover opacity-40"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-900/50 to-dark-900" />
         </div>
-
-        {/* CSS gold particles */}
-        <div className="absolute inset-0 cta-particles" />
 
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="relative z-10 text-center max-w-2xl mx-auto px-6"
+          className="relative z-10 text-center px-6 max-w-5xl mx-auto"
         >
-          <motion.h2
+          <motion.span
             variants={fadeUp}
             custom={0}
-            className="text-3xl sm:text-4xl md:text-5xl font-medium text-white mb-4"
+            className="text-gold-500 text-sm md:text-base font-bold tracking-[0.4em] uppercase mb-8 block"
           >
-            Откройте свой аромат
+            Найдите свой аромат
+          </motion.span>
+
+          <motion.h2
+            variants={fadeUp}
+            custom={0.1}
+            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tight leading-[1.05] mb-8"
+          >
+            Откройте
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+              свой аромат
+            </span>
           </motion.h2>
+
+          <motion.div
+            variants={fadeUp}
+            custom={0.2}
+            className="w-20 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8"
+          />
+
           <motion.p
             variants={fadeUp}
-            custom={0.15}
-            className="text-white/50 text-base md:text-lg mb-10"
+            custom={0.25}
+            className="text-xl md:text-2xl text-white/40 mb-14 max-w-2xl mx-auto leading-relaxed"
           >
-            Каждый аромат — это путешествие
+            Каждый аромат — это путешествие. Четыре истории, вдохновлённые духом Казахстана.
           </motion.p>
-          <motion.a
-            variants={fadeUp}
-            custom={0.3}
-            href="https://thespiritofkazakhstan.kz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-gold inline-block"
-          >
-            Перейти в магазин
-          </motion.a>
+
+
         </motion.div>
       </section>
 
       {/* ═══════════ FOOTER ═══════════ */}
-      <footer id="contacts" className="relative z-10 bg-dark-950 border-t border-white/5 py-16">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
-            {/* Manufacturer */}
-            <div>
-              <h5 className="text-white/80 font-semibold uppercase tracking-[0.2em] text-xs mb-4">
-                Производитель
-              </h5>
-              <p className="text-white/35 leading-relaxed">
-                ТОО «Аромат»
-                <br />
-                Республика Казахстан, г. Астана
-                <br />
-                р-н Алматы, ул. Актекше, здание 4
-              </p>
-            </div>
+      <footer id="contacts" className="relative z-10 bg-dark-950">
+        {/* Main footer content */}
+        <div className="w-full border-t border-gold-500/10">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            {/* Top row — Logo + navigation */}
+            <div className="py-20 md:py-24 flex flex-col md:flex-row gap-16 md:gap-0">
+              {/* Brand */}
+              <div className="md:w-1/3">
+                <h2 className="text-4xl md:text-5xl font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 mb-4">
+                  BAITEREK
+                </h2>
+                <p className="text-sm tracking-[0.3em] uppercase text-white/25 mb-6">
+                  The Spirit of Kazakhstan
+                </p>
+                <div className="w-16 h-0.5 bg-gold-500/30 mb-6" />
+                <p className="text-base text-white/30 leading-relaxed max-w-sm">
+                  Парфюмерная линейка, созданная в 2025 году. Символ нашей страны, нашего любимого Казахстана.
+                </p>
+              </div>
 
-            {/* Brand center */}
-            <div className="text-center flex flex-col items-center">
-              <h2 className="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
-                BAITEREK
-              </h2>
-              <span className="text-[0.6rem] tracking-[0.3em] uppercase text-white/25 mt-1">
-                The Spirit of Kazakhstan
-              </span>
-              <div className="gold-divider mt-4 mb-3" />
-              <span className="text-white/20 text-xs">Est. 2025</span>
-            </div>
+              {/* Columns */}
+              <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-3 gap-12 md:pl-20">
+                {/* Production */}
+                <div>
+                  <h5 className="text-white/70 font-bold uppercase tracking-[0.2em] text-sm mb-6">
+                    Производство
+                  </h5>
+                  <ul className="space-y-3">
+                    <li className="text-white/35 text-base">ТОО «Аромат»</li>
+                    <li className="text-white/35 text-base">г. Астана, Казахстан</li>
+                    <li className="text-white/35 text-base">ул. Актекше, здание 4</li>
+                    <li className="text-gold-500/50 text-base mt-4">Фабрика полного цикла</li>
+                    <li className="text-gold-500/50 text-base">Единственная в Центральной Азии</li>
+                  </ul>
+                </div>
 
-            {/* Links */}
-            <div className="text-right md:text-right flex flex-col items-end">
-              <h5 className="text-white/80 font-semibold uppercase tracking-[0.2em] text-xs mb-4">
-                Контакты
-              </h5>
-              <a
-                href="https://thespiritofkazakhstan.kz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/35 hover:text-gold-500 transition-colors duration-300"
-              >
-                thespiritofkazakhstan.kz
-              </a>
-              <p className="text-white/25 text-xs mt-4 tracking-wider">
-                Следите за нами
-              </p>
+                {/* Collection */}
+                <div>
+                  <h5 className="text-white/70 font-bold uppercase tracking-[0.2em] text-sm mb-6">
+                    Коллекция
+                  </h5>
+                  <ul className="space-y-3">
+                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Astana</li>
+                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Almaty</li>
+                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Ulytau</li>
+                    <li className="text-white/35 text-base hover:text-gold-500 transition-colors cursor-pointer">Qara Altyn</li>
+                  </ul>
+                </div>
+
+                {/* Contact */}
+                <div>
+                  <h5 className="text-white/70 font-bold uppercase tracking-[0.2em] text-sm mb-6">
+                    Контакты
+                  </h5>
+                  <ul className="space-y-3">
+                    <li>
+                      <a
+                        href="https://thespiritofkazakhstan.kz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gold-500/60 hover:text-gold-400 transition-colors duration-300 text-base"
+                      >
+                        thespiritofkazakhstan.kz
+                      </a>
+                    </li>
+                    <li className="text-white/35 text-base mt-6">Компоненты из Франции</li>
+                    <li className="text-white/35 text-base">Концентрация: EDP</li>
+                    <li className="text-white/35 text-base">Объём: 50 мл</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="mt-12 pt-6 border-t border-white/5 flex items-center justify-between">
-            <p className="text-white/15 text-xs tracking-wider">
+        {/* Bottom bar */}
+        <div className="border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-6 md:px-16 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-white/20 text-sm tracking-wider">
               © {new Date().getFullYear()} BAITEREK. Все права защищены.
             </p>
             <button
               onClick={() => document.querySelector('#hero')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-white/25 hover:text-gold-500 transition-colors duration-300 text-xs uppercase tracking-[0.15em] flex items-center gap-2"
+              className="text-white/25 hover:text-gold-500 transition-colors duration-300 text-sm uppercase tracking-[0.2em] flex items-center gap-3"
             >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
               Наверх
-              <span className="inline-block w-px h-4 bg-gradient-to-t from-transparent to-gold-500/50" />
             </button>
           </div>
         </div>
