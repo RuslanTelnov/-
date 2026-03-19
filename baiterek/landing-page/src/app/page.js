@@ -302,7 +302,7 @@ export default function Home() {
                   className="text-center group hover:-translate-y-4 transition-transform duration-500"
                 >
                   {/* Photo */}
-                  <div className="w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-2 border-gold-500/15 group-hover:border-gold-500/50 transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]">
+                  <div className="w-28 h-28 mx-auto mb-8 rounded-lg overflow-hidden border border-gold-500/15 group-hover:border-gold-500/50 transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">
                     <Image
                       src={creator.photo}
                       alt={creator.nameEn}
