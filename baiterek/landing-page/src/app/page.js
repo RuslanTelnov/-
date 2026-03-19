@@ -24,7 +24,7 @@ const products = [
       mid: "Роза, древесные ноты, персик",
       base: "Ветивер, ваниль",
     },
-    bgImage: "/assets/generated/bg_astana.png",
+    bgImage: "/assets/generated/bg_astana_day.jpg",
     productImage: "/assets/perfumes/astana_box.png",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-astana-parfjumernaja-voda-edp-100-ml-uniseks-141140289/?m=30353973&ms=true",
   },
