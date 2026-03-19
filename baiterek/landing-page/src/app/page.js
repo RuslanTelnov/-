@@ -69,7 +69,7 @@ const products = [
       mid: "Гваяковое дерево, дым",
       base: "Ваниль, дуб",
     },
-    bgImage: "/assets/generated/bg_qara_altyn.png",
+    bgImage: "/assets/generated/bg_qara_altyn_new.jpg",
     productImage: "/assets/perfumes/qara_altyn_box.png",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-qara-altyn-parfjumernaja-voda-edp-100-ml-uniseks-141211823/?m=30353973&ms=true",
   },
