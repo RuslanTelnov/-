@@ -151,7 +151,7 @@ function Scene() {
   return (
     <>
       {/* transparent bg — photo shows through */}
-      <fog attach="fog" args={["#080808", 8, 25]} />
+      <fog attach="fog" args={["#111111", 8, 25]} />
       <ambientLight intensity={0.03} />
       <pointLight position={[0, 2, 0]} color="#d4af37" intensity={2} distance={20} />
       <pointLight position={[3, -1, 2]} color="#b8860b" intensity={0.8} distance={15} />
@@ -171,7 +171,7 @@ export default function HeroBackground() {
 
   if (!mounted) {
     return (
-      <div className="h-full w-full" style={{ background: "#080808" }} />
+      <div className="h-full w-full" style={{ background: "#111111" }} />
     );
   }
 
