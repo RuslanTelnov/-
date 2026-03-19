@@ -29,8 +29,8 @@ export default function ProductSection({ product, index }) {
           className="object-cover saturate-[1.1] transition-transform duration-[2s] ease-out group-hover:scale-105"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-dark-900/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/50 via-transparent to-dark-900/70" />
+        <div className="absolute inset-0 bg-dark-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/30 via-transparent to-dark-900/50" />
       </motion.div>
 
       {/* Content */}
