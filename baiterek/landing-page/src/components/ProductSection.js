@@ -75,7 +75,7 @@ export default function ProductSection({ product, index }) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className={`w-full md:w-1/2 flex flex-col px-10 ${isEven ? "md:pl-32 lg:pl-44 md:pr-16" : "md:pr-32 lg:pr-44 md:pl-16"}`}
+          className={`w-full md:w-1/2 flex flex-col px-12 ${isEven ? "md:pl-44 md:pr-16" : "md:pr-44 md:pl-16"}`}
         >
           {/* Number */}
           <span className="text-gold-500/20 text-5xl md:text-6xl font-black leading-none mb-2">
