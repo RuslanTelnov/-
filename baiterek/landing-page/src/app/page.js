@@ -272,22 +272,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="max-w-6xl mx-auto px-8 md:px-16"
           >
-            <motion.h3
-              variants={fadeUp}
-              custom={0}
-              className="text-center text-2xl md:text-3xl font-light text-white mb-4"
-            >
-              Создатели{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 font-bold">
-                ароматов
-              </span>
-            </motion.h3>
 
-            <motion.div
-              variants={fadeUp}
-              custom={0.1}
-              className="w-12 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-16"
-            />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
               {[
