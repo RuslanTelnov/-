@@ -143,7 +143,7 @@ export default function ProductSection({ product, index }) {
               href={product.kaspiUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-12 inline-flex items-center gap-3 px-8 py-3.5 border-2 border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-dark-900 font-bold text-sm uppercase tracking-[0.2em] rounded-full transition-all duration-500 group/buy"
+              className="mt-16 inline-flex items-center gap-4 px-14 py-4 border-2 border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-dark-900 font-bold text-sm uppercase tracking-[0.2em] rounded-full transition-all duration-500 group/buy"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />

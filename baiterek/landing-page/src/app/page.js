@@ -132,29 +132,51 @@ export default function Home() {
 
       {/* ═══════════ BRAND STORY + CREATORS ═══════════ */}
       <section id="about" className="relative z-10 bg-dark-900 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0">
-          <Image
-            src="/assets/brand_story_bg.jpg"
-            alt=""
-            fill
-            className="object-cover opacity-15"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-900/80 to-dark-900" />
+        {/* Background — 4 posters side by side */}
+        <div className="absolute inset-0 flex opacity-50">
+          {[
+            "/assets/posters/astana.jpg",
+            "/assets/posters/almaty.jpg",
+            "/assets/posters/ulytau.jpg",
+            "/assets/posters/qara_altyn.jpg",
+          ].map((src, i) => (
+            <div key={i} className="relative w-1/4 h-full">
+              <Image
+                src={src}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="25vw"
+              />
+            </div>
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900/40 via-dark-900/50 to-dark-900" />
+          <div className="absolute inset-0 bg-gradient-to-r from-dark-900/50 via-transparent to-dark-900/50" />
         </div>
 
-        {/* Floating particles */}
+        {/* Floating gold diamonds + dots */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {Array.from({ length: 20 }).map((_, i) => (
+          {Array.from({ length: 10 }).map((_, i) => (
             <div
-              key={i}
-              className="absolute w-1 h-1 rounded-full bg-gold-500/30 animate-float-particle"
+              key={`dot-${i}`}
+              className="absolute w-1.5 h-1.5 rounded-full bg-gold-500/20 animate-float-particle"
               style={{
-                left: `${5 + Math.floor(i * 4.7) % 90}%`,
-                top: `${3 + Math.floor(i * 7.3) % 90}%`,
-                animationDelay: `${(i * 0.7) % 8}s`,
-                animationDuration: `${7 + (i % 5)}s`,
+                left: `${8 + Math.floor(i * 9.1) % 84}%`,
+                top: `${5 + Math.floor(i * 11.3) % 85}%`,
+                animationDelay: `${(i * 1.2) % 10}s`,
+                animationDuration: `${8 + (i % 4)}s`,
+              }}
+            />
+          ))}
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={`diamond-${i}`}
+              className="absolute w-2 h-2 rotate-45 border border-gold-500/15 animate-float-particle"
+              style={{
+                left: `${12 + Math.floor(i * 15.7) % 76}%`,
+                top: `${10 + Math.floor(i * 13.9) % 75}%`,
+                animationDelay: `${(i * 1.8) % 10}s`,
+                animationDuration: `${10 + (i % 3)}s`,
               }}
             />
           ))}
@@ -216,12 +238,12 @@ export default function Home() {
         </div>
 
         {/* Creators */}
-        <div className="relative z-10 w-full py-36 md:py-48 border-b border-white/5">
+        <div className="relative z-10 w-full py-40 md:py-56 border-b border-white/5">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="max-w-7xl mx-auto px-8 md:px-16"
+            className="max-w-6xl mx-auto px-8 md:px-16"
           >
             <motion.h3
               variants={fadeUp}
@@ -240,7 +262,7 @@ export default function Home() {
               className="w-12 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-16"
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
               {[
                 {
                   photo: "/assets/creators/quentin.jpg",
