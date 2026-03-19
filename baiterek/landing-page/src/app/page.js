@@ -97,10 +97,10 @@ export default function Home() {
             alt="Baiterek perfume"
             fill
             priority
-            className="object-cover opacity-70"
+            className="object-cover opacity-90"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-dark-900/40 via-transparent to-dark-900/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900/20 via-transparent to-dark-900/40" />
         </div>
 
         {/* WebGL Particles overlay */}
