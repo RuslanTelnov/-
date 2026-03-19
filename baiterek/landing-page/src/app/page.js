@@ -85,11 +85,38 @@ const fadeUp = {
   }),
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BAITEREK",
+  "description": "Премиальная парфюмерная коллекция The Spirit of Kazakhstan",
+  "url": "https://landing-page-rus1.vercel.app",
+  "logo": "/assets/hero_bottle.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "BAITEREK - The Spirit of Kazakhstan"
+  },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "ТОО Аромат",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Астана",
+      "addressCountry": "KZ"
+    }
+  }
+};
+
 export default function Home() {
   return (
     <main className="relative bg-dark-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ═══════════ HERO ═══════════ */}
       <section id="hero" className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+        <h1 className="sr-only">BAITEREK — The Spirit of Kazakhstan | Премиальная парфюмерная коллекция</h1>
         {/* Hero Photo Background */}
         <div className="absolute inset-0 z-0">
           <Image
