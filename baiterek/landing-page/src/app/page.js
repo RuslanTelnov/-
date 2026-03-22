@@ -120,7 +120,7 @@ export default function Home() {
         {/* Hero Photo Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/hero_bottle.jpg"
+            src="/assets/hero_spirit.jpg"
             alt="Baiterek perfume"
             fill
             priority
