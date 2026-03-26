@@ -120,11 +120,11 @@ export default function Home() {
         {/* Hero Photo Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/hero_spirit.jpg"
+            src="/assets/hero_kz.jpg"
             alt="Baiterek perfume"
             fill
             priority
-            className="object-cover opacity-90"
+            className="object-cover object-center opacity-90"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-dark-900/20 via-transparent to-dark-900/40" />
@@ -254,14 +254,18 @@ export default function Home() {
               Новая парфюмерная линейка, созданная в 2025 году, представляет собой ароматы, которые символизируют нашу страну, наш любимый Казахстан.
             </motion.p>
 
-            <motion.p
-              variants={fadeUp}
-              custom={0.4}
-              className="text-base md:text-lg text-gold-500/70 italic"
-            >
-              Произведено в Казахстане, г. Астана
-            </motion.p>
           </motion.div>
+
+          {/* Bottom right corner */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="absolute bottom-8 right-10 md:right-16 text-sm text-gold-500/50 italic"
+          >
+            Произведено в Казахстане, г. Астана
+          </motion.p>
         </div>
 
         {/* Creators */}
@@ -270,11 +274,11 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="max-w-6xl mx-auto px-8 md:px-16"
+            className="w-full px-10 md:px-24 lg:px-32"
           >
 
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 justify-items-center">
               {[
                 {
                   photo: "/assets/creators/quentin.jpg",
