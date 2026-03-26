@@ -222,6 +222,162 @@ body {
 
 
 
+/* ═══ Perfume Slider — exact copy of original headphone slider ═══ */
+.ps-slider-main {
+  min-height: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.ps-backgrounds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: -1;
+}
+.ps-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+.ps-container {
+  position: relative;
+  left: 5%;
+  width: 45%;
+  padding-block: 100px;
+  max-width: 525px;
+  height: 100%;
+  z-index: 2;
+}
+.ps-content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.ps-subtitle {
+  color: #d4af37;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.ps-heading {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 50px;
+  margin-bottom: 40px;
+}
+.ps-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 35px;
+  margin-bottom: 28px;
+}
+.ps-type {
+  color: rgba(212, 175, 55, 0.5);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+/* images — exact same structure as original */
+.ps-images {
+  position: relative;
+  width: 55%;
+  height: 100%;
+  top: 0;
+}
+.ps-image {
+  position: absolute;
+  top: 0%;
+  left: 100%;
+  filter: blur(25px);
+  transform: translate(-50%, -50%) scale(0.3);
+  transition: opacity 3s;
+  object-fit: contain;
+  max-width: 800px;
+  max-height: 950px;
+  height: 100%;
+  min-height: 320px;
+  user-select: none;
+}
+.ps-image.next {
+  opacity: 1;
+  transition: 2s;
+  filter: blur(35px);
+  left: 100%;
+  top: 10%;
+  transform: translate(-50%, -50%) scale(0.3);
+}
+.ps-image.active {
+  opacity: 1;
+  transform: scale(1);
+  transition: 2s;
+  filter: blur(0px);
+  left: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.ps-image.previous {
+  opacity: 1;
+  transition: 2s;
+  filter: blur(25px);
+  left: 95%;
+  top: 90%;
+}
+.ps-image.inactive {
+  opacity: 0;
+  transition: 2s;
+  filter: blur(35px);
+  left: 100%;
+  top: 100%;
+  transform: translate(10%, 10%) scale(0.3);
+}
+
+@media screen and (max-width: 1199px) {
+  .ps-heading { font-size: 40px; line-height: 45px; margin-bottom: 30px; }
+  .ps-text { font-size: 17px; line-height: 28px; margin-bottom: 22px; }
+  .ps-container { left: 4%; padding-block: 80px; max-width: 475px; }
+  .ps-image { width: 550px; height: auto; aspect-ratio: 1/1.3; }
+}
+@media screen and (max-width: 991px) {
+  .ps-heading { font-size: 35px; line-height: 43px; margin-bottom: 22px; }
+  .ps-text { font-size: 16px; line-height: 26px; margin-bottom: 18px; }
+  .ps-container { left: 3%; padding-block: 70px; max-width: 405px; }
+  .ps-images { width: 50%; }
+  .ps-image { width: 420px; aspect-ratio: 1/1.3; }
+}
+@media screen and (max-width: 767px) {
+  .ps-slider-main { flex-direction: column; min-height: 900px; }
+  .ps-container { position: unset; padding-block: 70px; max-width: 540px; width: 100%; }
+  .ps-images { width: 100%; }
+  .ps-image { height: 380px; aspect-ratio: 1/1.3; width: auto; }
+  .ps-image.active { top: 45%; left: 20%; }
+}
+@media screen and (max-width: 575px) {
+  .ps-heading { font-size: 30px; line-height: 40px; margin-bottom: 20px; }
+  .ps-text { font-size: 15px; line-height: 24px; margin-bottom: 16px; }
+  .ps-container { padding: 50px 20px; max-width: 100%; }
+  .ps-image { height: 100px; }
+  .ps-image.active { top: 50%; left: 5%; }
+  .ps-image.previous { top: 100%; }
+}
+
 /* Line clamp utilities */
 .line-clamp-3 {
   display: -webkit-box;

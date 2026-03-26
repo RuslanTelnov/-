@@ -2,8 +2,10 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ProductSection from "@/components/ProductSection";
+import PerfumeSlider from "@/components/PerfumeSlider";
 
 const HeroBackground = dynamic(() => import("@/components/HeroBackground"), {
   ssr: false,
@@ -26,6 +28,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_astana_day.jpg",
     productImage: "/assets/perfumes/astana_box.png",
+    price: "115 000 ₸",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-astana-parfjumernaja-voda-edp-100-ml-uniseks-141140289/?m=30353973&ms=true",
   },
   {
@@ -41,6 +44,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_almaty.png",
     productImage: "/assets/perfumes/almaty_box.png",
+    price: "115 000 ₸",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-almaty-parfjumernaja-voda-edp-100-ml-uniseks-141211866/?m=30353973&ms=true",
   },
   {
@@ -56,6 +60,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_ulytau.png",
     productImage: "/assets/perfumes/ulytau_box.png",
+    price: "115 000 ₸",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-ulytau-parfjumernaja-voda-edp-100-ml-uniseks-141211835/?m=30353973&ms=true",
   },
   {
@@ -71,6 +76,7 @@ const products = [
     },
     bgImage: "/assets/generated/bg_qara_altyn_new.jpg",
     productImage: "/assets/perfumes/qara_altyn_box.png",
+    price: "115 000 ₸",
     kaspiUrl: "https://kaspi.kz/shop/p/the-spirit-of-kazakhstan-qara-altyn-parfjumernaja-voda-edp-100-ml-uniseks-141211823/?m=30353973&ms=true",
   },
 ];
@@ -107,6 +113,114 @@ const jsonLd = {
   }
 };
 
+const faqItems = [
+  {
+    q: "Какой объём флакона?",
+    a: "Все ароматы представлены в объёме 50 мл в концентрации Eau de Parfum (EDP).",
+  },
+  {
+    q: "Какая стойкость у ароматов?",
+    a: "Благодаря концентрации EDP, ароматы держатся 8-12 часов на коже и до 24 часов на одежде.",
+  },
+  {
+    q: "Где производятся ароматы?",
+    a: "Все ароматы производятся на фабрике полного цикла ТОО «Аромат» в г. Астана — единственном производстве такого масштаба в Центральной Азии.",
+  },
+  {
+    q: "Из чего сделаны ароматы?",
+    a: "Парфюмерные компоненты произведены во Франции лучшими парфюмерами домов Givaudan и EPS Fragrances.",
+  },
+  {
+    q: "Как заказать?",
+    a: "Вы можете приобрести ароматы на Kaspi.kz. Нажмите кнопку «Купить на Kaspi» на странице нужного аромата.",
+  },
+];
+
+function FaqSection() {
+  const [open, setOpen] = useState(null);
+
+  return (
+    <section className="relative z-10 bg-dark-900 py-24 md:py-32 overflow-hidden">
+      <div className="max-w-3xl mx-auto px-6 md:px-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
+        >
+          <motion.h2
+            variants={fadeUp}
+            custom={0}
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
+          >
+            Часто задаваемые{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+              вопросы
+            </span>
+          </motion.h2>
+          <motion.div
+            variants={fadeUp}
+            custom={0.1}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto"
+          />
+        </motion.div>
+
+        <div className="space-y-3">
+          {faqItems.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <motion.div
+                key={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-30px" }}
+                variants={fadeUp}
+                custom={i * 0.08}
+              >
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className={`w-full text-left px-6 py-5 rounded-xl border transition-all duration-300 flex items-center justify-between gap-4 ${
+                    isOpen
+                      ? "bg-white/[0.05] border-gold-500/30"
+                      : "bg-white/[0.02] border-white/[0.06] hover:border-white/10"
+                  }`}
+                >
+                  <span className={`text-sm md:text-base font-medium transition-colors duration-300 ${isOpen ? "text-gold-400" : "text-white/70"}`}>
+                    {item.q}
+                  </span>
+                  <svg
+                    className={`w-4 h-4 flex-shrink-0 text-gold-500/60 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 py-4 text-sm text-white/45 leading-relaxed">
+                        {item.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main className="relative bg-dark-900">
@@ -117,6 +231,7 @@ export default function Home() {
       {/* ═══════════ HERO ═══════════ */}
       <section id="hero" className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
         <h1 className="sr-only">BAITEREK — The Spirit of Kazakhstan | Премиальная парфюмерная коллекция</h1>
+
         {/* Hero Photo Background */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -124,7 +239,9 @@ export default function Home() {
             alt="Baiterek perfume"
             fill
             priority
-            className="object-cover object-center opacity-90"
+            quality={100}
+            unoptimized
+            className="object-cover object-[center_30%] opacity-90"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-dark-900/20 via-transparent to-dark-900/40" />
@@ -134,8 +251,6 @@ export default function Home() {
         <div className="absolute inset-0 z-[1]">
           <HeroBackground />
         </div>
-
-
 
         {/* Scroll indicator */}
         <motion.div
@@ -155,7 +270,109 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* ═══════════ PERFUME SLIDER ═══════════ */}
+      <section className="relative z-10">
+        <PerfumeSlider />
+      </section>
 
+
+
+      {/* ═══════════ PRODUCT SHOWCASE ═══════════ */}
+      <div id="collection">
+        {products.map((product, index) => (
+          <div key={product.id}>
+            {index > 0 && (
+              <div className="relative z-10 flex items-center justify-center py-4 bg-dark-900">
+                <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
+                <div className="mx-3 w-2 h-2 rotate-45 border border-gold-500/40" />
+                <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
+              </div>
+            )}
+            <ProductSection product={product} index={index} />
+          </div>
+        ))}
+      </div>
+
+
+
+      {/* ═══════════ REVIEWS ═══════════ */}
+      <section className="relative z-10 bg-dark-900 py-24 md:py-32 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-16"
+          >
+            <motion.h2
+              variants={fadeUp}
+              custom={0}
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
+            >
+              Отзывы наших{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+                клиентов
+              </span>
+            </motion.h2>
+            <motion.div
+              variants={fadeUp}
+              custom={0.1}
+              className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto"
+            />
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              {
+                text: "Astana — мой любимый аромат! Стойкость невероятная, комплименты получаю каждый день.",
+                author: "Айгерим К.",
+                city: "Астана",
+              },
+              {
+                text: "Qara Altyn — это нечто. Глубокий, мужественный, но при этом элегантный. Жена в восторге.",
+                author: "Дамир Т.",
+                city: "Алматы",
+              },
+              {
+                text: "Подарила маме Almaty на день рождения — она счастлива! Аромат нежный и стойкий.",
+                author: "Мадина С.",
+                city: "Караганда",
+              },
+            ].map((review, i) => (
+              <motion.div
+                key={review.author}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={fadeUp}
+                custom={i * 0.12}
+                className="bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-2xl p-8 md:p-10 hover:border-gold-500/30 transition-all duration-500 group"
+              >
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <svg key={s} className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                {/* Text */}
+                <p className="text-white/60 text-sm md:text-base leading-relaxed mb-8 italic">
+                  &ldquo;{review.text}&rdquo;
+                </p>
+                {/* Author */}
+                <div className="border-t border-white/5 pt-5">
+                  <p className="text-white font-semibold text-sm">{review.author}</p>
+                  <p className="text-white/30 text-xs mt-1">{review.city}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ FAQ ═══════════ */}
+      <FaqSection />
 
       {/* ═══════════ BRAND STORY + CREATORS ═══════════ */}
       <section id="about" className="relative z-10 bg-dark-900 overflow-hidden">
@@ -269,7 +486,7 @@ export default function Home() {
         </div>
 
         {/* Creators */}
-        <div className="relative z-10 w-full py-40 md:py-56 border-b border-white/5">
+        <div className="relative z-10 w-full py-32 md:py-40 border-b border-white/5">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -318,7 +535,7 @@ export default function Home() {
                   className="text-center group hover:-translate-y-4 transition-transform duration-500"
                 >
                   {/* Photo */}
-                  <div className="w-28 h-28 mx-auto mb-8 rounded-lg overflow-hidden border border-gold-500/15 group-hover:border-gold-500/50 transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                  <div className="w-44 h-44 mx-auto mb-8 rounded-lg overflow-hidden border-2 border-gold-500/15 group-hover:border-gold-500/50 transition-all duration-700 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">
                     <Image
                       src={creator.photo}
                       alt={creator.nameEn}
@@ -329,23 +546,23 @@ export default function Home() {
                   </div>
 
                   {/* Name */}
-                  <h4 className="text-xl font-bold text-white mb-1">{creator.name}</h4>
-                  <p className="text-gold-500 text-sm font-medium mb-2">{creator.nameEn}</p>
+                  <h4 className="text-2xl font-bold text-white mb-1">{creator.name}</h4>
+                  <p className="text-gold-500 text-base font-medium mb-2">{creator.nameEn}</p>
 
                   {/* Role badge */}
-                  <p className="text-gold-500/80 text-xs tracking-[0.15em] uppercase mb-2 font-semibold">{creator.role}</p>
-                  <p className="text-white/30 text-xs mb-6">{creator.company} · {creator.count} ароматов</p>
+                  <p className="text-gold-500/80 text-sm tracking-[0.15em] uppercase mb-2 font-semibold">{creator.role}</p>
+                  <p className="text-white/30 text-sm mb-6">{creator.company} · {creator.count} ароматов</p>
 
                   {/* Divider */}
                   <div className="w-10 h-px bg-gold-500/20 mx-auto mb-6" />
 
                   {/* Description */}
-                  <p className="text-sm text-white/45 leading-relaxed mb-5 max-w-xs mx-auto">
+                  <p className="text-base text-white/45 leading-relaxed mb-5 max-w-sm mx-auto">
                     {creator.desc}
                   </p>
 
                   {/* Brands */}
-                  <p className="text-xs text-white/25 leading-relaxed max-w-xs mx-auto">
+                  <p className="text-sm text-white/25 leading-relaxed max-w-sm mx-auto">
                     {creator.brands}
                   </p>
                 </motion.div>
@@ -355,21 +572,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════ PRODUCT SHOWCASE ═══════════ */}
-      <div id="collection">
-        {products.map((product, index) => (
-          <div key={product.id}>
-            {index > 0 && (
-              <div className="relative z-10 flex items-center justify-center py-4 bg-dark-900">
-                <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
-                <div className="mx-3 w-2 h-2 rotate-45 border border-gold-500/40" />
-                <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
-              </div>
-            )}
-            <ProductSection product={product} index={index} />
-          </div>
-        ))}
-      </div>
 
       {/* ═══════════ CTA SECTION — FULL SCREEN ═══════════ */}
       <section className="relative z-10 h-screen flex items-center justify-center overflow-hidden">

@@ -26,6 +26,8 @@ export default function ProductSection({ product, index }) {
           src={product.bgImage}
           alt={`${product.title} atmosphere`}
           fill
+          quality={100}
+          unoptimized
           className="object-cover saturate-[1.1] transition-transform duration-[2s] ease-out group-hover:scale-105"
           sizes="100vw"
         />
@@ -62,6 +64,8 @@ export default function ProductSection({ product, index }) {
               alt={product.title}
               width={800}
               height={1000}
+              quality={100}
+              unoptimized
               className={`object-contain relative z-10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)] group-hover:drop-shadow-[0_30px_80px_rgba(212,175,55,0.25)] transition-all duration-700 max-h-[85vh] `}
             />
           </motion.div>
@@ -103,9 +107,24 @@ export default function ProductSection({ product, index }) {
           <div className="w-20 h-0.5 bg-gradient-to-r from-gold-500 to-transparent mb-7" />
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-9 font-light [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]">
+          <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-7 font-light [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]">
             {product.description}
           </p>
+
+          {/* Price */}
+          {product.price && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mb-9"
+            >
+              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+                {product.price}
+              </span>
+            </motion.div>
+          )}
 
           {/* Notes */}
           <div className="space-y-4">
