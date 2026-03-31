@@ -151,7 +151,7 @@ function FaqSection() {
           <motion.h2
             variants={fadeUp}
             custom={0}
-            className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-4"
           >
             Часто задаваемые{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
@@ -189,7 +189,7 @@ function FaqSection() {
                     {item.q}
                   </span>
                   <svg
-                    className={`w-4 h-4 flex-shrink-0 text-gold-500/60 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 flex-shrink-0 text-gold-500/80 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -206,7 +206,7 @@ function FaqSection() {
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="px-6 py-4 text-sm text-white/45 leading-relaxed">
+                      <p className="px-6 py-4 text-sm text-white/55 leading-relaxed">
                         {item.a}
                       </p>
                     </motion.div>
@@ -259,7 +259,7 @@ export default function Home() {
           transition={{ delay: 2.5, duration: 1 }}
           className="absolute bottom-8 z-[2] flex flex-col items-center gap-2"
         >
-          <span className="text-[0.6rem] uppercase tracking-[0.3em] text-white/30">
+          <span className="text-[0.6rem] uppercase tracking-[0.3em] text-white/60">
             Scroll
           </span>
           <motion.div
@@ -307,7 +307,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               custom={0}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-4"
             >
               Отзывы наших{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
@@ -357,13 +357,13 @@ export default function Home() {
                   ))}
                 </div>
                 {/* Text */}
-                <p className="text-white/60 text-sm md:text-base leading-relaxed mb-8 italic">
+                <p className="text-white/65 text-base md:text-lg leading-relaxed mb-8 italic">
                   &ldquo;{review.text}&rdquo;
                 </p>
                 {/* Author */}
                 <div className="border-t border-white/5 pt-5">
                   <p className="text-white font-semibold text-sm">{review.author}</p>
-                  <p className="text-white/30 text-xs mt-1">{review.city}</p>
+                  <p className="text-white/60 text-xs mt-1">{review.city}</p>
                 </div>
               </motion.div>
             ))}
@@ -436,7 +436,7 @@ export default function Home() {
             <motion.p
               variants={fadeUp}
               custom={0}
-              className="text-base md:text-lg text-white/40 leading-relaxed mb-4"
+              className="text-lg md:text-xl text-white/70 leading-relaxed mb-4"
             >
               Первая Казахстанская парфюмерная фабрика
             </motion.p>
@@ -444,7 +444,7 @@ export default function Home() {
             <motion.p
               variants={fadeUp}
               custom={0.08}
-              className="text-lg md:text-xl text-white/60 leading-relaxed mb-6"
+              className="text-xl md:text-2xl text-white/60 leading-relaxed mb-6"
             >
               ТОО «АРОМАТ» представляет премиальные ароматы бренда
             </motion.p>
@@ -452,7 +452,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               custom={0.15}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-[0.15em] mb-10"
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-[0.15em] mb-10"
             >
               THE SPIRIT OF KAZAKHSTAN
             </motion.h2>
@@ -466,7 +466,7 @@ export default function Home() {
             <motion.p
               variants={fadeUp}
               custom={0.3}
-              className="text-lg md:text-xl text-white/50 leading-relaxed mb-6 max-w-2xl mx-auto"
+              className="text-xl md:text-2xl text-white/55 leading-relaxed mb-6 max-w-2xl mx-auto"
             >
               Новая парфюмерная линейка, созданная в 2025 году, представляет собой ароматы, которые символизируют нашу страну, наш любимый Казахстан.
             </motion.p>
@@ -479,7 +479,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="absolute bottom-8 right-10 md:right-16 text-sm text-gold-500/50 italic"
+            className="absolute bottom-8 right-10 md:right-16 text-sm text-gold-500/80 italic"
           >
             Произведено в Казахстане, г. Астана
           </motion.p>
@@ -551,18 +551,18 @@ export default function Home() {
 
                   {/* Role badge */}
                   <p className="text-gold-500/80 text-sm tracking-[0.15em] uppercase mb-2 font-semibold">{creator.role}</p>
-                  <p className="text-white/30 text-sm mb-6">{creator.company} · {creator.count} ароматов</p>
+                  <p className="text-white/60 text-sm mb-6">{creator.company} · {creator.count} ароматов</p>
 
                   {/* Divider */}
                   <div className="w-10 h-px bg-gold-500/20 mx-auto mb-6" />
 
                   {/* Description */}
-                  <p className="text-base text-white/45 leading-relaxed mb-5 max-w-sm mx-auto">
+                  <p className="text-base text-white/70 leading-relaxed mb-5 max-w-sm mx-auto">
                     {creator.desc}
                   </p>
 
                   {/* Brands */}
-                  <p className="text-sm text-white/25 leading-relaxed max-w-sm mx-auto">
+                  <p className="text-sm text-white/60 leading-relaxed max-w-sm mx-auto">
                     {creator.brands}
                   </p>
                 </motion.div>
@@ -604,7 +604,7 @@ export default function Home() {
           <motion.h2
             variants={fadeUp}
             custom={0.1}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tight leading-[1.05] mb-8"
+            className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-black text-white tracking-tight leading-[1.05] mb-8"
           >
             Откройте
             <br />
@@ -622,7 +622,7 @@ export default function Home() {
           <motion.p
             variants={fadeUp}
             custom={0.25}
-            className="text-xl md:text-2xl text-white/40 mb-14 max-w-2xl mx-auto leading-relaxed"
+            className="text-2xl md:text-3xl text-white/70 mb-14 max-w-2xl mx-auto leading-relaxed"
           >
             Каждый аромат — это путешествие. Четыре истории, вдохновлённые духом Казахстана.
           </motion.p>
@@ -640,17 +640,17 @@ export default function Home() {
 
             {/* Brand */}
             <div className="md:col-span-1">
-              <h2 className="text-3xl md:text-4xl font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-gold-300 to-gold-600 mb-3">
+              <h2 className="text-4xl md:text-5xl font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-gold-300 to-gold-600 mb-3">
                 BAITEREK
               </h2>
-              <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">
+              <p className="text-xs tracking-[0.3em] uppercase text-white/60 mb-8">
                 The Spirit of Kazakhstan
               </p>
               <div className="w-12 h-0.5 bg-gold-500/30 mb-8" />
-              <p className="text-sm text-white/30 leading-loose">
+              <p className="text-sm text-white/60 leading-loose">
                 Парфюмерная линейка, созданная в 2025 году.
               </p>
-              <p className="text-sm text-white/30 leading-loose mt-2">
+              <p className="text-sm text-white/60 leading-loose mt-2">
                 Символ нашей страны, нашего любимого Казахстана.
               </p>
             </div>
@@ -661,11 +661,11 @@ export default function Home() {
                 Производство
               </h5>
               <ul className="space-y-4">
-                <li className="text-white/35 text-sm leading-relaxed">ТОО «Аромат»</li>
-                <li className="text-white/35 text-sm leading-relaxed">г. Астана, Казахстан</li>
-                <li className="text-white/35 text-sm leading-relaxed">ул. Актекше, здание 4</li>
-                <li className="text-gold-500/50 text-sm leading-relaxed pt-4 border-t border-white/5">Фабрика полного цикла</li>
-                <li className="text-gold-500/50 text-sm leading-relaxed">Единственная в Центральной Азии</li>
+                <li className="text-white/60 text-sm leading-relaxed">ТОО «Аромат»</li>
+                <li className="text-white/60 text-sm leading-relaxed">г. Астана, Казахстан</li>
+                <li className="text-white/60 text-sm leading-relaxed">ул. Актекше, здание 4</li>
+                <li className="text-gold-500/80 text-sm leading-relaxed pt-4 border-t border-white/5">Фабрика полного цикла</li>
+                <li className="text-gold-500/80 text-sm leading-relaxed">Единственная в Центральной Азии</li>
               </ul>
             </div>
 
@@ -675,10 +675,10 @@ export default function Home() {
                 Коллекция
               </h5>
               <ul className="space-y-4">
-                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Astana</li>
-                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Almaty</li>
-                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Ulytau</li>
-                <li className="text-white/35 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Qara Altyn</li>
+                <li className="text-white/60 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Astana</li>
+                <li className="text-white/60 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Almaty</li>
+                <li className="text-white/60 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Ulytau</li>
+                <li className="text-white/60 text-sm hover:text-gold-500 transition-colors cursor-pointer leading-relaxed">Qara Altyn</li>
               </ul>
             </div>
 
@@ -698,9 +698,9 @@ export default function Home() {
                     thespiritofkazakhstan.kz
                   </a>
                 </li>
-                <li className="text-white/35 text-sm leading-relaxed pt-4 border-t border-white/5">Компоненты из Франции</li>
-                <li className="text-white/35 text-sm leading-relaxed">Концентрация: EDP</li>
-                <li className="text-white/35 text-sm leading-relaxed">Объём: 50 мл</li>
+                <li className="text-white/60 text-sm leading-relaxed pt-4 border-t border-white/5">Компоненты из Франции</li>
+                <li className="text-white/60 text-sm leading-relaxed">Концентрация: EDP</li>
+                <li className="text-white/60 text-sm leading-relaxed">Объём: 50 мл</li>
               </ul>
             </div>
           </div>
@@ -714,7 +714,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => document.querySelector('#hero')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-white/25 hover:text-gold-500 transition-colors duration-300 text-xs uppercase tracking-[0.2em] flex items-center gap-2"
+              className="text-white/60 hover:text-gold-500 transition-colors duration-300 text-xs uppercase tracking-[0.2em] flex items-center gap-2"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />

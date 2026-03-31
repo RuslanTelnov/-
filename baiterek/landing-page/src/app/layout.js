@@ -1,11 +1,19 @@
-import { Inter } from "next/font/google";
+import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 
-const inter = Inter({
+const playfair = Playfair_Display({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
+  weight: ["400", "700", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600", "700", "900"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -53,7 +61,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru" className="dark">
       <body
-        className={`${inter.variable} font-sans antialiased bg-dark-900 text-white min-h-screen overflow-x-hidden`}
+        className={`${playfair.variable} ${montserrat.variable} font-sans antialiased bg-dark-900 text-white min-h-screen overflow-x-hidden`}
       >
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>

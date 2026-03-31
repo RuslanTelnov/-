@@ -82,12 +82,12 @@ export default function ProductSection({ product, index }) {
           className={`w-full md:w-1/2 flex flex-col px-12 ${isEven ? "md:pl-[15%] md:pr-8" : "md:pr-[15%] md:pl-8"}`}
         >
           {/* Number */}
-          <span className="text-gold-500/20 text-5xl md:text-6xl font-black leading-none mb-2">
+          <span className="text-gold-500/20 text-6xl md:text-7xl font-black leading-none mb-2">
             {String(index + 1).padStart(2, '0')}
           </span>
 
           {/* Title */}
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-4 [text-shadow:_0_4px_25px_rgba(0,0,0,0.7)]">
+          <h2 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight text-white mb-4 [text-shadow:_0_4px_25px_rgba(0,0,0,0.7)]">
             {product.title}
           </h2>
 
@@ -107,7 +107,7 @@ export default function ProductSection({ product, index }) {
           <div className="w-20 h-0.5 bg-gradient-to-r from-gold-500 to-transparent mb-7" />
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-7 font-light [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]">
+          <p className="text-xl md:text-2xl text-white/75 leading-relaxed mb-7 font-light [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]">
             {product.description}
           </p>
 
@@ -120,7 +120,7 @@ export default function ProductSection({ product, index }) {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="mb-9"
             >
-              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
+              <span className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">
                 {product.price}
               </span>
             </motion.div>
@@ -138,12 +138,12 @@ export default function ProductSection({ product, index }) {
                   key={note.key}
                   className="flex items-start gap-4 bg-dark-900/40 backdrop-blur-sm rounded-xl p-4 border border-gold-500/10"
                 >
-                  <span className="text-gold-500/50 text-sm mt-1">{note.icon}</span>
+                  <span className="text-gold-500/80 text-sm mt-1">{note.icon}</span>
                   <div>
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase text-gold-500/60">
+                    <span className="text-sm font-bold tracking-[0.2em] uppercase text-gold-500/80">
                       {note.label}
                     </span>
-                    <p className="text-base md:text-lg text-white/70 mt-1">
+                    <p className="text-lg md:text-xl text-white/70 mt-1">
                       {product.notes[note.key]}
                     </p>
                   </div>
