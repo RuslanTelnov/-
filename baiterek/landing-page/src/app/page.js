@@ -141,12 +141,12 @@ function FaqSection() {
 
   return (
     <section className="relative z-10 bg-dark-900 py-24 md:py-32 overflow-hidden">
-      <div className="max-w-3xl mx-auto px-6 md:px-12">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-start md:gap-16">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-16"
+          className="md:w-2/5 mb-12 md:mb-0 md:sticky md:top-32"
         >
           <motion.h2
             variants={fadeUp}
@@ -161,9 +161,11 @@ function FaqSection() {
           <motion.div
             variants={fadeUp}
             custom={0.1}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto"
+            className="w-16 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent"
           />
         </motion.div>
+
+        <div className="md:w-3/5">
 
         <div className="space-y-3">
           {faqItems.map((item, i) => {
@@ -215,6 +217,7 @@ function FaqSection() {
               </motion.div>
             );
           })}
+        </div>
         </div>
       </div>
     </section>
@@ -321,7 +324,7 @@ export default function Home() {
             />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {[
               {
                 text: "Astana — мой любимый аромат! Стойкость невероятная, комплименты получаю каждый день.",
@@ -337,6 +340,11 @@ export default function Home() {
                 text: "Подарила маме Almaty на день рождения — она счастлива! Аромат нежный и стойкий.",
                 author: "Мадина С.",
                 city: "Караганда",
+              },
+              {
+                text: "Ulytau — аромат который невозможно забыть. Носил на важную встречу — все спрашивали что за парфюм.",
+                author: "Арман Б.",
+                city: "Шымкент",
               },
             ].map((review, i) => (
               <motion.div
