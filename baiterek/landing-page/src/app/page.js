@@ -116,7 +116,7 @@ const jsonLd = {
 const faqItems = [
   {
     q: "Какой объём флакона?",
-    a: "Все ароматы представлены в объёме 50 мл в концентрации Eau de Parfum (EDP).",
+    a: "Все ароматы представлены в объёме 100 мл в концентрации Eau de Parfum (EDP).",
   },
   {
     q: "Какая стойкость у ароматов?",
@@ -700,7 +700,7 @@ export default function Home() {
                 </li>
                 <li className="text-white/60 text-sm leading-relaxed pt-4 border-t border-white/5">Компоненты из Франции</li>
                 <li className="text-white/60 text-sm leading-relaxed">Концентрация: EDP</li>
-                <li className="text-white/60 text-sm leading-relaxed">Объём: 50 мл</li>
+                <li className="text-white/60 text-sm leading-relaxed">Объём: 100 мл</li>
               </ul>
             </div>
           </div>
