@@ -2,15 +2,15 @@
 
 @theme {
   --color-gold-50: #fdf8e8;
-  --color-gold-100: #f5e6b8;
-  --color-gold-200: #f0d98a;
-  --color-gold-300: #e0c96d;
-  --color-gold-400: #d4b85c;
-  --color-gold-500: #c9a84c;
-  --color-gold-600: #b8930f;
-  --color-gold-700: #a67c0b;
-  --color-gold-800: #8a6508;
-  --color-gold-900: #5c4306;
+  --color-gold-100: #FFF5CC;
+  --color-gold-200: #FFF099;
+  --color-gold-300: #FFEB66;
+  --color-gold-400: #FFE033;
+  --color-gold-500: #FFD700;
+  --color-gold-600: #E6C200;
+  --color-gold-700: #CCAC00;
+  --color-gold-800: #B39700;
+  --color-gold-900: #998200;
 
   --color-dark-950: #0a0a0a;
   --color-dark-900: #111111;
@@ -117,7 +117,7 @@ h1, h2, h3 {
 .gold-divider {
   width: 60px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
 }
 
 /* Note pill */
@@ -274,7 +274,7 @@ h1, h2, h3 {
   height: 100%;
 }
 .ps-subtitle {
-  color: #c9a84c;
+  color: #FFD700;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.3em;
@@ -404,7 +404,7 @@ h1, h2, h3 {
 .btn-gold {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: linear-gradient(135deg, #d4af37, #b8960f);
+  background: linear-gradient(135deg, #FFD700, #b8960f);
   color: #080808;
   font-size: 0.75rem;
   font-weight: 700;
@@ -425,7 +425,7 @@ h1, h2, h3 {
   display: inline-block;
   padding: 0.75rem 2rem;
   background: transparent;
-  color: #d4af37;
+  color: #FFD700;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -437,7 +437,7 @@ h1, h2, h3 {
   cursor: pointer;
 }
 .btn-gold-outline:hover {
-  background: linear-gradient(135deg, #d4af37, #b8960f);
+  background: linear-gradient(135deg, #FFD700, #b8960f);
   color: #080808;
   border-color: transparent;
   box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
