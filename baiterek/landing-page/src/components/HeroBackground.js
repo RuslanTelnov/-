@@ -122,7 +122,7 @@ function GlowOrb() {
       <mesh ref={outerRef}>
         <sphereGeometry args={[2.5, 32, 32]} />
         <meshBasicMaterial
-          color="#FFD700"
+          color="#C0C0C0"
           transparent
           opacity={0.06}
           blending={THREE.AdditiveBlending}
@@ -133,8 +133,8 @@ function GlowOrb() {
       <mesh ref={innerRef}>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial
-          color="#FFD700"
-          emissive="#FFD700"
+          color="#C0C0C0"
+          emissive="#C0C0C0"
           emissiveIntensity={0.6}
           transparent
           opacity={0.15}
@@ -153,9 +153,9 @@ function Scene() {
       {/* transparent bg — photo shows through */}
       <fog attach="fog" args={["#111111", 8, 25]} />
       <ambientLight intensity={0.03} />
-      <pointLight position={[0, 2, 0]} color="#FFD700" intensity={2} distance={20} />
-      <pointLight position={[3, -1, 2]} color="#CCAC00" intensity={0.8} distance={15} />
-      <pointLight position={[-3, 1, -2]} color="#FFE033" intensity={0.5} distance={12} />
+      <pointLight position={[0, 2, 0]} color="#C0C0C0" intensity={2} distance={20} />
+      <pointLight position={[3, -1, 2]} color="#A1A1AA" intensity={0.8} distance={15} />
+      <pointLight position={[-3, 1, -2]} color="#D4D4D8" intensity={0.5} distance={12} />
       <GoldenParticles />
     </>
   );
