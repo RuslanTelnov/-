@@ -238,8 +238,8 @@ export default function Home() {
         {/* Hero Photo Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/hero_kz.jpg"
-            alt="Baiterek perfume"
+            src="/assets/generated/baiterek-homepage-hero.png"
+            alt="Baiterek Astana premium hero"
             fill
             priority
             quality={100}
